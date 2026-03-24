@@ -1,5 +1,6 @@
 #ifndef OPERADOR_H
 #define OPERADOR_H
+#include <string.h>   // 👈 ADICIONA ISSO
 
 // declaracao da estrutura Operador
 typedef struct {

@@ -1,17 +1,14 @@
 #include "operador.h"
+#include <string.h>   // 👈 ADICIONA ISSO
+
 #include "../common.h"
-#include <openssl/sha.h> // sha256
+//#include <openssl/sha.h> // sha256
 
 static Operador operador = {0}; // incializa com valor padrao
 
 static void gerarSHA256(const char* senha, char* saida) {
-    unsigned char hash[SHA256_DIGEST_LENGTH];
-    SHA256((unsigned char*)senha, strlen(senha), hash);
-    
-    for (int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
-        sprintf(saida + (i * 2), "%02x", hash[i]);
-    }
-    saida[64] = '\0';
+    // hash fake só para teste
+    snprintf(saida, 65, "hash_%s", senha);
 }
 
 void criarOperador(){
