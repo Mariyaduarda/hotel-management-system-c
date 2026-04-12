@@ -3,6 +3,7 @@
 #include "model/hotel.h"
 
 int main(){
+    // gcc main.c model/operador.c model/hotel.c -o programa.exe
 
     criarOperador();
 

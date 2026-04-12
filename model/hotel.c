@@ -12,8 +12,8 @@ void HotelInit(Hotel *hotel){
     strcpy(hotel->Telefone,          "-");
     strcpy(hotel->NomeResp,          "-");
     strcpy(hotel->CheckIn,           "00:00");
-    strcpy(hotel->CheckOut,         "00:00");
-    strcpy(hotel->TelefoneResp,     "-");
+    strcpy(hotel->CheckOut,          "00:00");
+    strcpy(hotel->TelefoneResp,      "-");
 
     hotel->ativo = 0; // Evita exclusao fisica
 
@@ -30,16 +30,9 @@ void HotelInit(Hotel *hotel){
 
 void ExcluirHotel(Hotel *hotel){
     HotelInit(hotel);    // Remove em mem
-    if(remove("hotel.txt") == 0){ // Remove em texto
-        // Arq txt removido
-    }
-    if(remove("hotel.bin") == 0){ // Remove em bin
-        // Arq bin removido
-    }
+    
+    remove("hotel.txt"); //Remove em texto
+    remove("hotel.bin");  // Remove em bin
+
+    printf("Sistema resetado. Todos os dados do hotel foram excluidos.\n");
 }
-
-void HotelSalvarTxt(Hotel *hotel);
-void HotelSalvarBin(Hotel *hotel);
-
-void HotelExibirTxt(Hotel *hotel);
-void HotelExibirBin(Hotel *hotel);
