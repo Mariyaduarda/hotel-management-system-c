@@ -1,5 +1,5 @@
 #include "hotel.h"
-#include <stdio.h>    // 👈 para usar remove()
+#include "../common.h"
 #include <string.h>
 
 void HotelInit(Hotel *hotel){
