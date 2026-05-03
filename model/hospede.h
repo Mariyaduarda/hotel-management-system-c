@@ -25,17 +25,17 @@ void HospedeListaInit(ListaHospede *hospede);
 
 /** * = sem necessiddade de alterar o endereco de memoria
     ** = com necessidade de alterar o endereco de memoria **/
-void HospedeCriar(ListaHospede **lista, TipoHospede hospede);
+int HospedeCriar(ListaHospede **lista, TipoHospede hospede);
 void HospedeListar(ListaHospede **lista, int id);
 int HospedeExcluir(ListaHospede **lista, int id);
-int HospedeAtualizar(ListaHospede **lista, int id);
-void HospedeListaLiberar(ListaHospede **lista);
+int HospedeAtualizar(ListaHospede **lista, int id, int op);
+void HospedeListaLiberar(ListaHospede *lista);
 
 // Funcoes de arquivo
 // Leitura de arquivo gera espaço na memoria
-void HospedeSalvarTxt(ListaHospede *lista);
-void HospedeSalvarBin(ListaHospede *lista);
-void HospedeLerTxt(ListaHospede *lista);
-void HospedeLerBin(ListaHospede *lista);
+int HospedeSalvarTxt(ListaHospede *lista);
+int HospedeSalvarBin(ListaHospede *lista);
+int HospedeLerTxt(ListaHospede **lista);
+int HospedeLerBin(ListaHospede **lista);
 
 #endif // HOSPEDE_H

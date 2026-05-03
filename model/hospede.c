@@ -23,7 +23,7 @@ void HospedeListaInit(ListaHospede *lista){
 
 /** *  = sem necessiddade de alterar o endereco de memoria
     ** = com necessidade de alterar o endereco de memoria **/
-void HospedeCriar(ListaHospede **lista, TipoHospede hospede){
+int HospedeCriar(ListaHospede **lista, TipoHospede hospede){
     ListaHospede *novo = (ListaHospede*)malloc(sizeof(ListaHospede));
 
     // aloca o espaço para um novo endereco
@@ -155,7 +155,7 @@ int HospedeAtualizar(ListaHospede **lista, int id, int op){
         printf("Opcao invalida.\n");
         break;
     }
-    return 1; // sucesso
+     return 1;// sucesso
 }
 
 void HospedeListaLiberar(ListaHospede *lista){

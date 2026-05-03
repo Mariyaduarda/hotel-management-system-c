@@ -36,3 +36,9 @@ void ExcluirHotel(Hotel *hotel){
 
     printf("Sistema resetado. Todos os dados do hotel foram excluidos.\n");
 }
+
+    void HotelSalvarTxt(Hotel *hotel);
+    void HotelSalvarBin(Hotel *hotel);
+
+    void HotelExibirTxt(Hotel *hotel);
+    void HotelExibirBin(Hotel *hotel);

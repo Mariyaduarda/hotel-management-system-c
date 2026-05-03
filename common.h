@@ -1,40 +1,36 @@
-/* --------------------------------------
-    common.h - header file para a biblioteca de funções do projeto
-   --------------------------------------
-
-   -- incluir APENAS arquivos em arquivos .c
-        #include "common.h" no main.c
-        #include"../common.h" em subpastas
-*/
-
 #ifndef COMMON_H
 #define COMMON_H
 
-/* 1. PADRAO LING. C*/ 
-#include <stdio.h>      /* printf, scanf, fopen, fclose, fgets... */
+/* ============================
+   Ative/desative as bibliotecas aqui
+   ============================ */
+#define USE_STDLIB
+#define USE_STRING
+#define USE_CTYPE
+#define USE_TIME
+#define USE_MATH
+
+/* ============================ */
+
+#include <stdio.h>
 
 #ifdef USE_STDLIB
-    #include <stdlib.h>     /* malloc, free, atoi, atof, exit...      */
+#include <stdlib.h>
 #endif
-
 #ifdef USE_STRING
-    #include <string.h>     /* strcpy, strcmp, strlen, memset...      */
+#include <string.h>
 #endif
-
 #ifdef USE_CTYPE
-    #include <ctype.h>      /* isdigit, isalpha, toupper, tolower...  */
+#include <ctype.h>
 #endif
-
 #ifdef USE_TIME
-    #include <time.h>       /* time, localtime, mktime (datas)        */
+#include <time.h>
 #endif
-
 #ifdef USE_MATH
-    #include <math.h>       /* round, floor, ceil, pow               */
+#include <math.h>
 #endif
 
-#ifdef USE_VALIDACAO
-    #include <validacao.h>       
-#endif
+void lerString(char *dest, int tamanho);
+void limparBuffer();
 
-#endif // BIBLIOTECA_H
+#endif // COMMON_H

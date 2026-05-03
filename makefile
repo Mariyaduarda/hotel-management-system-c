@@ -1,33 +1,47 @@
-CC = gcc
-CFLAGS = -Wall -g
-
+CC     = gcc
+CFLAGS = -Wall -Wextra -g
 TARGET = hotelbao
 
-# arquivos fontes
 SRC = \
-model/acomodacao.c \
-model/hospede.c \
-model/hotel.c \
-model/operador.c \
-utils/validacao.c \
-view/hospede_view.c \
-view/menu_principal.c \
-view/menu_relatorio.c \
-view/menu_cadastro.c
+    main.c \
+    model/acomodacao.c \
+    model/categoria.c \
+    model/hospede.c \
+    model/hotel.c \
+    model/operador.c \
+    model/produto.c \
+    model/reserva.c \
+    controller/hospede_controller.c \
+    controller/reserva_controller.c \
+    controller/relatorio_controller.c \
+    view/menu_principal.c \
+    view/hospede_view.c \
+    view/reserva_view.c \
+    view/relatorio_view.c \
+    utils/validacao.c \
+    utils/relatorio.c
 
-# Gera automaticamente os .o
 OBJ = $(SRC:.c=.o)
 
-# Regra principal
+# ── Regra principal ──────────────────────────────────────
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ) -lssl -lcrypto -lm
 
-# Compilação de cada .c → .o
+# ── Compilação de cada .c em .o ──────────────────────────
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Limpar arquivos gerados
+# ── Limpeza ──────────────────────────────────────────────
 clean:
-	del /Q model\*.o utils\*.o view\*.o $(TARGET).exe 2>nul || true
+	rm -f $(OBJ) $(TARGET)
+
+# ── Rebuild completo ─────────────────────────────────────
+re: clean all
+
+# ── Executa o programa ───────────────────────────────────
+run: all
+	./$(TARGET)
+
+.PHONY: all clean re run

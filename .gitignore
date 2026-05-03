@@ -1,0 +1,26 @@
+# Arquivos objeto compilados
+*.o
+
+# Executável
+hotel-management-system
+hotel_management_system
+a.out
+
+# VS Code
+.vscode/
+
+# Arquivos de debug
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Dependências / bibliotecas
+*.a
+*.so
+*.dylib
+
+# Arquivos temporários
+*~
+*.swp
+*.swo
