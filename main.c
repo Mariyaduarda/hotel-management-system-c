@@ -6,41 +6,70 @@
 #include "model/acomodacao.h"
 #include "model/categoria_acomodacao.h"
 #include "model/produto.h"
+#include "view/login_view.h"
 #include "view/menu_principal.h"
 
 int main() {
     /* ── Operador ─────────────────────────────────────────── */
-    criarOperador();
-    const Operador *op = obterOperador();
-    printf("\n=== Operador logado ===\n");
-    printf("ID      : %d\n",  op->id);
-    printf("Nome    : %s\n",  op->nome);
-    printf("Usuario : %s\n",  op->usuario);
-    printf("Senha (SHA256): %s\n", op->senha);
+    ListaOperador *ListaOperador = NULL;
+    OperadorLerBin(&ListaOperador);
+    OperadorLerTxt(&ListaOperador);
+
+    if(ListaOperador == NULL) {
+        if(!telaPrimeiroCadastro(&ListaOperador)) {
+            printf("Erro ao cadastrar operador inicial.\n");
+            OperadorListaLiberar(ListaOperador);
+            return 1;
+        }
+        // persistencia ao inciar
+        OperadorSalvarBin(ListaOperador);
+        OperadorSalvarTxt(ListaOperador);
+        printf("Operador inicial cadastrado com sucesso.\n");
+        return 1;
+    }
+
+    /* ── Login ────────────────────────────────────────────── */
+    Operador *logado = NULL;
+    if (!telaLogin(&ListaOperador, &logado)) {
+        printf("Falha no login. Sessao encerrada.\n");
+        OperadorListaLiberar(ListaOperador);
+        return 1; /* falha no login */
+    }
 
     /* ── Hotel ────────────────────────────────────────────── */
     Hotel hotel;
     HotelInit(&hotel);
-    HotelLerBin(&hotel); // tenta carregar do arquivo; se nao existir usa os defaults
-    printf("\n=== Hotel ===\n");
-    printf("Nome Fantasia : %s\n", hotel.NomeFantasia);
-    printf("Cidade        : %s\n", hotel.endereco.cidade);
-    printf("Check-in      : %s\n", hotel.CheckIn);
-    printf("Check-out     : %s\n", hotel.CheckOut);
+    
+    int hotelConfigurado = HotelLerBin(&hotel) || HotelLerTxt(&hotel);
+    if (!hotelConfigurado) {
+        if(!hotelConfigurado){
+            printf("Nenhuma configuração de hotel encontrada. Por favor, configure o hotel.\n");
+            OperadorListaLiberar(ListaOperador);
+            return 1;
+        }
+        HotelSalvarBin(&hotel);
+        HotelSalvarTxt(&hotel);
+    }
 
-    /* ── Listas ───────────────────────────────────────────── */
+    /* ── Listas das Entidades ────────────────────────────────────── */
     ListaHospede    *listaHospede    = NULL;
     ListaReserva    *listaReserva    = NULL;
     ListaAcomodacao *listaAcomodacao = NULL;
     ListaCategoria  *listaCategoria  = NULL;
     ListaProduto    *listaProduto    = NULL;
 
-    /* ── Carrega dados persistidos ────────────────────────── */
+    /* ── Carrega dados persistidos das Entidades ────────────────────────── */
     HospedeLerBin(&listaHospede);
     ReservaLerBin(&listaReserva);
     AcomodacaoLerBin(&listaAcomodacao);
     CategoriaLerBin(&listaCategoria);
     ProdutoLerBin(&listaProduto);
+
+    HospedeLerTxt(&listaHospede);
+    ReservaLerTxt(&listaReserva);
+    AcomodacaoLerTxt(&listaAcomodacao);
+    CategoriaLerTxt(&listaCategoria);
+    ProdutoLerTxt(&listaProduto);
 
     /* ── Menu principal ───────────────────────────────────── */
     menuPrincipal(&listaHospede,
@@ -49,7 +78,7 @@ int main() {
                   &listaCategoria,
                   &listaProduto,
                   &hotel);
-
+    
     /* ── Salva ao sair ────────────────────────────────────── */
     HospedeSalvarBin(listaHospede);
     ReservaSalvarBin(listaReserva);
@@ -57,6 +86,13 @@ int main() {
     CategoriaSalvarBin(listaCategoria);
     ProdutoSalvarBin(listaProduto);
     HotelSalvarBin(&hotel);
+
+    HospedeSalvarTxt(listaHospede);
+    ReservaSalvarTxt(listaReserva);
+    AcomodacaoSalvarTxt(listaAcomodacao);
+    CategoriaSalvarTxt(listaCategoria);
+    ProdutoSalvarTxt(listaProduto);
+    HotelSalvarTxt(&hotel);
 
     /* ── Libera memória ───────────────────────────────────── */
     HospedeListaLiberar(listaHospede);

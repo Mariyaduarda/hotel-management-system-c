@@ -2,9 +2,10 @@
 #include "../common.h"
 #include "menu_principal.h"
 #include "hospede_view.h"
-// Descomente conforme for criando os outros menus:
-// #include "reserva_view.h"
-// #include "relatorio_view.h"
+#include "../controller/reserva_controller.h"
+#include "../controller/relatorio_controller.h"
+#include "../controller/produto_controller.h"
+#include "../controller/hotel_controller.h"
 
 /* ── Cores ANSI ─────────────────────────────────────────── */
 #define RESET    "\033[0m"
@@ -62,15 +63,18 @@ static void menuCadastros(ListaHospede    **listaHospede,
                            ListaProduto    **listaProduto,
                            Hotel           *hotel)
 {
+    (void)listaAcomodacao;
+    (void)listaCategoria;
+
     char op;
     do {
-        cabecalho("📋  CADASTROS");
-        opcao("H", "Hóspedes",           VERDE);
-        opcao("A", "Acomodações",        VERDE);
-        opcao("C", "Categorias",         VERDE);
-        opcao("P", "Produtos",           VERDE);
-        opcao("T", "Hotel",              AMARELO);
-        opcao("V", "Voltar",             CINZA);
+        cabecalho("CADASTROS");
+        opcao("H", "Hóspedes",    VERDE);
+        opcao("A", "Acomodações", VERDE);
+        opcao("C", "Categorias",  VERDE);
+        opcao("P", "Produtos",    VERDE);
+        opcao("T", "Hotel",       AMARELO);
+        opcao("V", "Voltar",      CINZA);
         rodape();
         scanf(" %c", &op);
         op = toupper(op);
@@ -80,31 +84,28 @@ static void menuCadastros(ListaHospede    **listaHospede,
             menuHospede(listaHospede);
             break;
         case 'A':
-            // menuAcomodacao(listaAcomodacao, listaCategoria);
             printf(AMARELO "\n  [Em construção]\n" RESET);
             pausar();
             break;
         case 'C':
-            // menuCategoria(listaCategoria);
             printf(AMARELO "\n  [Em construção]\n" RESET);
             pausar();
             break;
         case 'P':
-            // menuProduto(listaProduto);
-            printf(AMARELO "\n  [Em construção]\n" RESET);
-            pausar();
+            ProdutoControllerExecutar(listaProduto);
             break;
         case 'T':
-            // menuHotel(hotel);
-            printf(AMARELO "\n  [Em construção]\n" RESET);
+            printf(AMARELO "\n  NAO FEITO AINDA \n" RESET);
             pausar();
             break;
         case 'V': break;
         default:
-            printf(VERMELHO "  ✘ Opção inválida.\n" RESET);
+            printf(VERMELHO "Opção inválida.\n" RESET);
             pausar();
         }
     } while (op != 'V');
+
+    (void)hotel;
 }
 
 /* ── Submenu: Reservas ──────────────────────────────────── */
@@ -116,105 +117,26 @@ static void menuReservas(ListaReserva    **listaReserva,
     char op;
     do {
         cabecalho("📅  RESERVAS");
-        opcao("N", "Nova reserva",       VERDE);
-        opcao("C", "Cancelar reserva",   VERMELHO);
-        opcao("B", "Buscar disponíveis", AMARELO);
-        opcao("L", "Consultar por ID",   AMARELO);
+        opcao("R", "Gerenciar reservas", VERDE);
         opcao("V", "Voltar",             CINZA);
         rodape();
         scanf(" %c", &op);
         op = toupper(op);
 
         switch (op) {
-        case 'N':
-            // ReservaCadastrarView(listaReserva, listaAcomodacao, listaCategoria, listaHospede);
-            printf(AMARELO "\n  [Em construção]\n" RESET);
-            pausar();
-            break;
-        case 'C':
-            // ReservaCancelarView(listaReserva);
-            printf(AMARELO "\n  [Em construção]\n" RESET);
-            pausar();
-            break;
-        case 'B':
-            // ReservaBuscarDisponiveisView(listaReserva, listaAcomodacao, listaCategoria);
-            printf(AMARELO "\n  [Em construção]\n" RESET);
-            pausar();
-            break;
-        case 'L':
-            // ReservaConsultarView(listaReserva);
-            printf(AMARELO "\n  [Em construção]\n" RESET);
-            pausar();
-            break;
-        case 'V': break;
-        default:
-            printf(VERMELHO "  ✘ Opção inválida.\n" RESET);
-            pausar();
-        }
-    } while (op != 'V');
-}
-
-/* ── Submenu: Relatórios ────────────────────────────────── */
-static void menuRelatorios(ListaHospede    **listaHospede,
-                            ListaAcomodacao **listaAcomodacao,
-                            ListaCategoria  **listaCategoria,
-                            ListaReserva    **listaReserva,
-                            ListaProduto    **listaProduto)
-{
-    char op;
-    do {
-        cabecalho("📊  RELATÓRIOS");
-        opcao("H", "Hóspedes",             AMARELO);
-        opcao("A", "Acomodações",          AMARELO);
-        opcao("R", "Reservas",             AMARELO);
-        opcao("M", "Movim. acomodações",   AMARELO);
-        opcao("P", "Produtos",             AMARELO);
-        opcao("E", "Estoque mínimo",       VERMELHO);
-        opcao("V", "Voltar",               CINZA);
-        rodape();
-        scanf(" %c", &op);
-        op = toupper(op);
-
-        switch (op) {
-        case 'H':
-            // RelatorioHospedesView(listaHospede);
-            printf(AMARELO "\n  [Em construção]\n" RESET);
-            pausar();
-            break;
-        case 'A':
-            // RelatorioAcomodacoesView(listaAcomodacao, listaCategoria);
-            printf(AMARELO "\n  [Em construção]\n" RESET);
-            pausar();
-            break;
         case 'R':
-            // RelatorioReservasView(listaReserva);
-            printf(AMARELO "\n  [Em construção]\n" RESET);
-            pausar();
-            break;
-        case 'M':
-            // RelatorioMovimentacaoView(listaReserva, listaAcomodacao, listaCategoria);
-            printf(AMARELO "\n  [Em construção]\n" RESET);
-            pausar();
-            break;
-        case 'P':
-            // RelatorioProdutosView(listaProduto);
-            printf(AMARELO "\n  [Em construção]\n" RESET);
-            pausar();
-            break;
-        case 'E':
-            // RelatorioProdutosEstoqueView(listaProduto);
-            printf(AMARELO "\n  [Em construção]\n" RESET);
-            pausar();
+            ReservaControllerExecutar(listaReserva, listaAcomodacao,
+                                      listaCategoria, listaHospede);
             break;
         case 'V': break;
         default:
-            printf(VERMELHO "  ✘ Opção inválida.\n" RESET);
+            printf(VERMELHO "  Opção inválida.\n" RESET);
             pausar();
         }
     } while (op != 'V');
 }
 
-/* ── Menu principal (entry point público) ───────────────── */
+/* ── Menu principal ────────────────── */
 void menuPrincipal(ListaHospede    **listaHospede,
                    ListaReserva    **listaReserva,
                    ListaAcomodacao **listaAcomodacao,
@@ -224,16 +146,16 @@ void menuPrincipal(ListaHospede    **listaHospede,
 {
     char op;
     do {
-        cabecalho("🏨  HOTEL SYSTEM");
+        cabecalho("HOTEL SISTEMA  --  MENU PRINCIPAL");
         separador("  GESTÃO");
-        opcao("C", "Cadastros",          VERDE);
-        opcao("R", "Reservas",           CIANO);
+        opcao("C", "Cadastros",           VERDE);
+        opcao("R", "Reservas",            CIANO);
         separador("  OPERAÇÕES");
-        opcao("T", "Transações",         AMARELO);
-        opcao("F", "Relatórios",         MAGENTA);
-        opcao("I", "Importar / Exportar",CINZA);
+        opcao("T", "Transações",          AMARELO);
+        opcao("F", "Relatórios",          MAGENTA);
+        opcao("I", "Importar / Exportar", CINZA);
         separador("  SISTEMA");
-        opcao("S", "Sair",               VERMELHO);
+        opcao("S", "Sair",                VERMELHO);
         rodape();
         scanf(" %c", &op);
         op = toupper(op);
@@ -248,20 +170,21 @@ void menuPrincipal(ListaHospede    **listaHospede,
                          listaCategoria, listaHospede);
             break;
         case 'T':
-            printf(AMARELO "\n  [Módulo de Transações em construção]\n" RESET);
+            printf(AMARELO "\n  NAO FEITO AINDA \n" RESET);
             pausar();
             break;
         case 'F':
-            menuRelatorios(listaHospede, listaAcomodacao,
-                           listaCategoria, listaReserva, listaProduto);
+            RelatorioControllerExecutar(listaHospede, listaAcomodacao,
+                                        listaCategoria, listaReserva,
+                                        listaProduto);
             break;
         case 'I':
-            printf(AMARELO "\n  [Módulo de Importação/Exportação em construção]\n" RESET);
+            printf(AMARELO "\n NAO FEITO AINDA \n" RESET);
             pausar();
             break;
         case 'S': break;
         default:
-            printf(VERMELHO "  ✘ Opção inválida.\n" RESET);
+            printf(VERMELHO "  Opção inválida.\n" RESET);
             pausar();
         }
     } while (op != 'S');

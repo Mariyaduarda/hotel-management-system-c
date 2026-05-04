@@ -12,5 +12,6 @@ int          controllerHospedeExcluir   (ListaHospede **lista, int id);
 int          controllerHospedeSalvar    (ListaHospede  *lista);
 int          controllerHospedeCarregar  (ListaHospede **lista);
 void         controllerHospedeLiberar   (ListaHospede  *lista);
+void         HospedeControllerExecutar  (ListaHospede **lista);
 
 #endif

@@ -16,28 +16,32 @@ typedef struct {
     char senha[50];      // armazenar hash em producao; aqui texto simples p/ fins didaticos
     int  permissoes;     // bitmask com PERM_*
     int  ativo;
-} TipoOperador;
+} Operador;
 
 typedef struct ListaOperador {
     struct ListaOperador *proximo;
-    TipoOperador operador;
+    Operador operador;
 } ListaOperador;
 
 // Funcoes base
-void OperadorInit(TipoOperador *operador);
+void OperadorInit(Operador *operador);
 void OperadorListaInit(ListaOperador *lista);
 
-int  OperadorCriar(ListaOperador **lista, TipoOperador operador);
+int  OperadorCriar(ListaOperador **lista, Operador operador);
 void OperadorListar(ListaOperador **lista, int id);
-TipoOperador* OperadorBuscar(ListaOperador **lista, int id);
-TipoOperador* OperadorBuscarPorUsuario(ListaOperador **lista, const char *usuario);
+Operador* OperadorBuscar(ListaOperador **lista, int id);
+Operador* OperadorBuscarPorUsuario(ListaOperador **lista, const char *usuario);
 int  OperadorExcluir(ListaOperador **lista, int id);
 int  OperadorAtualizar(ListaOperador **lista, int id, int op);
 void OperadorListaLiberar(ListaOperador *lista);
 
 // Autenticacao
-int  OperadorAutenticar(ListaOperador **lista, const char *usuario, const char *senha, TipoOperador **logado);
-int  OperadorTemPermissao(TipoOperador *operador, int permissao);
+int  OperadorAutenticar(ListaOperador **lista, const char *usuario, const char *senha, Operador **logado);
+int  OperadorTemPermissao(Operador *operador, int permissao);
+
+// Funcoes globais para o operador atual
+void criarOperador(void);
+const Operador* obterOperador(void);
 
 // Funcoes de arquivo
 int OperadorSalvarTxt(ListaOperador *lista);

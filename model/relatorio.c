@@ -1,7 +1,5 @@
 #include "../common.h"
 #include "relatorio.h"
-#include <string.h>
-#include <stdio.h>
 
 // ──────────────────────────────────────────────
 // Helpers internos
@@ -54,7 +52,7 @@ void RelatorioHospedes(ListaHospede **lista,
 
     // Cabecalho
     if (cfg->destino == RELATORIO_ARQUIVO) {
-        fprintf(out, "ID;Nome;CPF;Telefone;Email;Sexo;EstadoCivil;DataNascimento\n");
+        fprintf(out, "ID;Nome;Endereco;CPF;Telefone;Email;Sexo;EstadoCivil;DataNascimento\n");
     } else {
         printf("\n========== RELATORIO DE HOSPEDES ==========\n");
         printf("%-4s %-30s %-14s %-25s %-15s %-4s %-12s %-12s\n",
@@ -84,8 +82,8 @@ void RelatorioHospedes(ListaHospede **lista,
 
         // Saida
         if (cfg->destino == RELATORIO_ARQUIVO) {
-            fprintf(out, "%d;%s;%s;%s;%s;%s;%s;%s\n",
-                    h->id, h->nome, h->cpf,
+            fprintf(out, "%d;%s;%s;%s;%s;%s;%s;%s;%s\n",
+                    h->id, h->nome, h->endereco, h->cpf,
                     h->telefone, h->email, h->sexo,
                     h->estadoCivil, h->dataNascimento);
         } else {

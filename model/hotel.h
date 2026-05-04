@@ -3,16 +3,7 @@
 #ifndef HOTEL_H
 #define HOTEL_H
 
-    // Subdividi endereco para maximizar as info.
-    typedef struct {
-        char rua[100];
-        int numero;
-        char bairro[50];
-        char cidade[50];
-        char estado[3];
-        char cep[10];
-    } Endereco;
-
+    /* ── Dados do Hotel ─────────────────────────────────────────────── */
     typedef struct {
         char NomeFantasia[100];
         char RazaoSocial[100];
@@ -29,13 +20,14 @@
         int ativo; // Verifica se existe ou nao
     } Hotel;
 
+    /* ── Funcoes de inicializacao e outras ─────────────────────────────────────────────── */
     void HotelInit(Hotel *hotel);
     void excluirHotel(Hotel *hotel);
 
-    void HotelSalvarTxt(Hotel *hotel);
-    void HotelSalvarBin(Hotel *hotel);
+    int HotelSalvarTxt(Hotel *hotel);
+    int HotelSalvarBin(Hotel *hotel);
 
-    void HotelExibirTxt(Hotel *hotel);
-    void HotelExibirBin(Hotel *hotel);
+    int HotelLerTxt(Hotel *hotel);
+    int HotelLerBin(Hotel *hotel);
 
 #endif

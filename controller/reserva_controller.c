@@ -3,7 +3,7 @@
 #include "../view/reserva_view.h"
 
 void ReservaControllerExecutar(ListaReserva    **listaReserva,
-                                ListaCategoria **listaAcomodacao,
+                                ListaAcomodacao **listaAcomodacao,
                                 ListaCategoria  **listaCategoria,
                                 ListaHospede    **listaHospede)
 {
