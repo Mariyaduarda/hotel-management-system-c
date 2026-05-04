@@ -1,0 +1,6 @@
+1|agua mineral 500ml|120|20|1.00|3.40|1
+2|Kit Higiene Pessoal|40|10|8.50|18.00|1
+3|Cafe da manha extra|25|5|12.00|35.00|1
+4|Toalhas extras|30|7|15.00|60.00|1
+5|Vinho da casa|29|14|40.00|120.00|1
+6|9999|0|10|40.00|0.00|1

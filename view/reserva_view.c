@@ -1,47 +1,62 @@
+
 #include "../common.h"
 #include "reserva_view.h"
 #include <string.h>
 #include <stdio.h>
 
-/* ── Cores ANSI ─────────────────────────────────────────── */
-#define RESET    "\033[0m"
-#define NEGRITO  "\033[1m"
-#define CIANO    "\033[1;36m"
-#define AMARELO  "\033[1;33m"
-#define VERDE    "\033[1;32m"
-#define VERMELHO "\033[1;31m"
-#define CINZA    "\033[0;90m"
-
-#define TOPO  "╔══════════════════════════════════╗"
-#define MEIO  "╠══════════════════════════════════╣"
-#define FUNDO "╚══════════════════════════════════╝"
+#define TOPO  "╔══════════════════════════════════════════════════════════╗"
+#define MEIO  "╠══════════════════════════════════════════════════════════╣"
+#define FUNDO "╚══════════════════════════════════════════════════════════╝"
 #define BORDA "║"
 
 static void cabecalho(const char *titulo) {
-    printf(CIANO "%s\n" RESET, TOPO);
-    printf(CIANO "%s" RESET "  " NEGRITO "%-51s" RESET CIANO "%s\n" RESET,
-           BORDA, titulo, BORDA);
-    printf(CIANO "%s\n" RESET, MEIO);
+    printf("%s\n", TOPO);
+    printf("%s  %-54s%s\n", BORDA, titulo, BORDA);
+    printf("%s\n", MEIO);
 }
 
 static void opcao(const char *num, const char *desc) {
-    printf(CIANO "%s" RESET "  " VERDE "[%s]" RESET " %-47s" CIANO "%s\n" RESET,
-           BORDA, num, desc, BORDA);
+    printf("%s  [%s] %-52s%s\n", BORDA, num, desc, BORDA);
 }
 
 static void rodape(void) {
-    printf(CIANO "%s\n" RESET, FUNDO);
-    printf(CINZA "  Opcao: " RESET);
+    printf("%s\n", FUNDO);
+    printf("  Opcao: ");
 }
 
 static void separador(void) {
-    printf(CIANO "%s\n" RESET, MEIO);
+    printf("%s\n", MEIO);
 }
 
-// ──────────────────────────────────────────────
-// Helpers internos
-// ──────────────────────────────────────────────
+/* ── Helper: leitura de data com validacao ──────────────── */
+static void lerData(char *dest, int tamanho, const char *label) {
+    char buf[13];
+    int valido = 0;
 
+    do {
+        printf("%s", label);
+        fgets(buf, sizeof(buf), stdin);
+        buf[strcspn(buf, "\n")] = '\0';
+
+        if (strlen(buf) == 10 && buf[2] == '/' && buf[5] == '/')
+            valido = 1;
+        else if (strlen(buf) == 8) {
+            int ok = 1;
+            for (int i = 0; i < 8; i++)
+                if (buf[i] < '0' || buf[i] > '9') { ok = 0; break; }
+            if (ok) valido = 1;
+        }
+
+        if (!valido)
+            printf("  Formato invalido. Use DD/MM/AAAA (ex: 20/05/2026)\n");
+
+    } while (!valido);
+
+    strncpy(dest, buf, tamanho - 1);
+    dest[tamanho - 1] = '\0';
+}
+
+/* ── Exibe acomodacoes disponiveis no periodo ───────────── */
 static void exibirDisponiveisPeriodo(ListaReserva    **listaReserva,
                                       ListaAcomodacao **listaAcomodacao,
                                       ListaCategoria  **listaCategoria,
@@ -54,9 +69,9 @@ static void exibirDisponiveisPeriodo(ListaReserva    **listaReserva,
     ListaAcomodacao *a = *listaAcomodacao;
     int achou = 0;
 
-    printf(CIANO "\n%-5s %-30s %-20s %-10s %-6s %-6s\n" RESET,
+    printf("\n%-5s %-30s %-20s %-10s %-6s %-6s\n",
            "ID", "Descricao", "Facilidades", "Categoria", "Adult", "Crian");
-    printf(CINZA "%-5s %-30s %-20s %-10s %-6s %-6s\n" RESET,
+    printf("%-5s %-30s %-20s %-10s %-6s %-6s\n",
            "---", "------------------------------",
            "--------------------", "----------", "------", "------");
 
@@ -97,13 +112,10 @@ static void exibirDisponiveisPeriodo(ListaReserva    **listaReserva,
     }
 
     if (!achou)
-        printf(AMARELO "Nenhuma acomodacao disponivel com os criterios informados.\n" RESET);
+        printf("Nenhuma acomodacao disponivel com os criterios informados.\n");
 }
 
-// ──────────────────────────────────────────────
-// Menu principal de reservas
-// ──────────────────────────────────────────────
-
+/* ── Menu ───────────────────────────────────────────────── */
 void ReservaMenuExibir(void) {
     printf("\n");
     cabecalho("RESERVAS");
@@ -116,10 +128,7 @@ void ReservaMenuExibir(void) {
     rodape();
 }
 
-// ──────────────────────────────────────────────
-// Nova reserva
-// ──────────────────────────────────────────────
-
+/* ── Nova reserva ───────────────────────────────────────── */
 void ReservaCadastrarView(ListaReserva    **listaReserva,
                            ListaAcomodacao **listaAcomodacao,
                            ListaCategoria  **listaCategoria,
@@ -130,7 +139,7 @@ void ReservaCadastrarView(ListaReserva    **listaReserva,
 
     printf("\n");
     cabecalho("NOVA RESERVA");
-    printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n" RESET);
+    printf("%s\n", FUNDO);
 
     printf("ID do hospede: ");
     scanf("%d", &r.idHospede);
@@ -138,15 +147,13 @@ void ReservaCadastrarView(ListaReserva    **listaReserva,
 
     TipoHospede *h = HospedeBuscar(listaHospede, r.idHospede);
     if (h == NULL || !h->ativo) {
-        printf(VERMELHO "Hospede nao encontrado.\n" RESET);
+        printf("Hospede nao encontrado.\n");
         return;
     }
-    printf(VERDE "Hospede: %s\n" RESET, h->nome);
+    printf("Hospede: %s\n", h->nome);
 
-    printf("Data de entrada (DD/MM/AAAA): ");
-    lerString(r.dataEntrada, sizeof(r.dataEntrada));
-    printf("Data de saida  (DD/MM/AAAA): ");
-    lerString(r.dataSaida, sizeof(r.dataSaida));
+    lerData(r.dataEntrada, sizeof(r.dataEntrada), "Data de entrada (DD/MM/AAAA): ");
+    lerData(r.dataSaida,   sizeof(r.dataSaida),   "Data de saida  (DD/MM/AAAA): ");
 
     printf("Numero de adultos : ");
     scanf("%d", &r.numAdultos);
@@ -155,7 +162,7 @@ void ReservaCadastrarView(ListaReserva    **listaReserva,
     scanf("%d", &r.numCriancas);
     limparBuffer();
 
-    printf(CIANO "\n-- Filtros (0 ou vazio = ignorar) --\n" RESET);
+    printf("\n-- Filtros (0 ou vazio = ignorar) --\n");
     int idCategoria = 0;
     printf("ID da categoria desejada: ");
     scanf("%d", &idCategoria);
@@ -165,7 +172,7 @@ void ReservaCadastrarView(ListaReserva    **listaReserva,
     printf("Facilidade desejada (ex: TV): ");
     lerString(facilidade, sizeof(facilidade));
 
-    printf(CIANO "\n-- Acomodacoes Disponiveis --\n" RESET);
+    printf("\n-- Acomodacoes Disponiveis --\n");
     exibirDisponiveisPeriodo(listaReserva, listaAcomodacao, listaCategoria,
                               r.dataEntrada, r.dataSaida,
                               idCategoria, r.numAdultos, r.numCriancas,
@@ -178,21 +185,21 @@ void ReservaCadastrarView(ListaReserva    **listaReserva,
 
     TipoAcomodacao *ac = AcomodacaoBuscar(listaAcomodacao, r.idAcomodacao);
     if (ac == NULL || !ac->ativo) {
-        printf(VERMELHO "  ✘ Acomodacao invalida.\n" RESET);
+        printf("Acomodacao invalida.\n");
         return;
     }
 
     TipoCategoria *cat = CategoriaBuscar(listaCategoria, ac->idCategoria);
     if (cat != NULL) {
         if (r.numAdultos > cat->maxAdultos || r.numCriancas > cat->maxCriancas) {
-            printf(VERMELHO "  ✘ Acomodacao nao comporta o numero de pessoas.\n" RESET);
-            printf("  Capacidade: %d adultos e %d criancas.\n",
+            printf("Acomodacao nao comporta o numero de pessoas.\n");
+            printf("Capacidade: %d adultos e %d criancas.\n",
                    cat->maxAdultos, cat->maxCriancas);
             return;
         }
         int dias = ReservaCalcularDiarias(r.dataEntrada, r.dataSaida);
         r.totalDiarias = dias * cat->valorDiaria;
-        printf(VERDE "\n  Total: %d diarias x R$ %.2f = R$ %.2f\n" RESET,
+        printf("\nTotal: %d diarias x R$ %.2f = R$ %.2f\n",
                dias, cat->valorDiaria, r.totalDiarias);
     }
 
@@ -207,19 +214,16 @@ void ReservaCadastrarView(ListaReserva    **listaReserva,
     if (!confirm) return;
 
     if (ReservaCriar(listaReserva, r))
-        printf(VERDE "Reserva criada com sucesso!\n" RESET);
+        printf("Reserva criada com sucesso!\n");
     else
-        printf(VERMELHO "Erro ao criar reserva.\n" RESET);
+        printf("Erro ao criar reserva.\n");
 }
 
-// ──────────────────────────────────────────────
-// Cancelar reserva
-// ──────────────────────────────────────────────
-
+/* ── Cancelar reserva ───────────────────────────────────── */
 void ReservaCancelarView(ListaReserva **lista) {
     printf("\n");
     cabecalho("CANCELAR RESERVA");
-    printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n" RESET);
+    printf("%s\n", FUNDO);
 
     printf("ID da reserva: ");
     int id;
@@ -238,17 +242,14 @@ void ReservaCancelarView(ListaReserva **lista) {
     if (!confirm) return;
 
     if (ReservaCancelar(lista, id))
-        printf(VERDE "Reserva cancelada com sucesso.\n" RESET);
+        printf("Reserva cancelada com sucesso.\n");
 }
 
-// ──────────────────────────────────────────────
-// Consultar reserva por ID
-// ──────────────────────────────────────────────
-
+/* ── Consultar por ID ───────────────────────────────────── */
 void ReservaConsultarView(ListaReserva **lista) {
     printf("\n");
     cabecalho("CONSULTAR RESERVA");
-    printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n" RESET);
+    printf("%s\n", FUNDO);
 
     printf("ID da reserva: ");
     int id;
@@ -257,28 +258,23 @@ void ReservaConsultarView(ListaReserva **lista) {
     ReservaListar(lista, id);
 }
 
-// ──────────────────────────────────────────────
-// Buscar acomodacoes disponiveis
-// ──────────────────────────────────────────────
-
+/* ── Buscar disponiveis ─────────────────────────────────── */
 void ReservaBuscarDisponiveisView(ListaReserva    **listaReserva,
                                    ListaAcomodacao **listaAcomodacao,
                                    ListaCategoria  **listaCategoria)
 {
     printf("\n");
     cabecalho("ACOMODACOES DISPONIVEIS");
-    printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n" RESET);
+    printf("%s\n", FUNDO);
 
-    char entrada[11], saida[11];
-    printf("Data de entrada (DD/MM/AAAA): ");
-    lerString(entrada, sizeof(entrada));
-    printf("Data de saida  (DD/MM/AAAA): ");
-    lerString(saida, sizeof(saida));
+    char entrada[13], saida[13];
+    lerData(entrada, sizeof(entrada), "Data de entrada (DD/MM/AAAA): ");
+    lerData(saida,   sizeof(saida),   "Data de saida  (DD/MM/AAAA): ");
 
     int adultos = 0, criancas = 0, idCat = 0;
-    printf("Adultos  (0 = qualquer): "); scanf("%d", &adultos);  limparBuffer();
-    printf("Criancas (0 = qualquer): "); scanf("%d", &criancas); limparBuffer();
-    printf("ID Categoria (0 = qualquer): "); scanf("%d", &idCat); limparBuffer();
+    printf("Adultos  (0 = qualquer): ");     scanf("%d", &adultos);  limparBuffer();
+    printf("Criancas (0 = qualquer): ");     scanf("%d", &criancas); limparBuffer();
+    printf("ID Categoria (0 = qualquer): "); scanf("%d", &idCat);    limparBuffer();
 
     char facilidade[100] = "";
     printf("Facilidade (vazio = qualquer): ");
@@ -287,3 +283,4 @@ void ReservaBuscarDisponiveisView(ListaReserva    **listaReserva,
     exibirDisponiveisPeriodo(listaReserva, listaAcomodacao, listaCategoria,
                               entrada, saida, idCat, adultos, criancas, facilidade);
 }
+

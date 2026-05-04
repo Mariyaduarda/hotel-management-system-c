@@ -41,11 +41,21 @@ TipoAcomodacao *AcomodacaoBuscar(ListaAcomodacao **lista, int id) {
     return NULL;
 }
 
-void AcomodacaoListar(ListaAcomodacao **lista, int id,
-                       ListaCategoria **listaCat) {
+void AcomodacaoListar(ListaAcomodacao **lista, int id, ListaCategoria **listaCat) {
+    if (id == 0) {
+        // Lista todas
+        ListaAcomodacao *atual = *lista;
+        while (atual) {
+            if (atual->acomodacao.ativo)
+                AcomodacaoListar(lista, atual->acomodacao.id, listaCat);
+            atual = atual->proximo;
+        }
+        return;
+    }
+    // Busca por ID específico (código que já existe)
     TipoAcomodacao *a = AcomodacaoBuscar(lista, id);
     if (!a) { printf("Acomodação não encontrada.\n"); return; }
-
+    
     printf("ID          : %d\n", a->id);
     printf("Descrição   : %s\n", a->descricao);
     printf("Facilidades : %s\n", a->facilidades);
@@ -86,7 +96,7 @@ void AcomodacaoListaLiberar(ListaAcomodacao *lista) {
 }
 
 int AcomodacaoSalvarTxt(ListaAcomodacao *lista) {
-    FILE *f = fopen("acomodacao.txt", "w");
+    FILE *f = fopen("dados/acomodacao.txt", "w");
     if (!f) return 0;
     for (ListaAcomodacao *a = lista; a; a = a->proximo)
         fprintf(f, "%d;%s;%s;%d;%d\n",
@@ -97,7 +107,7 @@ int AcomodacaoSalvarTxt(ListaAcomodacao *lista) {
 }
 
 int AcomodacaoSalvarBin(ListaAcomodacao *lista) {
-    FILE *f = fopen("acomodacao.bin", "wb");
+    FILE *f = fopen("dados/acomodacao.bin", "wb");
     if (!f) return 0;
     for (ListaAcomodacao *a = lista; a; a = a->proximo)
         fwrite(&a->acomodacao, sizeof(TipoAcomodacao), 1, f);
@@ -105,7 +115,7 @@ int AcomodacaoSalvarBin(ListaAcomodacao *lista) {
 }
 
 int AcomodacaoLerTxt(ListaAcomodacao **lista) {
-    FILE *f = fopen("acomodacao.txt", "r");
+    FILE *f = fopen("dados/acomodacao.txt", "r");
     if (!f) return 0;
     char linha[400];
     while (fgets(linha, sizeof(linha), f)) {
@@ -118,7 +128,7 @@ int AcomodacaoLerTxt(ListaAcomodacao **lista) {
 }
 
 int AcomodacaoLerBin(ListaAcomodacao **lista) {
-    FILE *f = fopen("acomodacao.bin", "rb");
+    FILE *f = fopen("dados/acomodacao.bin", "rb");
     if (!f) return 0;
     TipoAcomodacao a;
     while (fread(&a, sizeof(TipoAcomodacao), 1, f))

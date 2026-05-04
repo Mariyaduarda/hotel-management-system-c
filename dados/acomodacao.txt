@@ -1,0 +1,4 @@
+1;Standard Solteiro;Wifi, Tv, Ventilador;1;1
+2;Standard Casal;Wifi;2;1
+3;Luxo Familia;Varanda, Frigobar, ar condicionado, smart tv, frigobar;3;1
+4;Suite Premium;Hidromassagem, Servico de quarto, Vista panoramica, smart tv, wifi;4;1

@@ -24,6 +24,16 @@ int main() {
             OperadorListaLiberar(ListaOperador);
             return 1;
         }
+        int salvo = OperadorSalvarBin(ListaOperador);
+        printf("DEBUG: SalvarBin retornou %d\n", salvo);
+        printf("DEBUG: Lista tem operador: %s\n", 
+           ListaOperador ? ListaOperador->operador.usuario : "NULA");
+int leuBin = OperadorLerBin(&ListaOperador);
+    printf("DEBUG: LerBin retornou %d\n", leuBin);
+    if (!leuBin) {
+        int leuTxt = OperadorLerTxt(&ListaOperador);
+        printf("DEBUG: LerTxt retornou %d\n", leuTxt);
+    }
         // persistencia ao inciar
         OperadorSalvarBin(ListaOperador);
         OperadorSalvarTxt(ListaOperador);
@@ -35,6 +45,7 @@ int main() {
     Operador *logado = NULL;
     if (!telaLogin(&ListaOperador, &logado)) {
         printf("Falha no login. Sessao encerrada.\n");
+            printf("DEBUG: Operadores na lista:\n");
         OperadorListaLiberar(ListaOperador);
         return 1; /* falha no login */
     }

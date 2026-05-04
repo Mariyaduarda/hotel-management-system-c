@@ -99,7 +99,7 @@ void CategoriaListaLiberar(ListaCategoria *lista) {
 }
 
 int CategoriaSalvarTxt(ListaCategoria *lista) {
-    FILE *f = fopen("categoria.txt", "w");
+    FILE *f = fopen("dados/categoria.txt", "w");
     if (!f) return 0;
     for (ListaCategoria *a = lista; a; a = a->proximo) {
         TipoCategoria *c = &a->categoria;
@@ -112,7 +112,7 @@ int CategoriaSalvarTxt(ListaCategoria *lista) {
 }
 
 int CategoriaSalvarBin(ListaCategoria *lista) {
-    FILE *f = fopen("categoria.bin", "wb");
+    FILE *f = fopen("dados/categoria.bin", "wb");
     if (!f) return 0;
     for (ListaCategoria *a = lista; a; a = a->proximo)
         fwrite(&a->categoria, sizeof(TipoCategoria), 1, f);
@@ -121,7 +121,7 @@ int CategoriaSalvarBin(ListaCategoria *lista) {
 }
 
 int CategoriaLerTxt(ListaCategoria **lista) {
-    FILE *f = fopen("categoria.txt", "r");
+    FILE *f = fopen("dados/categoria.txt", "r");
     if (!f) return 0;
     char linha[256];
     while (fgets(linha, sizeof(linha), f)) {
@@ -136,7 +136,7 @@ int CategoriaLerTxt(ListaCategoria **lista) {
 }
 
 int CategoriaLerBin(ListaCategoria **lista) {
-    FILE *f = fopen("categoria.bin", "rb");
+    FILE *f = fopen("dados/categoria.bin", "rb");
     if (!f) return 0;
     TipoCategoria c;
     while (fread(&c, sizeof(TipoCategoria), 1, f))

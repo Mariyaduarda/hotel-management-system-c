@@ -3,6 +3,7 @@
 
 #include "../model/hotel.h"
 
+void HotelControllerExecutar(Hotel *hotel);
 void  controllerHotelLer(Hotel *hotel);
 int   controllerHotelSalvar(Hotel *hotel);
 void  controllerHotelExcluir(Hotel *hotel);

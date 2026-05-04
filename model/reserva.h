@@ -11,8 +11,8 @@ typedef struct {
     int  id;
     int  idHospede;
     int  idAcomodacao;
-    char dataEntrada[11];   // DD/MM/AAAA
-    char dataSaida[11];     // DD/MM/AAAA
+    char dataEntrada[13];   // DD/MM/AAAA
+    char dataSaida[13];     // DD/MM/AAAA
     int  numAdultos;
     int  numCriancas;
     int  pagarNaEntrada;    // 1 = paga no check-in, 0 = paga no check-out

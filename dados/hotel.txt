@@ -1,0 +1,10 @@
+Nome Fantasia: hotelFormiga
+Razao Social: Formiga companhia
+Inscricao Estadual: -
+CNPJ: 12345678901234
+Email: -
+Telefone: -
+Nome do Responsavel: -
+Check-in: 00:00
+Check-out: 00:00
+Telefone do Responsavel: -

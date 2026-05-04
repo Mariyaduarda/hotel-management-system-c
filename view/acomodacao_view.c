@@ -1,5 +1,8 @@
 #include "acomodacao_view.h"
 #include "../common.h"
+#include "../controller/acomodacao_controller.h"
+#include "../model/acomodacao.h"
+#include "../model/categoria_acomodacao.h"
 
 void AcomodacaoMenuExibir(void) {
     printf("\n╔══════════════════════════════╗\n");

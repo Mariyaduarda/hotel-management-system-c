@@ -13,7 +13,7 @@ typedef struct {
     int  id;
     char nome[100];
     char usuario[50];
-    char senha[50];      // armazenar hash em producao; aqui texto simples p/ fins didaticos
+    char senha[65];      // SHA256 gera 64 caracteres hex + null terminator
     int  permissoes;     // bitmask com PERM_*
     int  ativo;
 } Operador;
