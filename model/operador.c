@@ -8,6 +8,8 @@ static Operador operadorAtual = {0};
 static void gerarSHA256(const char *senha, char *saida) {
     unsigned char hash[SHA256_DIGEST_LENGTH];
     SHA256((unsigned char *)senha, strlen(senha), hash);
+    
+    memset(saida, 0, 65); // Garante que a string de saída comece limpa
     for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
         sprintf(saida + (i * 2), "%02x", hash[i]);
     saida[64] = '\0';

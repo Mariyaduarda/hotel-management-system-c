@@ -88,15 +88,14 @@ static void menuCadastros(ListaHospede    **listaHospede,
             pausar();
             break;
         case 'C':
-            printf(AMARELO "\n  [Em construção]\n" RESET);
+
             pausar();
             break;
         case 'P':
             ProdutoControllerExecutar(listaProduto);
             break;
         case 'T':
-            printf(AMARELO "\n  NAO FEITO AINDA \n" RESET);
-            pausar();
+            HotelControllerExecutar(hotel);
             break;
         case 'V': break;
         default:

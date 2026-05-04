@@ -12,8 +12,11 @@
 int main() {
     /* ── Operador ─────────────────────────────────────────── */
     ListaOperador *ListaOperador = NULL;
-    OperadorLerBin(&ListaOperador);
+    
+    if (!OperadorLerBin(&ListaOperador)) {
     OperadorLerTxt(&ListaOperador);
+    }
+
 
     if(ListaOperador == NULL) {
         if(!telaPrimeiroCadastro(&ListaOperador)) {
@@ -24,8 +27,8 @@ int main() {
         // persistencia ao inciar
         OperadorSalvarBin(ListaOperador);
         OperadorSalvarTxt(ListaOperador);
+
         printf("Operador inicial cadastrado com sucesso.\n");
-        return 1;
     }
 
     /* ── Login ────────────────────────────────────────────── */
@@ -59,17 +62,11 @@ int main() {
     ListaProduto    *listaProduto    = NULL;
 
     /* ── Carrega dados persistidos das Entidades ────────────────────────── */
-    HospedeLerBin(&listaHospede);
-    ReservaLerBin(&listaReserva);
-    AcomodacaoLerBin(&listaAcomodacao);
-    CategoriaLerBin(&listaCategoria);
-    ProdutoLerBin(&listaProduto);
-
-    HospedeLerTxt(&listaHospede);
-    ReservaLerTxt(&listaReserva);
-    AcomodacaoLerTxt(&listaAcomodacao);
-    CategoriaLerTxt(&listaCategoria);
-    ProdutoLerTxt(&listaProduto);
+   if (!HospedeLerBin(&listaHospede))       HospedeLerTxt(&listaHospede);
+   if (!ReservaLerBin(&listaReserva))       ReservaLerTxt(&listaReserva);
+   if (!AcomodacaoLerBin(&listaAcomodacao)) AcomodacaoLerTxt(&listaAcomodacao);
+   if (!CategoriaLerBin(&listaCategoria))   CategoriaLerTxt(&listaCategoria);
+   if (!ProdutoLerBin(&listaProduto))       ProdutoLerTxt(&listaProduto);
 
     /* ── Menu principal ───────────────────────────────────── */
     menuPrincipal(&listaHospede,

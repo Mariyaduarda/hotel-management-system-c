@@ -12,8 +12,6 @@ SRC = \
     model/operador.c \
     model/reserva.c \
     model/produto.c \
-    model/relatorio.c \
-    model/fornecedor.c\
     controller/hospede_controller.c \
     controller/reserva_controller.c \
     controller/relatorio_controller.c \

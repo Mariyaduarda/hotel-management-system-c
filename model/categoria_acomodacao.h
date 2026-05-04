@@ -1,9 +1,11 @@
-#ifndef CATEGORIA_H
-#define CATEGORIA_H
+#ifndef CATEGORIA_ACOMODACAO_H
+#define CATEGORIA_ACOMODACAO_H
+
+#include "../common.h"
 
 typedef struct {
     int   id;
-    char  descricao[100];   // ex: Standard, Luxo, Presidencial
+    char  descricao[100];
     float valorDiaria;
     int   maxAdultos;
     int   maxCriancas;
@@ -11,25 +13,20 @@ typedef struct {
 } TipoCategoria;
 
 typedef struct ListaCategoria {
+    TipoCategoria          categoria;
     struct ListaCategoria *proximo;
-    TipoCategoria categoria;
 } ListaCategoria;
 
-// Funcoes base
-void CategoriasInit(TipoCategoria *categoria);
-void CategoriaListaInit(ListaCategoria *lista);
+void           CategoriasInit        (TipoCategoria *cat);
+int            CategoriaCriar        (ListaCategoria **lista, TipoCategoria cat);
+TipoCategoria *CategoriaBuscar       (ListaCategoria **lista, int id);
+void           CategoriaListar       (ListaCategoria **lista, int id);
+int            CategoriaExcluir      (ListaCategoria **lista, int id);
+int            CategoriaAtualizar    (ListaCategoria **lista, int id, int op);
+void           CategoriaListaLiberar (ListaCategoria *lista);
+int            CategoriaSalvarTxt    (ListaCategoria *lista);
+int            CategoriaSalvarBin    (ListaCategoria *lista);
+int            CategoriaLerTxt       (ListaCategoria **lista);
+int            CategoriaLerBin       (ListaCategoria **lista);
 
-int  CategoriarCriar(ListaCategoria **lista, TipoCategoria categoria);
-void CategoriaListar(ListaCategoria **lista, int id);
-TipoCategoria* CategoriaBuscar(ListaCategoria **lista, int id);
-int  CategoriaExcluir(ListaCategoria **lista, int id);
-int  CategoriaAtualizar(ListaCategoria **lista, int id, int op);
-void CategoriaListaLiberar(ListaCategoria *lista);
-
-// Funcoes de arquivo
-int CategoriaSalvarTxt(ListaCategoria *lista);
-int CategoriaSalvarBin(ListaCategoria *lista);
-int CategoriaLerTxt(ListaCategoria **lista);
-int CategoriaLerBin(ListaCategoria **lista);
-
-#endif // CATEGORIA_H
+#endif
