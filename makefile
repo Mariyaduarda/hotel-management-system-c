@@ -27,6 +27,7 @@ SRC = \
     view/relatorio_view.c \
     view/hotel_view.c \
     view/acomodacao_view.c\
+    view/ler_entradas.c\
     utils/validacao.c \
     utils/relatorio.c\
     view/login_view.c\

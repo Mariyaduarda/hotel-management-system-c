@@ -11,7 +11,7 @@
 #define USE_MATH
 #define USE_UNISTD
 #define USE_FCNTL
-#define USE_OPENSSL
+// #define USE_OPENSSL
 
 /* ============================ */
 
@@ -45,16 +45,16 @@
 /* ════════════════════════════════════════════════════════════════ */
 /* Cores ANSI para Terminal                                         */
 /* ════════════════════════════════════════════════════════════════ */
-#define RESET   "\x1b[0m"
-#define PRETO   "\x1b[30m"
+#define RESET    "\x1b[0m"
+#define PRETO    "\x1b[30m"
 #define VERMELHO "\x1b[31m"
-#define VERDE   "\x1b[32m"
-#define AMARELO "\x1b[33m"
-#define AZUL    "\x1b[34m"
-#define MAGENTA "\x1b[35m"
-#define CIANO   "\x1b[36m"
-#define BRANCO  "\x1b[37m"
-#define CINZA   "\x1b[90m"
+#define VERDE    "\x1b[32m"
+#define AMARELO  "\x1b[33m"
+#define AZUL     "\x1b[34m"
+#define MAGENTA  "\x1b[35m"
+#define CIANO    "\x1b[36m"
+#define BRANCO   "\x1b[37m"
+#define CINZA    "\x1b[90m"
 
 /* ════════════════════════════════════════════════════════════════ */
 /* Estrutura de Endereço (unificada)                                */
@@ -71,5 +71,12 @@ typedef struct {
 
 void lerString(char *dest, int tamanho);
 void limparBuffer();
+
+
+/* ════════════════════════════════════════════════════════════════ */
+/* Funcoes Gerais                                                   */
+/* ════════════════════════════════════════════════════════════════ */
+
+#include "view/ler_entradas.h"
 
 #endif // COMMON_H

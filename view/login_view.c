@@ -1,7 +1,6 @@
 // view/login_view.c
 #include "../common.h"
 #include "login_view.h"
-#include <openssl/sha.h>
 #include <string.h>
 
 #define TOPO  "╔═══════════════════════════════════════════════════════╗"
@@ -90,11 +89,8 @@ int telaPrimeiroCadastro(ListaOperador **lista) {
             printf("  Senhas nao coincidem. Tente novamente.\n");
     } while (strcmp(senha, confirma) != 0);
 
-    unsigned char hash[SHA256_DIGEST_LENGTH];
-    SHA256((unsigned char *)senha, strlen(senha), hash);
-    for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
-        sprintf(op.senha + (i * 2), "%02x", hash[i]);
-    op.senha[64] = '\0';
+    // Armazenar senha em texto plano
+    strcpy(op.senha, senha);
 
     memset(senha,    0, sizeof(senha));
     memset(confirma, 0, sizeof(confirma));

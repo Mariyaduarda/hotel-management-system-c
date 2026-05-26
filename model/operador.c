@@ -4,17 +4,6 @@
 /* ── Operador Globalmente ────────────────────────── */
 static Operador operadorAtual = {0};
 
-/* ── SHA256 - Hash ─────────────────────────────────────────────── */
-static void gerarSHA256(const char *senha, char *saida) {
-    unsigned char hash[SHA256_DIGEST_LENGTH];
-    SHA256((unsigned char *)senha, strlen(senha), hash);
-    
-    memset(saida, 0, 65); // Garante que a string de saída comece limpa
-    for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
-        sprintf(saida + (i * 2), "%02x", hash[i]);
-    saida[64] = '\0';
-}
-
 /* ── Inicializar Operados ───────────────────────────────────────────────── */
 void OperadorInit(Operador *op) {
     op->id         = 0;
@@ -115,7 +104,7 @@ int OperadorAtualizar(ListaOperador **lista, int id, int op) {
                 if (strcmp(novaSenha, confirma) != 0)
                     printf("Senhas nao coincidem.\n");
             } while (strcmp(novaSenha, confirma) != 0);
-            gerarSHA256(novaSenha, o->senha);
+            strcpy(o->senha, novaSenha);
             memset(novaSenha, 0, sizeof(novaSenha));
             memset(confirma,  0, sizeof(confirma));
             break;
@@ -141,11 +130,8 @@ int OperadorAutenticar(ListaOperador **lista, const char *usuario,
     //verifica se existe
     if (!op || !op->ativo) return 0;
 
-    char hash[65];
-    gerarSHA256(senha, hash);
-
-    // comparar hash da senha digitada com o hash armazenado
-    if (strcmp(op->senha, hash) != 0) return 0;
+    // Comparar senha digitada com a senha armazenada
+    if (strcmp(op->senha, senha) != 0) return 0;
 
     // funcionou a autenticacao vem p ca
     *logado = op;
@@ -173,7 +159,7 @@ void criarOperador(void) {
             printf("As senhas nao coincidem. Tente novamente.\n");
     } while (strcmp(senha, confirmacao) != 0);
 
-    gerarSHA256(senha, operadorAtual.senha);
+    strcpy(operadorAtual.senha, senha);
     operadorAtual.permissoes = PERM_ADMIN;
     operadorAtual.ativo      = 1;
 
