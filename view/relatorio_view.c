@@ -4,15 +4,6 @@
 #include <string.h>
 #include <stdio.h>
 
-/* ── Cores ANSI ─────────────────────────────────────────── */
-#define RESET    "\033[0m"
-#define NEGRITO  "\033[1m"
-#define CIANO    "\033[1;36m"
-#define AMARELO  "\033[1;33m"
-#define VERDE    "\033[1;32m"
-#define VERMELHO "\033[1;31m"
-#define CINZA    "\033[0;90m"
-
 #define TOPO  "╔══════════════════════════════════╗"
 #define MEIO  "╠══════════════════════════════════╣"
 #define FUNDO "╚══════════════════════════════════╝"

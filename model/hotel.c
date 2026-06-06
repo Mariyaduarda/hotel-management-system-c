@@ -64,6 +64,7 @@ int HotelSalvarTxt(Hotel *hotel) {
 }
 
 int HotelLerTxt(Hotel *hotel) {
+    (void)hotel; /* parâmetro não utilizado */
     FILE *fp = fopen("dados/hotel.txt", "r");
     if (!fp) return 0;
     char line[256];

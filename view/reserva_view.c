@@ -100,7 +100,7 @@ static void exibirDisponiveisPeriodo(ListaReserva    **listaReserva,
         char descCat[20] = "-";
         int maxAd = 0, maxCr = 0;
         if (cat != NULL) {
-            snprintf(descCat, sizeof(descCat), "%s", cat->descricao);
+            snprintf(descCat, sizeof(descCat), "%.19s", cat->descricao);
             maxAd = cat->maxAdultos;
             maxCr = cat->maxCriancas;
         }

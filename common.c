@@ -1,4 +1,4 @@
-// common.c CORRETO
+// common.c 
 #include "common.h"
 
 void limparBuffer() {

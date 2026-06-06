@@ -3,14 +3,6 @@
 #include "hospede_view.h"
 #include "../controller/hospede_controller.h"
 
-/* ── Cores ANSI ─────────────────────────────────────────── */
-#define RESET    "\033[0m"
-#define NEGRITO  "\033[1m"
-#define CIANO    "\033[1;36m"
-#define VERDE    "\033[1;32m"
-#define VERMELHO "\033[1;31m"
-#define CINZA    "\033[0;90m"
-
 #define TOPO  "╔═══════════════════════════════════════════════════════╗"
 #define MEIO  "╠═══════════════════════════════════════════════════════╣"
 #define FUNDO "╚═══════════════════════════════════════════════════════╝"

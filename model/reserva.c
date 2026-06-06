@@ -24,7 +24,7 @@ static int dataParaInt(const char *data) {
     return a * 10000 + m * 100 + d;
 }
 
-// Retorna diferenca em dias (aproximada, suficiente para comparar)
+// Retorna diferenca em dias - aproximada, suficiente para comparar
 static int diffDias(const char *entrada, const char *saida) {
     return dataParaInt(saida) - dataParaInt(entrada);
 }
@@ -39,7 +39,7 @@ static int datasSeOverpoem(const char *e1, const char *s1,
 }
 
 /* ════════════════════════════════════════════════════════════════ */
-/* Funções de inicialização                                         */
+/* Inicialização da Reserva                                         */
 /* ════════════════════════════════════════════════════════════════ */
 
 void ReservaInit(TipoReserva *reserva) {
@@ -57,7 +57,7 @@ void ReservaInit(TipoReserva *reserva) {
 }
 
 void ReservaListaInit(ListaReserva *lista) {
-    lista = NULL;
+    (void)lista; /* parâmetro não utilizado */
 }
 
 /* ════════════════════════════════════════════════════════════════ */

@@ -46,6 +46,7 @@
 /* Cores ANSI para Terminal                                         */
 /* ════════════════════════════════════════════════════════════════ */
 #define RESET   "\x1b[0m"
+#define NEGRITO "\x1b[1m"
 #define PRETO   "\x1b[30m"
 #define VERMELHO "\x1b[31m"
 #define VERDE   "\x1b[32m"

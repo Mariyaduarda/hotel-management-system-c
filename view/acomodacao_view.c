@@ -20,8 +20,7 @@ void AcomodacaoMenuExibir(void) {
 
 void AcomodacaoCadastrarView(ListaAcomodacao **lista,
                                 ListaCategoria  **listaCat)
-{
-    TipoAcomodacao a;
+{    (void)listaCat; /* parâmetro não utilizado */    TipoAcomodacao a;
     AcomodacaoInit(&a);
 
     printf("\n-- Cadastro de Acomodacao --\n");
@@ -57,6 +56,7 @@ void AcomodacaoListarView(ListaAcomodacao **lista,
 void AcomodacaoAtualizarView(ListaAcomodacao **lista,
                                 ListaCategoria  **listaCat)
 {
+    (void)listaCat; /* parâmetro não utilizado */
     int id, op;
     printf("\n-- Atualizar Acomodacao --\n");
     printf("ID da acomodacao: ");

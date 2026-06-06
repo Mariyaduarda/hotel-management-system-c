@@ -4,20 +4,30 @@
 #include <openssl/sha.h>
 #include <string.h>
 
-#define TOPO  "╔═══════════════════════════════════════════════════════╗"
-#define MEIO  "╠═══════════════════════════════════════════════════════╣"
-#define FUNDO "╚═══════════════════════════════════════════════════════╝"
-#define BORDA "║"
+#define LARGURA 55
+
+#define TOPO  "+-------------------------------------------------------+"
+#define MEIO  "+-------------------------------------------------------+"
+#define FUNDO "+-------------------------------------------------------+"
+#define BORDA "|"
+
+/* ── Helpers ───────────────────────────────────────────── */
 
 static void cabecalho(const char *titulo) {
     printf("%s\n", TOPO);
-    printf("%s  %-51s%s\n", BORDA, titulo, BORDA);
+    printf("%s %-*s %s\n", BORDA, LARGURA, titulo, BORDA);
     printf("%s\n", MEIO);
 }
 
 static void linha(const char *texto) {
-    printf("%s  %-51s%s\n", BORDA, texto, BORDA);
+    printf("%s %-*s %s\n", BORDA, LARGURA, texto, BORDA);
 }
+
+static void rodape(void) {
+    printf("%s\n", FUNDO);
+}
+
+/* ── Tela de login ─────────────────────────────────────── */
 
 int telaLogin(ListaOperador **lista, Operador **logado) {
     char usuario[50], senha[100];
@@ -25,15 +35,15 @@ int telaLogin(ListaOperador **lista, Operador **logado) {
 
     printf("\033[H\033[J");
 
-    cabecalho("  HOTEL SISTEMA  --  LOGIN");
+    cabecalho("HOTEL SISTEMA -- LOGIN");
     linha("");
-    linha("  Bem-vindo! Faca login operador");
+    linha("Bem-vindo! Faca login do operador.");
     linha("");
-    printf("%s\n", FUNDO);
+    rodape();
 
     while (tentativas > 0) {
-        printf("\n");
-        printf("  Usuario : ");
+
+        printf("\n  Usuario : ");
         scanf("%49s", usuario);
         limparBuffer();
 
@@ -42,8 +52,11 @@ int telaLogin(ListaOperador **lista, Operador **logado) {
         limparBuffer();
 
         if (OperadorAutenticar(lista, usuario, senha, logado)) {
-            printf("\n  Login realizado com sucesso! Bem-vindo, %s.\n\n",
-                   (*logado)->nome);
+
+            printf("\n");
+            printf(VERDE "  Login realizado com sucesso!\n" RESET);
+            printf("  Bem-vindo, %s.\n\n", (*logado)->nome);
+
             memset(senha, 0, sizeof(senha));
             return 1;
         }
@@ -52,28 +65,41 @@ int telaLogin(ListaOperador **lista, Operador **logado) {
         memset(senha, 0, sizeof(senha));
 
         if (tentativas > 0) {
-            printf("\n  Usuario ou senha incorretos. Tentativas restantes: %d\n",
+            printf(VERMELHO
+                   "\n  Usuario ou senha incorretos.\n"
+                   "  Tentativas restantes: %d\n\n"
+                   RESET,
                    tentativas);
         } else {
-            printf("\n  Numero de tentativas esgotado. Encerrando.\n\n");
+            printf(VERMELHO
+                   "\n  Numero de tentativas esgotado.\n"
+                   "  Encerrando sistema.\n\n"
+                   RESET);
         }
     }
+
     return 0;
 }
 
+/* ── Primeiro cadastro ─────────────────────────────────── */
+
 int telaPrimeiroCadastro(ListaOperador **lista) {
+
     Operador op;
     OperadorInit(&op);
+
     char senha[100], confirma[100];
 
     printf("\033[H\033[J");
 
-    cabecalho("  PRIMEIRO ACESSO  --  CADASTRO DE OPERADOR");
+    cabecalho("PRIMEIRO ACESSO -- CADASTRO");
     linha("");
-    linha("  Nenhum operador encontrado.");
-    linha("  Cadastre o administrador do sistema.");
+    linha("Nenhum operador encontrado.");
+    linha("Cadastre o administrador do sistema.");
     linha("");
-    printf("%s\n\n", FUNDO);
+    rodape();
+
+    printf("\n");
 
     printf("  Nome     : ");
     lerString(op.nome, sizeof(op.nome));
@@ -82,30 +108,52 @@ int telaPrimeiroCadastro(ListaOperador **lista) {
     lerString(op.usuario, sizeof(op.usuario));
 
     do {
+
         printf("  Senha    : ");
-        scanf("%99s", senha);    limparBuffer();
+        scanf("%99s", senha);
+        limparBuffer();
+
         printf("  Confirme : ");
-        scanf("%99s", confirma); limparBuffer();
-        if (strcmp(senha, confirma) != 0)
-            printf("  Senhas nao coincidem. Tente novamente.\n");
+        scanf("%99s", confirma);
+        limparBuffer();
+
+        if (strcmp(senha, confirma) != 0) {
+            printf(VERMELHO
+                   "  Senhas nao coincidem. Tente novamente.\n"
+                   RESET);
+        }
+
     } while (strcmp(senha, confirma) != 0);
 
     unsigned char hash[SHA256_DIGEST_LENGTH];
+
     SHA256((unsigned char *)senha, strlen(senha), hash);
-    for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
+
+    for (int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
         sprintf(op.senha + (i * 2), "%02x", hash[i]);
+    }
+
     op.senha[64] = '\0';
 
-    memset(senha,    0, sizeof(senha));
+    memset(senha, 0, sizeof(senha));
     memset(confirma, 0, sizeof(confirma));
 
     op.permissoes = PERM_ADMIN;
-    op.ativo      = 1;
+    op.ativo = 1;
 
     if (OperadorCriar(lista, op)) {
-        printf("\n  Operador \"%s\" cadastrado com sucesso!\n\n", op.nome);
+
+        printf(VERDE
+               "\n  Operador \"%s\" cadastrado com sucesso!\n\n"
+               RESET,
+               op.nome);
+
         return 1;
     }
-    printf("\n  Erro ao cadastrar operador.\n");
+
+    printf(VERMELHO
+           "\n  Erro ao cadastrar operador.\n\n"
+           RESET);
+
     return 0;
 }

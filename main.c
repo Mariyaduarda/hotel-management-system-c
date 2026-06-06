@@ -17,7 +17,6 @@ int main() {
     OperadorLerTxt(&ListaOperador);
     }
 
-
     if(ListaOperador == NULL) {
         if(!telaPrimeiroCadastro(&ListaOperador)) {
             printf("Erro ao cadastrar operador inicial.\n");
@@ -28,12 +27,12 @@ int main() {
         printf("DEBUG: SalvarBin retornou %d\n", salvo);
         printf("DEBUG: Lista tem operador: %s\n", 
            ListaOperador ? ListaOperador->operador.usuario : "NULA");
-int leuBin = OperadorLerBin(&ListaOperador);
-    printf("DEBUG: LerBin retornou %d\n", leuBin);
-    if (!leuBin) {
-        int leuTxt = OperadorLerTxt(&ListaOperador);
-        printf("DEBUG: LerTxt retornou %d\n", leuTxt);
-    }
+        int leuBin = OperadorLerBin(&ListaOperador);
+            printf("DEBUG: LerBin retornou %d\n", leuBin);
+            if (!leuBin) {
+                int leuTxt = OperadorLerTxt(&ListaOperador);
+                printf("DEBUG: LerTxt retornou %d\n", leuTxt);
+            }
         // persistencia ao inciar
         OperadorSalvarBin(ListaOperador);
         OperadorSalvarTxt(ListaOperador);
