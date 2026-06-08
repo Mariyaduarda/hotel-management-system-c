@@ -22,13 +22,7 @@ static void fecharDestino(FILE *f) {
     if (f != NULL && f != stdout) fclose(f);
 }
 
-// Converte "DD/MM/AAAA" para inteiro AAAAMMDD para comparacao
-static int dataParaInt(const char *data) {
-    int d = 0, m = 0, a = 0;
-    sscanf(data, "%d/%d/%d", &d, &m, &a);
-    return a * 10000 + m * 100 + d;
-}
-
+// Reuse global dataParaInt from common.c
 static int dataEntrePeriodo(const char *data,
                              const char *inicio, const char *fim) {
     if (strlen(inicio) == 0 && strlen(fim) == 0) return 1; // sem filtro

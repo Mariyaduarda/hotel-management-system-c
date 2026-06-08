@@ -12,6 +12,7 @@
 #define USE_UNISTD
 #define USE_FCNTL
 #define USE_OPENSSL
+#define USE_CAIXA
 
 /* ============================ */
 
@@ -41,21 +42,32 @@
 #ifdef USE_OPENSSL
 #include <openssl/sha.h>
 #endif
+#ifdef USE_CAIXA
+#include "model/caixa.h"
+#endif
 
-/* ════════════════════════════════════════════════════════════════ */
-/* Cores ANSI para Terminal                                         */
-/* ════════════════════════════════════════════════════════════════ */
-#define RESET   "\x1b[0m"
-#define NEGRITO "\x1b[1m"
-#define PRETO   "\x1b[30m"
+/* Terminal color macros used by views */
+#ifndef RESET
+#define RESET "\x1b[0m"
+#endif
+#ifndef VERDE
+#define VERDE "\x1b[32m"
+#endif
+#ifndef VERMELHO
 #define VERMELHO "\x1b[31m"
-#define VERDE   "\x1b[32m"
+#endif
+#ifndef AMARELO
 #define AMARELO "\x1b[33m"
-#define AZUL    "\x1b[34m"
-#define MAGENTA "\x1b[35m"
-#define CIANO   "\x1b[36m"
-#define BRANCO  "\x1b[37m"
-#define CINZA   "\x1b[90m"
+#endif
+#ifndef CIANO
+#define CIANO "\x1b[36m"
+#endif
+#ifndef CINZA
+#define CINZA "\x1b[90m"
+#endif
+#ifndef NEGRITO
+#define NEGRITO "\x1b[1m"
+#endif
 
 /* ════════════════════════════════════════════════════════════════ */
 /* Estrutura de Endereço (unificada)                                */
@@ -72,5 +84,10 @@ typedef struct {
 
 void lerString(char *dest, int tamanho);
 void limparBuffer();
+int dataParaInt(const char* data);
+int LerInt();
+
+/* View helpers used by common utilities */
+void ViewEntradaInvalida(void);
 
 #endif // COMMON_H

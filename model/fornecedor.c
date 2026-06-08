@@ -159,4 +159,4 @@ int FornecedorLerBin(ListaFornecedor **lista) {
         FornecedorCriar(lista, fo);
     fclose(f);
     return 1;
-}s
+}

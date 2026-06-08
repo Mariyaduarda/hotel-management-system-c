@@ -6,6 +6,11 @@
 #include "model/acomodacao.h"
 #include "model/categoria_acomodacao.h"
 #include "model/produto.h"
+#include "model/nota_fiscal.h"
+#include "model/venda.h"
+#include "model/checkin.h"
+#include "model/contas_pagar.h"
+#include "model/contas_receber.h"
 #include "view/login_view.h"
 #include "view/menu_principal.h"
 
@@ -65,11 +70,16 @@ int main() {
     }
 
     /* ── Listas das Entidades ────────────────────────────────────── */
-    ListaHospede    *listaHospede    = NULL;
-    ListaReserva    *listaReserva    = NULL;
-    ListaAcomodacao *listaAcomodacao = NULL;
-    ListaCategoria  *listaCategoria  = NULL;
-    ListaProduto    *listaProduto    = NULL;
+    ListaHospede        *listaHospede    = NULL;
+    ListaReserva        *listaReserva    = NULL;
+    ListaAcomodacao     *listaAcomodacao = NULL;
+    ListaCategoria      *listaCategoria  = NULL;
+    ListaProduto        *listaProduto    = NULL;
+    ListaNotaFiscal     *listaNotaFiscal = NULL;
+    ListaVenda          *listaVenda      = NULL;
+    ListaCheckin        *listaCheckin    = NULL;
+    ListaContaPagar     *listaContaPagar = NULL;
+    ListaContaReceber   *listaContaReceber = NULL;
 
     /* ── Carrega dados persistidos das Entidades ────────────────────────── */
    if (!HospedeLerBin(&listaHospede))       HospedeLerTxt(&listaHospede);
@@ -77,6 +87,11 @@ int main() {
    if (!AcomodacaoLerBin(&listaAcomodacao)) AcomodacaoLerTxt(&listaAcomodacao);
    if (!CategoriaLerBin(&listaCategoria))   CategoriaLerTxt(&listaCategoria);
    if (!ProdutoLerBin(&listaProduto))       ProdutoLerTxt(&listaProduto);
+   if (!NotaFiscalLerBin(&listaNotaFiscal)) NotaFiscalLerTxt(&listaNotaFiscal);
+   if (!VendaLerBin(&listaVenda))           VendaLerTxt(&listaVenda);
+   if (!CheckinLerBin(&listaCheckin))       CheckinLerTxt(&listaCheckin);
+   if (!ContaPagarLerBin(&listaContaPagar)) ContaPagarLerTxt(&listaContaPagar);
+   if (!ContaReceberLerBin(&listaContaReceber)) ContaReceberLerTxt(&listaContaReceber);
 
     /* ── Menu principal ───────────────────────────────────── */
     menuPrincipal(&listaHospede,
@@ -84,7 +99,12 @@ int main() {
                   &listaAcomodacao,
                   &listaCategoria,
                   &listaProduto,
-                  &hotel);
+                  &hotel,
+                  &listaNotaFiscal,
+                  &listaVenda,
+                  &listaCheckin,
+                  &listaContaPagar,
+                  &listaContaReceber);
     
     /* ── Salva ao sair ────────────────────────────────────── */
     HospedeSalvarBin(listaHospede);
@@ -93,6 +113,11 @@ int main() {
     CategoriaSalvarBin(listaCategoria);
     ProdutoSalvarBin(listaProduto);
     HotelSalvarBin(&hotel);
+    NotaFiscalSalvarBin(listaNotaFiscal);
+    VendaSalvarBin(listaVenda);
+    CheckinSalvarBin(listaCheckin);
+    ContaPagarSalvarBin(listaContaPagar);
+    ContaReceberSalvarBin(listaContaReceber);
 
     HospedeSalvarTxt(listaHospede);
     ReservaSalvarTxt(listaReserva);
@@ -100,6 +125,11 @@ int main() {
     CategoriaSalvarTxt(listaCategoria);
     ProdutoSalvarTxt(listaProduto);
     HotelSalvarTxt(&hotel);
+    NotaFiscalSalvarTxt(listaNotaFiscal);
+    VendaSalvarTxt(listaVenda);
+    CheckinSalvarTxt(listaCheckin);
+    ContaPagarSalvarTxt(listaContaPagar);
+    ContaReceberSalvarTxt(listaContaReceber);
 
     /* ── Libera memória ───────────────────────────────────── */
     HospedeListaLiberar(listaHospede);
@@ -107,6 +137,11 @@ int main() {
     AcomodacaoListaLiberar(listaAcomodacao);
     CategoriaListaLiberar(listaCategoria);
     ProdutoListaLiberar(listaProduto);
+    NotaFiscalListaLiberar(listaNotaFiscal);
+    VendaListaLiberar(listaVenda);
+    CheckinListaLiberar(listaCheckin);
+    ContaPagarListaLiberar(listaContaPagar);
+    ContaReceberListaLiberar(listaContaReceber);
 
     return 0;
 }

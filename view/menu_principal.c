@@ -8,6 +8,11 @@
 #include "../controller/produto_controller.h"
 #include "../controller/hotel_controller.h"
 #include "../controller/categoria_controller.h"
+#include "../controller/nota_fiscal_controller.h"
+#include "../controller/venda_controller.h"
+#include "../controller/checkin_controller.h"
+#include "../controller/contas_pagar_controller.h"
+#include "../controller/contas_receber_controller.h"
 
 #define LARGURA 56
 
@@ -172,6 +177,50 @@ static void menuReservas(ListaReserva    **listaReserva,
 }
 
 /* ───────────────────────────────────────────────────────── */
+/* Submenu: Transacoes                                       */
+/* ───────────────────────────────────────────────────────── */
+
+static void menuTransacoes(ListaNotaFiscal **listaNotaFiscal,
+                           ListaVenda      **listaVenda,
+                           ListaCheckin    **listaCheckin,
+                           ListaContaPagar **listaContaPagar,
+                           ListaContaReceber **listaContaReceber)
+{
+    char op;
+
+    do {
+        cabecalho("TRANSACOES");
+
+        opcao("N", "Nota fiscal");
+        opcao("V", "Vendas");
+        opcao("K", "Check-In");
+        opcao("P", "Contas a pagar");
+        opcao("R", "Contas a receber");
+
+        linhaMeio();
+        opcao("X", "Voltar");
+
+        rodape();
+
+        scanf(" %c", &op);
+        op = toupper(op);
+
+        switch (op) {
+        case 'N': NotaFiscalControllerExecutar(listaNotaFiscal);          break;
+        case 'V': VendaControllerExecutar(listaVenda);                    break;
+        case 'K': CheckinControllerExecutar(listaCheckin);                break;
+        case 'P': ContaPagarControllerExecutar(listaContaPagar);          break;
+        case 'R': ContaReceberControllerExecutar(listaContaReceber);      break;
+        case 'X': break;
+        default:
+            printf("\nOpcao invalida.\n");
+            pausar();
+        }
+
+    } while (op != 'X');
+}
+
+/* ───────────────────────────────────────────────────────── */
 /* Menu principal                                            */
 /* ───────────────────────────────────────────────────────── */
 
@@ -180,7 +229,12 @@ void menuPrincipal(ListaHospede    **listaHospede,
                    ListaAcomodacao **listaAcomodacao,
                    ListaCategoria  **listaCategoria,
                    ListaProduto    **listaProduto,
-                   Hotel           *hotel)
+                   Hotel           *hotel,
+                   ListaNotaFiscal **listaNotaFiscal,
+                   ListaVenda      **listaVenda,
+                   ListaCheckin    **listaCheckin,
+                   ListaContaPagar **listaContaPagar,
+                   ListaContaReceber **listaContaReceber)
 {
     char op;
 
@@ -219,8 +273,11 @@ void menuPrincipal(ListaHospede    **listaHospede,
                          listaHospede);
             break;
         case 'T':
-            printf("\nTransacoes ainda nao implementado.\n");
-            pausar();
+            menuTransacoes(listaNotaFiscal,
+                          listaVenda,
+                          listaCheckin,
+                          listaContaPagar,
+                          listaContaReceber);
             break;
         case 'F':
             RelatorioControllerExecutar(listaHospede,
@@ -230,7 +287,7 @@ void menuPrincipal(ListaHospede    **listaHospede,
                                         listaProduto);
             break;
         case 'I':
-            printf("\nImportacao/exportacao ainda nao implementado.\n");
+            printf("\nImportacao/exportacao ainda nao.\n");
             pausar();
             break;
         case 'S':

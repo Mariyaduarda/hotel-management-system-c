@@ -2,36 +2,8 @@ CC     = gcc
 CFLAGS = -Wall -Wextra -g
 TARGET = hotelbao
 
-SRC = \
-    main.c \
-    common.c \
-    model/acomodacao.c \
-    model/categoria_acomodacao.c \
-    model/hospede.c \
-    model/hotel.c \
-    model/operador.c \
-    model/reserva.c \
-    model/produto.c \
-    controller/hospede_controller.c \
-    controller/reserva_controller.c \
-    controller/relatorio_controller.c \
-    controller/produto_controller.c \
-    controller/hotel_controller.c \
-    controller/acomodacao_controller.c \
-    controller/categoria_controller.c \
-    view/menu_principal.c \
-    view/categoria_view.c \
-    view/hospede_view.c \
-    view/reserva_view.c \
-    view/produto_view.c \
-    view/relatorio_view.c \
-    view/hotel_view.c \
-    view/acomodacao_view.c\
-    utils/validacao.c \
-    utils/relatorio.c\
-    view/login_view.c\
-
-OBJ = $(SRC:.c=.o)
+SRC := $(filter-out model/relatorio.c, $(wildcard main.c common.c model/*.c controller/*.c view/*.c utils/*.c))
+OBJ := $(SRC:.c=.o)
 
 # ── Regra principal ──────────────────────────────────────
 all: $(TARGET)

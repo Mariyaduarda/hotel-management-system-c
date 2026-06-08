@@ -5,24 +5,6 @@
 /* Funções auxiliares de data                                       */
 /* ════════════════════════════════════════════════════════════════ */
 
-// Converte "DD/MM/AAAA" para inteiro AAAAMMDD — facil de comparar
-static int dataParaInt(const char *data) {
-    int d = 0, m = 0, a = 0;
-
-    if (strlen(data) == 10 && data[2] == '/' && data[5] == '/') {
-        // formato DD/MM/AAAA
-        sscanf(data, "%d/%d/%d", &d, &m, &a);
-    } else if (strlen(data) == 8) {
-        // formato DDMMAAAA sem separador
-        char buf[9];
-        strncpy(buf, data, 8);
-        buf[8] = '\0';
-        d = (buf[0]-'0')*10 + (buf[1]-'0');
-        m = (buf[2]-'0')*10 + (buf[3]-'0');
-        a = (buf[4]-'0')*1000 + (buf[5]-'0')*100 + (buf[6]-'0')*10 + (buf[7]-'0');
-    }
-    return a * 10000 + m * 100 + d;
-}
 
 // Retorna diferenca em dias - aproximada, suficiente para comparar
 static int diffDias(const char *entrada, const char *saida) {
