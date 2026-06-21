@@ -13,4 +13,9 @@ int          controllerReservaCancelar(ListaReserva **lista, int id);
 int          controllerReservaDisponivel(ListaReserva **lista, int idAcomodacao,
                                           const char *entrada, const char *saida);
 
+void ReservaControllerExecutar(ListaReserva    **listaReserva,
+                                ListaAcomodacao **listaAcomodacao,
+                                ListaCategoria  **listaCategoria,
+                                ListaHospede    **listaHospede);
+
 #endif // RESERVA_CONTROLLER_H

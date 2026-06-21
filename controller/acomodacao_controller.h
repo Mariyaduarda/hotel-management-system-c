@@ -2,6 +2,7 @@
 #define ACOMODACAO_CONTROLLER_H
 
 #include "../model/acomodacao.h"
+#include "../view/acomodacao_view.h"
 
 /* ── Categoria ──────────────────────────────────────────── */
 int            controllerCategoriaCadastrar(ListaCategoria **lista, TipoCategoria cat);
@@ -14,5 +15,8 @@ int             controllerAcomodacaoCadastrar(ListaAcomodacao **lista, TipoAcomo
 TipoAcomodacao *controllerAcomodacaoBuscar(ListaAcomodacao **lista, int id);
 int             controllerAcomodacaoAtualizar(ListaAcomodacao **lista, int id, int op);
 int             controllerAcomodacaoExcluir(ListaAcomodacao **lista, int id);
+
+void AcomodacaoControllerExecutar(ListaAcomodacao **lista,
+                                  ListaCategoria  **listaCat);
 
 #endif // ACOMODACAO_CONTROLLER_H

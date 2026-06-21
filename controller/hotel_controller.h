@@ -2,6 +2,7 @@
 #define HOTEL_CONTROLLER_H
 
 #include "../model/hotel.h"
+#include "../view/hotel_view.h"
 
 void HotelControllerExecutar(Hotel *hotel);
 void  controllerHotelLer(Hotel *hotel);

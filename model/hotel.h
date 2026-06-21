@@ -22,7 +22,7 @@
 
     /* ── Funcoes de inicializacao e outras ─────────────────────────────────────────────── */
     void HotelInit(Hotel *hotel);
-    void excluirHotel(Hotel *hotel);
+    void ExcluirHotel(Hotel *hotel);
 
     int HotelSalvarTxt(Hotel *hotel);
     int HotelSalvarBin(Hotel *hotel);

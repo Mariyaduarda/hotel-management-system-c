@@ -72,7 +72,7 @@ static void opcao(const char *tecla, const char *desc) {
     printf("║ %-*s ║\n", LARGURA - 4, buffer);
 }
 
-static void separador(const char *label) {
+static void separadorMenuPrincipal(const char *label) {
     linhaMeio();
     linhaTexto(label);
 }
@@ -241,16 +241,16 @@ void menuPrincipal(ListaHospede    **listaHospede,
     do {
         cabecalho("HOTEL SISTEMA -- MENU PRINCIPAL");
 
-        separador("GESTAO");
+        separadorMenuPrincipal("GESTAO");
         opcao("C", "Cadastros");
         opcao("R", "Reservas");
 
-        separador("OPERACOES");
+        separadorMenuPrincipal("OPERACOES");
         opcao("T", "Transacoes");
         opcao("F", "Relatorios");
         opcao("I", "Importar / Exportar");
 
-        separador("SISTEMA");
+        separadorMenuPrincipal("SISTEMA");
         opcao("S", "Sair");
 
         rodape();

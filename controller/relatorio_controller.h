@@ -7,6 +7,8 @@
 #include "../model/reserva.h"
 #include "../model/produto.h"
 
+#include "../view/relatorio_view.h"
+
 void RelatorioControllerExecutar(ListaHospede    **listaHospede,
                                   ListaAcomodacao **listaAcom,
                                   ListaCategoria  **listaCat,
