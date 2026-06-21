@@ -5,9 +5,9 @@
 #include "../view/hotel_view.h"
 
 void HotelControllerExecutar(Hotel *hotel);
-void  controllerHotelLer(Hotel *hotel);
 int   controllerHotelSalvar(Hotel *hotel);
 void  controllerHotelExcluir(Hotel *hotel);
 float controllerHotelMargemLucro(Hotel *hotel);
+int controllerHotelPrimeiroCadastro(Hotel *hotel);
 
 #endif // HOTEL_CONTROLLER_H

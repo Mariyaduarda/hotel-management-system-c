@@ -16,17 +16,6 @@
 
 #define LARGURA 56
 
-/* ── Utilitários internos ───────────────────────────────── */
-
-static void limparTela(void) {
-    printf("\033[H\033[J");
-}
-
-static void pausar(void) {
-    printf("\nPressione Enter para continuar...");
-    while (getchar() != '\n');
-}
-
 /* ── Bordas ─────────────────────────────────────────────── */
 
 static void linhaTopo(void) {

@@ -82,6 +82,10 @@ typedef struct {
     char cep[20];
 } Endereco;
 
+void limparTela();
+
+void pausar();
+
 void lerString(char *dest, int tamanho);
 void limparBuffer();
 int dataParaInt(const char* data);

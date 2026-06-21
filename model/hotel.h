@@ -17,6 +17,9 @@
         char CheckIn[6];
         char CheckOut[6];
         double MargemLucro;
+
+        int TipoSalvamento; // 0 para txt, 1 para bin, 2 para nenhum
+
         int ativo; // Verifica se existe ou nao
     } Hotel;
 
@@ -26,8 +29,10 @@
 
     int HotelSalvarTxt(Hotel *hotel);
     int HotelSalvarBin(Hotel *hotel);
+    int HotelSalvar(Hotel *hotel);
 
     int HotelLerTxt(Hotel *hotel);
     int HotelLerBin(Hotel *hotel);
+    int HotelCarregar(Hotel *hotel);
 
 #endif

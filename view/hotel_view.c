@@ -50,6 +50,7 @@ void HotelEditarView(Hotel *hotel) {
     printf(  "║  [10] Check-out                                      ║\n");
     printf(  "║  [11] Margem de Lucro                                ║\n");
     printf(  "║  [12] Endereco completo                              ║\n");
+    printf(  "║  [13] Tipo de Salvamento                             ║\n");
     printf(  "║  [0]  Voltar                                         ║\n");
     printf(  "╚══════════════════════════════════════════════════════╝\n");
     printf("Opcao: ");
@@ -76,6 +77,14 @@ void HotelEditarView(Hotel *hotel) {
             printf("Cidade: ");       lerString(hotel->endereco.cidade,      sizeof(hotel->endereco.cidade));
             printf("Estado: ");       lerString(hotel->endereco.estado,      sizeof(hotel->endereco.estado));
             printf("CEP: ");          lerString(hotel->endereco.cep,         sizeof(hotel->endereco.cep));
+            break;
+        case 13:
+            printf(" 0. Salvar em TXT              \n");
+            printf(" 1. Salvar em BIN              \n");
+            printf(" 2. Nao salvar (apenas memoria)\n");
+            printf("Tipo de Salvamento: ");
+            scanf("%d", &hotel->TipoSalvamento);
+            limparBuffer();
             break;
         case 0: return;
         default: printf("Opcao invalida.\n"); return;

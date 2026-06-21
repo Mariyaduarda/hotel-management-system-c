@@ -24,6 +24,6 @@ re: clean all
 
 # ── Executa o programa ───────────────────────────────────
 run: all
-	./$(TARGET)
+	./$(TARGET).exe
 
 .PHONY: all clean re run

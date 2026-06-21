@@ -27,11 +27,6 @@ static void separador(void) {
     printf("%s\n", MEIO);
 }
 
-static void pausar(void) {
-    printf("\n  Pressione Enter para continuar...");
-    getchar();
-}
-
 /* ── Cadastrar ───────────────────────────────────────────── */
 static void viewFornecedorCadastrar(ListaFornecedor **lista) {
     TipoFornecedor f;
@@ -103,7 +98,7 @@ static void viewFornecedorExcluir(ListaFornecedor **lista) {
 void menuFornecedor(ListaFornecedor **lista) {
     char op;
     do {
-        printf("\033[H\033[J");
+        limparTela();
         cabecalho("FORNECEDORES");
         opcao("C", "Cadastrar");
         opcao("L", "Listar por ID");

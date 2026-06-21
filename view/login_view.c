@@ -31,9 +31,9 @@ static void rodape(void) {
 
 int telaLogin(ListaOperador **lista, Operador **logado) {
     char usuario[50], senha[100];
-    int tentativas = 3;
+    int tentativas = 10;
 
-    printf("\033[H\033[J");
+    limparTela();
 
     cabecalho("HOTEL SISTEMA -- LOGIN");
     linha("");
@@ -89,8 +89,8 @@ int telaPrimeiroCadastro(ListaOperador **lista) {
     OperadorInit(&op);
 
     char senha[100], confirma[100];
-
-    printf("\033[H\033[J");
+    
+    limparTela();
 
     cabecalho("PRIMEIRO ACESSO -- CADASTRO");
     linha("");

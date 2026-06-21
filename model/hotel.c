@@ -27,13 +27,14 @@ void HotelInit(Hotel *hotel){
     strcpy(hotel->endereco.cep,     "-");
 
     hotel->MargemLucro = 0.0f;
+    hotel->TipoSalvamento = 0; // por padrao salva em txt
 }
 
 void ExcluirHotel(Hotel *hotel){
     HotelInit(hotel);    // Remove em mem
     
-    remove("hotel.txt"); //Remove em texto
-    remove("hotel.bin");  // Remove em bin
+    remove("dados/hotel.txt"); //Remove em texto
+    remove("dados/hotel.bin");  // Remove em bin
 
     printf("Sistema resetado. Todos os dados do hotel foram excluidos.\n");
 }
@@ -56,23 +57,72 @@ int HotelSalvarTxt(Hotel *hotel) {
     fprintf(fp, "Email: %s\n", hotel->Email);
     fprintf(fp, "Telefone: %s\n", hotel->Telefone);
     fprintf(fp, "Nome do Responsavel: %s\n", hotel->NomeResp);
+    fprintf(fp, "Telefone do Responsavel: %s\n", hotel->TelefoneResp);
+    fprintf(fp, "Rua: %s\n", hotel->endereco.rua);
+    fprintf(fp, "Numero: %s\n", hotel->endereco.numero);
+    fprintf(fp, "Complemento: %s\n", hotel->endereco.complemento);
+    fprintf(fp, "Bairro: %s\n", hotel->endereco.bairro);
+    fprintf(fp, "Cidade: %s\n", hotel->endereco.cidade);
+    fprintf(fp, "Estado: %s\n", hotel->endereco.estado);
+    fprintf(fp, "CEP: %s\n", hotel->endereco.cep);
     fprintf(fp, "Check-in: %s\n", hotel->CheckIn);
     fprintf(fp, "Check-out: %s\n", hotel->CheckOut);
-    fprintf(fp, "Telefone do Responsavel: %s\n", hotel->TelefoneResp);
+    fprintf(fp, "Margem de Lucro: %.2f\n", hotel->MargemLucro);
+    fprintf(fp, "Tipo de Salvamento: %d\n", hotel->TipoSalvamento);
     fclose(fp);
     return 1;
 }
 
 int HotelLerTxt(Hotel *hotel) {
-    (void)hotel; /* parâmetro não utilizado */
     FILE *fp = fopen("dados/hotel.txt", "r");
     if (!fp) return 0;
-    char line[256];
-    while (fgets(line, sizeof(line), fp)) {
-        printf("%s", line);
-    }
+
+    int count = fscanf(fp,
+        "Nome Fantasia: %99[^\n]\n"
+        "Razao Social: %99[^\n]\n"
+        "Inscricao Estadual: %19[^\n]\n"
+        "CNPJ: %19[^\n]\n"
+        "Email: %49[^\n]\n"
+        "Telefone: %19[^\n]\n"
+        "Nome do Responsavel: %49[^\n]\n"
+        "Telefone do Responsavel: %19[^\n]\n"
+        "Rua: %99[^\n]\n"
+        "Numero: %9[^\n]\n"
+        "Complemento: %49[^\n]\n"
+        "Bairro: %49[^\n]\n"
+        "Cidade: %49[^\n]\n"
+        "Estado: %49[^\n]\n"
+        "CEP: %19[^\n]\n"
+        "Check-in: %5[^\n]\n"
+        "Check-out: %5[^\n]\n"
+        "Margem de Lucro: %lf\n"
+        "Tipo de Salvamento: %d\n",
+        hotel->NomeFantasia,
+        hotel->RazaoSocial,
+        hotel->InscricaoEstadual,
+        hotel->CNPJ,
+        hotel->Email,
+        hotel->Telefone,
+        hotel->NomeResp,
+        hotel->TelefoneResp,
+        hotel->endereco.rua,
+        hotel->endereco.numero,
+        hotel->endereco.complemento,
+        hotel->endereco.bairro,
+        hotel->endereco.cidade,
+        hotel->endereco.estado,
+        hotel->endereco.cep,
+        hotel->CheckIn,
+        hotel->CheckOut,
+        &hotel->MargemLucro,
+        &hotel->TipoSalvamento
+    );
+
     fclose(fp);
-    return 1;
+
+    // confere se teve a qtd certa de parametros
+    if (count != 19) return 0;
+    else return 1;
 }
 
 int HotelLerBin(Hotel *hotel) {
@@ -81,4 +131,38 @@ int HotelLerBin(Hotel *hotel) {
     fread(hotel, sizeof(Hotel), 1, fp);
     fclose(fp);
     return 1;
+}
+
+int HotelCarregar(Hotel *hotel) {
+    // Pega o hotel do arquivo
+    //  - Le primeiro o txt, se nao tiver le o bin
+
+    // var auxiliar para ler o hotel
+    Hotel temp;
+    HotelInit(&temp);
+
+    // Tenta ler do txt
+    if (HotelLerTxt(&temp)) {
+        *hotel = temp;
+        return 1; // deu bom
+    }
+
+    // Tenta ler do bin
+    if (HotelLerBin(&temp)) {
+        *hotel = temp;
+        return 1; // deu bom
+    }
+
+    // se n deu pra ler nenhum dos dois, retorna 0
+    return 0;
+}
+
+int HotelSalvar(Hotel *hotel) {
+    if (hotel->TipoSalvamento == 0) {
+        return HotelSalvarTxt(hotel);
+    }
+    if (hotel->TipoSalvamento == 1) {
+        return HotelSalvarBin(hotel);
+    }
+    return 1; // TipoSalvamento == 2 => não salva
 }

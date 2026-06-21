@@ -1,6 +1,19 @@
 // common.c 
 #include "common.h"
 
+
+/* ── Utilitários internos ───────────────────────────────── */
+
+void limparTela() {
+    printf("\033[H\033[J");
+}
+
+void pausar() {
+    printf("\nPressione Enter para continuar...");
+    while (getchar() != '\n');
+}
+
+
 /* ── Limpar Buffer ────────────────────────────── */
 void limparBuffer() {
     int c;
