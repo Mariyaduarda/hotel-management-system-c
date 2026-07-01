@@ -13,6 +13,8 @@
 #include "../model/contas_pagar.h"
 #include "../model/contas_receber.h"
 
+#include "../utils/input.h"
+
 void menuPrincipal(ListaHospede    **listaHospede,
                    ListaReserva    **listaReserva,
                    ListaAcomodacao **listaAcomodacao,

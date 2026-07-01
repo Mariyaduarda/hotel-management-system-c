@@ -77,7 +77,6 @@ static void cabecalho(const char *titulo) {
 
 static void rodape(void) {
     linhaFundo();
-    printf("\nOpcao: ");
 }
 
 /* ───────────────────────────────────────────────────────── */
@@ -90,39 +89,36 @@ static void menuCadastros(ListaHospede    **listaHospede,
                           ListaProduto    **listaProduto,
                           Hotel           *hotel)
 {
-    char op;
+    int op;
 
     do {
+        // mostra o menu
         cabecalho("CADASTROS");
-
-        opcao("H", "Hospedes");
-        opcao("A", "Acomodacoes");
-        opcao("C", "Categorias");
-        opcao("P", "Produtos");
-        opcao("T", "Hotel");
-
+        opcao("1", "Hospedes");
+        opcao("2", "Acomodacoes");
+        opcao("3", "Categorias");
+        opcao("4", "Produtos");
+        opcao("5", "Hotel");
         linhaMeio();
-        opcao("V", "Voltar");
-
+        opcao("0", "Voltar");
         rodape();
 
-        scanf(" %c", &op);
-        op = toupper(op);
+        op = ler_int_intervalo("\n =>", 0, 5);
 
         switch (op) {
-        case 'H': menuHospede(listaHospede);                              break;
-        case 'A': AcomodacaoControllerExecutar(listaAcomodacao,
+        case 1: menuHospede(listaHospede);                              break;
+        case 2: AcomodacaoControllerExecutar(listaAcomodacao,
                                                listaCategoria);           break;
-        case 'C': CategoriaControllerExecutar(listaCategoria);            break;
-        case 'P': ProdutoControllerExecutar(listaProduto);                break;
-        case 'T': HotelControllerExecutar(hotel);                         break;
-        case 'V': break;
+        case 3: CategoriaControllerExecutar(listaCategoria);            break;
+        case 4: ProdutoControllerExecutar(listaProduto);                break;
+        case 5: HotelControllerExecutar(hotel);                         break;
+        case 0: break;
         default:
             printf("\nOpcao invalida.\n");
             pausar();
         }
 
-    } while (op != 'V');
+    } while (op != 0);
 }
 
 /* ───────────────────────────────────────────────────────── */
@@ -134,35 +130,34 @@ static void menuReservas(ListaReserva    **listaReserva,
                          ListaCategoria  **listaCategoria,
                          ListaHospede    **listaHospede)
 {
-    char op;
+    int op;
 
     do {
         cabecalho("RESERVAS");
 
-        opcao("R", "Gerenciar reservas");
+        opcao("1", "Gerenciar reservas");
 
         linhaMeio();
-        opcao("V", "Voltar");
+        opcao("0", "Voltar");
 
         rodape();
 
-        scanf(" %c", &op);
-        op = toupper(op);
+        op = ler_int("\n =>");
 
         switch (op) {
-        case 'R':
+        case 1:
             ReservaControllerExecutar(listaReserva,
                                       listaAcomodacao,
                                       listaCategoria,
                                       listaHospede);
             break;
-        case 'V': break;
+        case 0: break;
         default:
             printf("\nOpcao invalida.\n");
             pausar();
         }
 
-    } while (op != 'V');
+    } while (op != 0);
 }
 
 /* ───────────────────────────────────────────────────────── */
@@ -175,38 +170,37 @@ static void menuTransacoes(ListaNotaFiscal **listaNotaFiscal,
                            ListaContaPagar **listaContaPagar,
                            ListaContaReceber **listaContaReceber)
 {
-    char op;
+    int op;
 
     do {
         cabecalho("TRANSACOES");
 
-        opcao("N", "Nota fiscal");
-        opcao("V", "Vendas");
-        opcao("K", "Check-In");
-        opcao("P", "Contas a pagar");
-        opcao("R", "Contas a receber");
+        opcao("1", "Nota fiscal");
+        opcao("2", "Vendas");
+        opcao("3", "Check-In");
+        opcao("4", "Contas a pagar");
+        opcao("5", "Contas a receber");
 
         linhaMeio();
-        opcao("X", "Voltar");
+        opcao("0", "Voltar");
 
         rodape();
 
-        scanf(" %c", &op);
-        op = toupper(op);
+        op = ler_int("\n =>");
 
         switch (op) {
-        case 'N': NotaFiscalControllerExecutar(listaNotaFiscal);          break;
-        case 'V': VendaControllerExecutar(listaVenda);                    break;
-        case 'K': CheckinControllerExecutar(listaCheckin);                break;
-        case 'P': ContaPagarControllerExecutar(listaContaPagar);          break;
-        case 'R': ContaReceberControllerExecutar(listaContaReceber);      break;
-        case 'X': break;
+        case 1: NotaFiscalControllerExecutar(listaNotaFiscal);          break;
+        case 2: VendaControllerExecutar(listaVenda);                    break;
+        case 3: CheckinControllerExecutar(listaCheckin);                break;
+        case 4: ContaPagarControllerExecutar(listaContaPagar);          break;
+        case 5: ContaReceberControllerExecutar(listaContaReceber);      break;
+        case 0: break;
         default:
             printf("\nOpcao invalida.\n");
             pausar();
         }
 
-    } while (op != 'X');
+    } while (op != 0);
 }
 
 /* ───────────────────────────────────────────────────────── */
@@ -225,66 +219,65 @@ void menuPrincipal(ListaHospede    **listaHospede,
                    ListaContaPagar **listaContaPagar,
                    ListaContaReceber **listaContaReceber)
 {
-    char op;
+    int op;
 
     do {
         cabecalho("HOTEL SISTEMA -- MENU PRINCIPAL");
 
         separadorMenuPrincipal("GESTAO");
-        opcao("C", "Cadastros");
-        opcao("R", "Reservas");
+        opcao("1", "Cadastros");
+        opcao("2", "Reservas");
 
         separadorMenuPrincipal("OPERACOES");
-        opcao("T", "Transacoes");
-        opcao("F", "Relatorios");
-        opcao("I", "Importar / Exportar");
+        opcao("3", "Transacoes");
+        opcao("4", "Relatorios");
+        opcao("5", "Importar / Exportar");
 
         separadorMenuPrincipal("SISTEMA");
-        opcao("S", "Sair");
+        opcao("0", "Sair");
 
         rodape();
 
-        scanf(" %c", &op);
-        op = toupper(op);
+        op = ler_int("\n =>");
 
         switch (op) {
-        case 'C':
+        case 1:
             menuCadastros(listaHospede,
                           listaAcomodacao,
                           listaCategoria,
                           listaProduto,
                           hotel);
             break;
-        case 'R':
+        case 2:
             menuReservas(listaReserva,
                          listaAcomodacao,
                          listaCategoria,
                          listaHospede);
             break;
-        case 'T':
+        case 3:
             menuTransacoes(listaNotaFiscal,
                           listaVenda,
                           listaCheckin,
                           listaContaPagar,
                           listaContaReceber);
             break;
-        case 'F':
+        case 4:
             RelatorioControllerExecutar(listaHospede,
                                         listaAcomodacao,
                                         listaCategoria,
                                         listaReserva,
                                         listaProduto);
             break;
-        case 'I':
+        case 5:
             printf("\nImportacao/exportacao ainda nao.\n");
             pausar();
             break;
-        case 'S':
+        case 0:
             break;
         default:
             printf("\nOpcao invalida.\n");
             pausar();
         }
 
-    } while (op != 'S');
+    } while (op != 0);
 }

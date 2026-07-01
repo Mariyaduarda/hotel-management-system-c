@@ -1,0 +1,19 @@
+Nome Fantasia: O Melhor Que Tem
+Razao Social: 123
+Inscricao Estadual: 123
+CNPJ: 123
+Email: omqt@gmail.com
+Telefone: 12345678
+Nome do Responsavel: victor
+Telefone do Responsavel: 12341234
+Rua: aqui
+Numero: 12
+Complemento: 1
+Bairro: aqui
+Cidade: formiga
+Estado: mg
+CEP: 123
+Check-in: 0000
+Check-out: 1400
+Margem de Lucro: 100.00
+Tipo de Salvamento: 0
