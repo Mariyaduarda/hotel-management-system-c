@@ -1,0 +1,19 @@
+Nome Fantasia: 123
+Razao Social: 123
+Inscricao Estadual: 123
+CNPJ: 12
+Email: 123
+Telefone: 123
+Nome do Responsavel: 12
+Telefone do Responsavel: 123
+Rua: 123
+Numero: 12
+Complemento: 123
+Bairro: 123
+Cidade: 123
+Estado: 12
+CEP: 123
+Check-in: 12
+Check-out: 123
+Margem de Lucro: 123.00
+Tipo de Salvamento: 0

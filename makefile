@@ -2,7 +2,7 @@ CC     = gcc
 CFLAGS = -Wall -Wextra -g
 TARGET = hotelbao
 
-SRC := $(filter-out model/relatorio.c, $(wildcard main.c common.c model/*.c controller/*.c view/*.c utils/*.c))
+SRC := $(wildcard main.c common.c model/*.c controller/*.c view/*.c utils/*.c)
 OBJ := $(SRC:.c=.o)
 
 # ── Regra principal ──────────────────────────────────────

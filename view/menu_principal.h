@@ -16,11 +16,12 @@
 void menuPrincipal(ListaHospede    **listaHospede,
                    ListaReserva    **listaReserva,
                    ListaAcomodacao **listaAcomodacao,
-                   ListaCategoria  **listaCategoria,
+                   ListaCategoria  **listaCategory,
                    ListaProduto    **listaProduto,
                    Hotel           *hotel,
                    ListaNotaFiscal **listaNotaFiscal,
                    ListaVenda      **listaVenda,
+                   ListaCaixa      **listaCaixa,
                    ListaCheckin    **listaCheckin,
                    ListaContaPagar **listaContaPagar,
                    ListaContaReceber **listaContaReceber);

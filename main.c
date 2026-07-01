@@ -6,6 +6,7 @@
 #include "model/acomodacao.h"
 #include "model/categoria_acomodacao.h"
 #include "model/produto.h"
+#include "model/caixa.h"
 #include "model/nota_fiscal.h"
 #include "model/venda.h"
 #include "model/checkin.h"
@@ -78,6 +79,7 @@ int main() {
     ListaProduto        *listaProduto      = NULL;
     ListaNotaFiscal     *listaNotaFiscal   = NULL;
     ListaVenda          *listaVenda        = NULL;
+    ListaCaixa          *listaCaixa        = NULL;
     ListaCheckin        *listaCheckin      = NULL;
     ListaContaPagar     *listaContaPagar   = NULL;
     ListaContaReceber   *listaContaReceber = NULL;
@@ -91,6 +93,7 @@ int main() {
         ProdutoLerTxt(&listaProduto);
         NotaFiscalLerTxt(&listaNotaFiscal);
         VendaLerTxt(&listaVenda);
+        CaixaLerTxt(&listaCaixa);
         CheckinLerTxt(&listaCheckin);
         ContaPagarLerTxt(&listaContaPagar);
         ContaReceberLerTxt(&listaContaReceber);
@@ -102,6 +105,7 @@ int main() {
         ProdutoLerBin(&listaProduto);
         NotaFiscalLerBin(&listaNotaFiscal);
         VendaLerBin(&listaVenda);
+        CaixaLerBin(&listaCaixa);
         CheckinLerBin(&listaCheckin);
         ContaPagarLerBin(&listaContaPagar);
         ContaReceberLerBin(&listaContaReceber);
@@ -117,6 +121,7 @@ int main() {
                   &hotel,
                   &listaNotaFiscal,
                   &listaVenda,
+                  &listaCaixa,
                   &listaCheckin,
                   &listaContaPagar,
                   &listaContaReceber);
@@ -140,6 +145,7 @@ int main() {
         CheckinSalvarTxt(listaCheckin);
         ContaPagarSalvarTxt(listaContaPagar);
         ContaReceberSalvarTxt(listaContaReceber);
+        CaixaSalvarTxt(listaCaixa);
     } else if (hotel.TipoSalvamento == 1) {
         // caso for bin 
         HotelSalvar(&hotel);
@@ -152,6 +158,7 @@ int main() {
         OperadorSalvarBin(ListaOperador);
         NotaFiscalSalvarBin(listaNotaFiscal);
         VendaSalvarBin(listaVenda);
+        CaixaSalvarBin(listaCaixa);
         CheckinSalvarBin(listaCheckin);
         ContaPagarSalvarBin(listaContaPagar);
         ContaReceberSalvarBin(listaContaReceber);
@@ -182,6 +189,7 @@ int main() {
     CheckinListaLiberar(listaCheckin);
     ContaPagarListaLiberar(listaContaPagar);
     ContaReceberListaLiberar(listaContaReceber);
+    CaixaListaLiberar(listaCaixa);
 
     return 0;
 }

@@ -1,0 +1,2 @@
+1;Quarto Standard;Cama casal, TV, Ar-condicionado;1;1
+2;Suite Luxo;Cama king, TV, Ar-condicionado, Frigobar;2;1

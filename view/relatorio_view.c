@@ -56,7 +56,6 @@ static ConfigRelatorio pedirDestino(void) {
 // ──────────────────────────────────────────────
 // Menu
 // ──────────────────────────────────────────────
-
 void RelatorioMenuExibir(void) {
     printf("\n");
     cabecalho("RELATORIOS");
@@ -66,6 +65,10 @@ void RelatorioMenuExibir(void) {
     opcao("4", "Movimentacao de acomodacoes");
     opcao("5", "Produtos de consumo");
     opcao("6", "Produtos em estoque minimo");
+    opcao("7", "Vendas");
+    opcao("8", "Contas a receber");
+    opcao("9", "Contas a pagar");
+    opcao("10", "Movimentacao de caixa");
     separador();
     opcao("0", "Voltar");
     rodape();
@@ -201,4 +204,89 @@ void RelatorioProdutosEstoqueView(ListaProduto **lista) {
 
     ConfigRelatorio cfg = pedirDestino();
     RelatorioProdutosEstoqueMinimo(lista, &cfg, idMin, idMax);
+}
+
+// ──────────────────────────────────────────────
+// Vendas
+// ──────────────────────────────────────────────
+
+void RelatorioVendasView(ListaVenda **lista) {
+    printf("\n");
+    cabecalho("RELATORIO DE VENDAS");
+    printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n" RESET);
+
+    int formaPagamento = 0;
+    printf("Forma de pagamento (0=todas, 1=A vista, 2=Para anotar): ");
+    scanf("%d", &formaPagamento);
+    limparBuffer();
+
+    ConfigRelatorio cfg = pedirDestino();
+    RelatorioVendas(lista, &cfg, formaPagamento);
+}
+
+// ──────────────────────────────────────────────
+// Contas a Receber
+// ──────────────────────────────────────────────
+
+void RelatorioContasReceberView(ListaContaReceber **lista) {
+    printf("\n");
+    cabecalho("RELATORIO DE CONTAS A RECEBER");
+    printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n" RESET);
+
+    int idMin = 0, idMax = 0;
+    printf("Faixa de codigo do hospede (0 0 = todos): ");
+    scanf("%d %d", &idMin, &idMax);
+    limparBuffer();
+
+    char ini[11] = "", fim[11] = "";
+    printf("Vencimento inicio DD/MM/AAAA (vazio = sem filtro): ");
+    lerString(ini, sizeof(ini));
+    printf("Vencimento fim    DD/MM/AAAA (vazio = sem filtro): ");
+    lerString(fim, sizeof(fim));
+
+    ConfigRelatorio cfg = pedirDestino();
+    RelatorioContasReceber(lista, &cfg, idMin, idMax, ini, fim);
+}
+
+// ──────────────────────────────────────────────
+// Contas a Pagar
+// ──────────────────────────────────────────────
+
+void RelatorioContasPagarView(ListaContaPagar **lista) {
+    printf("\n");
+    cabecalho("RELATORIO DE CONTAS A PAGAR");
+    printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n" RESET);
+
+    int idMin = 0, idMax = 0;
+    printf("Faixa de codigo do fornecedor (0 0 = todos): ");
+    scanf("%d %d", &idMin, &idMax);
+    limparBuffer();
+
+    char ini[11] = "", fim[11] = "";
+    printf("Vencimento inicio DD/MM/AAAA (vazio = sem filtro): ");
+    lerString(ini, sizeof(ini));
+    printf("Vencimento fim    DD/MM/AAAA (vazio = sem filtro): ");
+    lerString(fim, sizeof(fim));
+
+    ConfigRelatorio cfg = pedirDestino();
+    RelatorioContasPagar(lista, &cfg, idMin, idMax, ini, fim);
+}
+
+// ──────────────────────────────────────────────
+// Movimentacao de Caixa
+// ──────────────────────────────────────────────
+
+void RelatorioMovimentacaoCaixaView(ListaCaixa **lista) {
+    printf("\n");
+    cabecalho("MOVIMENTACAO DE CAIXA");
+    printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n" RESET);
+
+    char ini[11] = "", fim[11] = "";
+    printf("Periodo inicio DD/MM/AAAA (vazio = sem filtro): ");
+    lerString(ini, sizeof(ini));
+    printf("Periodo fim    DD/MM/AAAA (vazio = sem filtro): ");
+    lerString(fim, sizeof(fim));
+
+    ConfigRelatorio cfg = pedirDestino();
+    RelatorioMovimentacaoCaixa(lista, &cfg, ini, fim);
 }

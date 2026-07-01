@@ -221,6 +221,7 @@ void menuPrincipal(ListaHospede    **listaHospede,
                    Hotel           *hotel,
                    ListaNotaFiscal **listaNotaFiscal,
                    ListaVenda      **listaVenda,
+                   ListaCaixa      **listaCaixa,
                    ListaCheckin    **listaCheckin,
                    ListaContaPagar **listaContaPagar,
                    ListaContaReceber **listaContaReceber)
@@ -270,10 +271,15 @@ void menuPrincipal(ListaHospede    **listaHospede,
             break;
         case 'F':
             RelatorioControllerExecutar(listaHospede,
-                                        listaAcomodacao,
-                                        listaCategoria,
-                                        listaReserva,
-                                        listaProduto);
+                                         listaAcomodacao,
+                                         listaCategoria,
+                                         listaReserva,
+                                         listaProduto,
+                                         listaVenda,
+                                         listaCaixa,
+                                         listaContaReceber,
+                                         listaContaPagar);
+            break;
             break;
         case 'I':
             printf("\nImportacao/exportacao ainda nao.\n");
