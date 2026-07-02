@@ -1,12 +1,12 @@
 # 🏨 Hotel Management System — C
 
-Sistema de controle gerencial para hotel desenvolvido em linguagem C, como trabalho prático da disciplina **Algoritmos II**.
+Sistema de controle gerencial para hotel desenvolvido em linguagem C, como trabalho pratico da disciplina **Algoritmos II**.
 
 ---
 
 ## 📋 Sobre o projeto
 
-O sistema permite gerenciar todas as operações de um hotel, desde o cadastro de hóspedes e acomodações até reservas, transações financeiras e relatórios.
+O sistema permite gerenciar todas as operacoes de um hotel, desde o cadastro de hospedes e acomodacoes ate reservas, transacoes financeiras e relatorios.
 
 ---
 
@@ -15,7 +15,7 @@ O sistema permite gerenciar todas as operações de um hotel, desde o cadastro d
 ```
 hotel-management-system-c/
 ├── main.c
-├── common.h / common.c          # Utilitários globais
+├── common.h / common.c          # Utilitarios globais
 ├── model/                       # Estruturas de dados e persistência
 │   ├── hotel.c / hotel.h
 │   ├── hospede.c / hospede.h
@@ -23,20 +23,20 @@ hotel-management-system-c/
 │   ├── reserva.c / reserva.h
 │   ├── produto.c / produto.h
 │   └── operador.c / operador.h
-├── controller/                  # Regras de negócio
+├── controller/                  # Regras de negocio
 │   ├── hospede_controller.c / .h
 │   ├── acomodacao_controller.c / .h
 │   ├── reserva_controller.c / .h
 │   ├── produto_controller.c / .h
 │   ├── hotel_controller.c / .h
 │   └── operador_controller.c / .h
-├── view/                        # Interface com o usuário
+├── view/                        # Interface com o usuario
 │   ├── menu_principal.c / .h
 │   ├── hospede_view.c / .h
 │   ├── reserva_view.c / .h
 │   ├── relatorio_view.c / .h
 │   └── login_view.c / .h
-├── utils/                       # Módulos auxiliares
+├── utils/                       # Modulos auxiliares
 │   ├── relatorio.c / .h
 │   └── validacao.c / .h
 └── dados/                       # Arquivos de persistência gerados em runtime
@@ -46,58 +46,58 @@ hotel-management-system-c/
 
 ---
 
-## ⚙️ Módulos implementados
+## ⚙️ Modulos implementados
 
 ### ✅ Cadastros
-- **Hotel** — dados da empresa (CNPJ, endereço, horários de check-in/out, margem de lucro)
-- **Hóspedes** — cadastro completo com exclusão lógica
-- **Acomodações** — quartos com facilidades e categoria associada
-- **Categorias** — Standard, Luxo, Presidencial etc. com valor de diária e capacidade
-- **Produtos** — itens de consumo com controle de estoque mínimo
-- **Operadores** — funcionários com permissões por módulo e senha SHA-256
+- **Hotel** — dados da empresa (CNPJ, endereco, horarios de check-in/out, margem de lucro)
+- **Hospedes** — cadastro completo com exclusao logica
+- **Acomodacoes** — quartos com facilidades e categoria associada
+- **Categorias** — Standard, Luxo, Presidencial etc. com valor de diaria e capacidade
+- **Produtos** — itens de consumo com controle de estoque minimo
+- **Operadores** — funcionarios com permissoes por modulo e senha SHA-256
 
 ### ✅ Reservas
-- Verificação de disponibilidade por período (sem sobreposição de datas)
-- Filtros por categoria, facilidade e número de pessoas
+- Verificacao de disponibilidade por periodo (sem sobreposicao de datas)
+- Filtros por categoria, facilidade e numero de pessoas
 - Cancelamento de reservas ativas
 
-### 🚧 Transações *(em desenvolvimento)*
+### 🚧 Transacoes *(em desenvolvimento)*
 - Check-in e check-out
 - Venda de produtos
 - Controle de caixa
 - Contas a pagar e a receber
 
-### ✅ Relatórios
-- Hóspedes, acomodações, reservas, produtos e estoque mínimo
-- Saída em tela ou arquivo CSV
+### ✅ Relatorios
+- Hospedes, acomodacoes, reservas, produtos e estoque minimo
+- Saida em tela ou arquivo CSV
 
 ---
 
 ## 💾 Persistência
 
-O sistema suporta três tipos de armazenamento, configuráveis:
+O sistema suporta três tipos de armazenamento, configuraveis:
 
 | Tipo | Formato |
 |------|---------|
-| Memória | Listas encadeadas em RAM |
+| Memoria | Listas encadeadas em RAM |
 | Arquivo texto | `.txt` separado por `;` |
-| Arquivo binário | `.bin` com `fwrite`/`fread` |
+| Arquivo binario | `.bin` com `fwrite`/`fread` |
 
-Na inicialização, o sistema tenta carregar o `.bin` primeiro. Se não existir, tenta o `.txt`.
+Na inicializacao, o sistema tenta carregar o `.bin` primeiro. Se nao existir, tenta o `.txt`.
 
 ---
 
-## 🔐 Segurança
+## 🔐 Seguranca
 
 - Senhas dos operadores armazenadas como hash **SHA-256** via OpenSSL
-- Permissões por módulo usando **bitmask**
-- Exclusão **lógica** (campo `ativo`) — nenhum dado é deletado fisicamente
+- Permissoes por modulo usando **bitmask**
+- Exclusao **logica** (campo `ativo`) — nenhum dado e deletado fisicamente
 
 ---
 
-## 🛠️ Compilação
+## 🛠️ Compilacao
 
-### Pré-requisitos
+### Pre-requisitos
 
 - GCC
 - OpenSSL (`libssl-dev`)
@@ -112,24 +112,24 @@ sudo apt install gcc libssl-dev
 ```bash
 make        # compila
 make run    # compila e executa
-make clean  # remove arquivos objeto e executável
+make clean  # remove arquivos objeto e executavel
 make re     # rebuild completo
 ```
 
 ---
 
-## 🚀 Primeira execução
+## 🚀 Primeira execucao
 
-Na primeira vez que o sistema é iniciado:
+Na primeira vez que o sistema e iniciado:
 
-1. Cadastro do **operador administrador** (nome, usuário e senha)
-2. Cadastro dos **dados do hotel** (CNPJ, endereço, horários, margem de lucro)
+1. Cadastro do **operador administrador** (nome, usuario e senha)
+2. Cadastro dos **dados do hotel** (CNPJ, endereco, horarios, margem de lucro)
 3. Menu principal liberado
 
-Nas execuções seguintes, o sistema carrega os dados salvos e pede login.
+Nas execucoes seguintes, o sistema carrega os dados salvos e pede login.
 
 ---
 
-## 📄 Licença
+## 📄 Licenca
 
 Projeto acadêmico — Algoritmos II, 1º semestre de 2026.

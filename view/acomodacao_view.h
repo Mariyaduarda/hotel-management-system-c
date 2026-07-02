@@ -6,6 +6,8 @@
 #include "../model/categoria_acomodacao.h"
 
 void AcomodacaoMenuExibir(void);
+void AcomodacaoMenuExecutar(ListaAcomodacao **lista,
+                           ListaCategoria  **listaCat);
 
 void AcomodacaoCadastrarView(ListaAcomodacao **lista,
                               ListaCategoria  **listaCat);

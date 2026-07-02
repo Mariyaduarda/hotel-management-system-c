@@ -70,7 +70,7 @@
 #endif
 
 /* ════════════════════════════════════════════════════════════════ */
-/* Estrutura de Endereço (unificada)                                */
+/* Estrutura de Endereco (unificada)                                */
 /* ════════════════════════════════════════════════════════════════ */
 typedef struct {
     char rua[100];

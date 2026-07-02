@@ -40,7 +40,7 @@ static ConfigRelatorio pedirDestino(void) {
     strcpy(cfg.caminho, "");
 
     int op;
-    printf(CIANO "\n  Saída: " RESET);
+    printf(CIANO "\n  Saida: " RESET);
     op = ler_int("[1] Tela  [2] Arquivo CSV: ");
     if (op == 2) {
         cfg.destino = RELATORIO_ARQUIVO;
@@ -65,6 +65,30 @@ void RelatorioMenuExibir(void) {
     separador();
     opcao("0", "Voltar");
     rodape();
+}
+
+void RelatorioMenuExecutar(ListaHospede    **listaHospede,
+                           ListaAcomodacao **listaAcom,
+                           ListaCategoria  **listaCat,
+                           ListaReserva    **listaReserva,
+                           ListaProduto    **listaProduto)
+{
+    int opcao;
+    do {
+        RelatorioMenuExibir();
+        opcao = ler_int("");
+
+        switch (opcao) {
+            case 1: RelatorioHospedesView(listaHospede);                              break;
+            case 2: RelatorioAcomodacoesView(listaAcom, listaCat);                    break;
+            case 3: RelatorioReservasView(listaReserva);                              break;
+            case 4: RelatorioMovimentacaoView(listaReserva, listaAcom, listaCat);     break;
+            case 5: RelatorioProdutosView(listaProduto);                              break;
+            case 6: RelatorioProdutosEstoqueView(listaProduto);                       break;
+            case 0: break;
+            default: printf("Opcao invalida.\n");
+        }
+    } while (opcao != 0);
 }
 
 // ──────────────────────────────────────────────

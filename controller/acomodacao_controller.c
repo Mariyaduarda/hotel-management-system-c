@@ -6,21 +6,5 @@
 void AcomodacaoControllerExecutar(ListaAcomodacao **lista,
                                   ListaCategoria  **listaCat)
 {
-    int opcao;
-    do {
-        printf("\n");
-        AcomodacaoMenuExibir();
-        opcao = ler_int("");
-
-        switch (opcao) {
-            case 1: AcomodacaoCadastrarView(lista, listaCat); break;
-            case 2: AcomodacaoListarView(lista, listaCat);    break;
-            case 3: AcomodacaoBuscarView(lista, listaCat);    break;
-            case 4: AcomodacaoAtualizarView(lista, listaCat); break;
-            case 5: AcomodacaoExcluirView(lista);             break;
-            case 0: break;
-            default:
-                printf("Opcao invalida.\n");
-        }
-    } while (opcao != 0);
+    AcomodacaoMenuExecutar(lista, listaCat);
 }

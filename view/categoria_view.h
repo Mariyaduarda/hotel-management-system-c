@@ -4,6 +4,7 @@
 #include "../model/categoria_acomodacao.h"
 
 void CategoriaMenuExibir(void);
+void CategoriaMenuExecutar(ListaCategoria **lista);
 void CategoriaCadastrarView  (ListaCategoria **lista);
 void CategoriaListarTodosView(ListaCategoria **lista);
 void CategoriaBuscarView     (ListaCategoria **lista);

@@ -164,5 +164,5 @@ int HotelSalvar(Hotel *hotel) {
     if (hotel->TipoSalvamento == 1) {
         return HotelSalvarBin(hotel);
     }
-    return 1; // TipoSalvamento == 2 => não salva
+    return 1; // TipoSalvamento == 2 => nao salva
 }

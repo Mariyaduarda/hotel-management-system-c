@@ -9,7 +9,7 @@ static void gerarSHA256(const char *senha, char *saida) {
     unsigned char hash[SHA256_DIGEST_LENGTH];
     SHA256((unsigned char *)senha, strlen(senha), hash);
     
-    memset(saida, 0, 65); // Garante que a string de saída comece limpa
+    memset(saida, 0, 65); // Garante que a string de saida comece limpa
     for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
         sprintf(saida + (i * 2), "%02x", hash[i]);
     saida[64] = '\0';
@@ -106,11 +106,14 @@ int OperadorAtualizar(ListaOperador **lista, int id, int op) {
     if (!o) return 0;
     char novaSenha[100], confirma[100];
     switch (op) {
-        case 1: ler_string("Novo nome: ",    o->nome,    sizeof(o->nome));      break;
-        case 2: ler_string("Novo usuario: ", o->usuario, sizeof(o->usuario));   break;
+        case 1:
+            ler_string("Novo nome: ", o->nome, sizeof(o->nome));
+            break;
+        case 2:
+            ler_string("Novo usuario: ", o->usuario, sizeof(o->usuario));
+            break;
         case 3:
             do {
-                // confere se a senha e a confirmacao sao iguais
                 ler_string("Nova senha: ", novaSenha, sizeof(novaSenha));
                 ler_string("Confirme: ",   confirma,  sizeof(confirma));
                 if (strcmp(novaSenha, confirma) != 0)
@@ -120,7 +123,15 @@ int OperadorAtualizar(ListaOperador **lista, int id, int op) {
             memset(novaSenha, 0, sizeof(novaSenha));
             memset(confirma,  0, sizeof(confirma));
             break;
-        default: return 0;
+        case 4:
+            printf("Permissoes (bitmask): 1=Cadastro 2=Reservas 4=Transacoes 8=Feedback 16=Import/Export 255=Admin\n");
+            o->permissoes = ler_int("Nova permissao: ");
+            break;
+        case 5:
+            o->ativo = ler_int("Ativar operador? (1=Sim / 0=Nao): ");
+            break;
+        default:
+            return 0;
     }
     return 1;
 }
@@ -158,7 +169,7 @@ int OperadorTemPermissao(Operador *op, int permissao) {
     return (op->permissoes & permissao) != 0;
 }
 
-/* ── Funções globais  ──────────────────── */
+/* ── Funcoes globais  ──────────────────── */
 void criarOperador(void) {
     char senha[100], confirmacao[100];
 

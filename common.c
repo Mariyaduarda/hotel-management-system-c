@@ -2,7 +2,7 @@
 #include "common.h"
 
 
-/* ── Utilitários internos ───────────────────────────────── */
+/* ── Utilitarios internos ───────────────────────────────── */
 
 void limparTela() {
     printf("\033[H\033[J");

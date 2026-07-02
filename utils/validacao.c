@@ -1,3 +1,3 @@
 #include "../common.h"
 
-// Funções de validação podem ser adicionadas aqui
+// Funcoes de validacao podem ser adicionadas aqui

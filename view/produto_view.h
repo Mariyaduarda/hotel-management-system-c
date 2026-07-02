@@ -4,6 +4,7 @@
 #include "../model/produto.h"
 
 void ProdutoMenuExibir(void);
+void ProdutoMenuExecutar(ListaProduto **lista);
 void ProdutoCadastrarView(ListaProduto **lista);
 void ProdutoListarView(ListaProduto **lista);
 void ProdutoBuscarView(ListaProduto **lista);

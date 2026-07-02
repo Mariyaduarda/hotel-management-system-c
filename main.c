@@ -157,7 +157,7 @@ int main() {
         ContaReceberSalvarBin(listaContaReceber);
     }
 
-    // Apagar os arquivos q n estão de acordo
+    // Apagar os arquivos q n estao de acordo
     if (hotel.TipoSalvamento == 0) {
         // Tipo TXT - Remover todos os arquivos BIN
         remove("dados/*.bin");

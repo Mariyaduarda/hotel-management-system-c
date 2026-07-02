@@ -1,6 +1,5 @@
 #include "acomodacao_view.h"
 #include "../common.h"
-#include "../controller/acomodacao_controller.h"
 #include "../model/acomodacao.h"
 #include "../model/categoria_acomodacao.h"
 
@@ -18,9 +17,31 @@ void AcomodacaoMenuExibir(void) {
     printf("Opcao: ");
 }
 
+void AcomodacaoMenuExecutar(ListaAcomodacao **lista,
+                           ListaCategoria  **listaCat)
+{
+    int opcao;
+    do {
+        printf("\n");
+        AcomodacaoMenuExibir();
+        opcao = ler_int("");
+
+        switch (opcao) {
+            case 1: AcomodacaoCadastrarView(lista, listaCat); break;
+            case 2: AcomodacaoListarView(lista, listaCat);    break;
+            case 3: AcomodacaoBuscarView(lista, listaCat);    break;
+            case 4: AcomodacaoAtualizarView(lista, listaCat); break;
+            case 5: AcomodacaoExcluirView(lista);             break;
+            case 0: break;
+            default:
+                printf("Opcao invalida.\n");
+        }
+    } while (opcao != 0);
+}
+
 void AcomodacaoCadastrarView(ListaAcomodacao **lista,
                                 ListaCategoria  **listaCat)
-{    (void)listaCat; /* parâmetro não utilizado */    TipoAcomodacao a;
+{    (void)listaCat; /* parâmetro nao utilizado */    TipoAcomodacao a;
     AcomodacaoInit(&a);
 
     printf("\n-- Cadastro de Acomodacao --\n");
@@ -48,7 +69,7 @@ void AcomodacaoListarView(ListaAcomodacao **lista,
 void AcomodacaoAtualizarView(ListaAcomodacao **lista,
                                 ListaCategoria  **listaCat)
 {
-    (void)listaCat; /* parâmetro não utilizado */
+    (void)listaCat; /* parâmetro nao utilizado */
     int id, op;
     printf("\n-- Atualizar Acomodacao --\n");
     id = ler_int("ID da acomodacao: ");

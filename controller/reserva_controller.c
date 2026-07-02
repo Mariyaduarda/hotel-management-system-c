@@ -7,30 +7,5 @@ void ReservaControllerExecutar(ListaReserva    **listaReserva,
                                 ListaCategoria  **listaCategoria,
                                 ListaHospede    **listaHospede)
 {
-    int opcao;
-    do {
-        ReservaMenuExibir();
-        opcao = ler_int("");
-
-        switch (opcao) {
-            case 1:
-                ReservaCadastrarView(listaReserva, listaAcomodacao,
-                                     listaCategoria, listaHospede);
-                break;
-            case 2:
-                ReservaCancelarView(listaReserva);
-                break;
-            case 3:
-                ReservaConsultarView(listaReserva);
-                break;
-            case 4:
-                ReservaBuscarDisponiveisView(listaReserva, listaAcomodacao,
-                                             listaCategoria);
-                break;
-            case 0:
-                break;
-            default:
-                printf("Opcao invalida.\n");
-        }
-    } while (opcao != 0);
+    ReservaMenuExecutar(listaReserva, listaAcomodacao, listaCategoria, listaHospede);
 }

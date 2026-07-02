@@ -2,7 +2,7 @@
 #include "acomodacao.h"
 
 /* ════════════════════════════════════════════════════════════
-   ACOMODAÇÃO
+   ACOMODACAO
    ════════════════════════════════════════════════════════════ */
 
 void AcomodacaoInit(TipoAcomodacao *acom) {
@@ -52,22 +52,22 @@ void AcomodacaoListar(ListaAcomodacao **lista, int id, ListaCategoria **listaCat
         }
         return;
     }
-    // Busca por ID específico (código que já existe)
+    // Busca por ID especifico (codigo que ja existe)
     TipoAcomodacao *a = AcomodacaoBuscar(lista, id);
-    if (!a) { printf("Acomodação não encontrada.\n"); return; }
+    if (!a) { printf("Acomodacao nao encontrada.\n"); return; }
     
     printf("ID          : %d\n", a->id);
-    printf("Descrição   : %s\n", a->descricao);
+    printf("Descricao   : %s\n", a->descricao);
     printf("Facilidades : %s\n", a->facilidades);
 
     TipoCategoria *cat = CategoriaBuscar(listaCat, a->idCategoria);
     if (cat) {
         printf("Categoria   : %s\n",      cat->descricao);
-        printf("Diária      : R$ %.2f\n", cat->valorDiaria);
-        printf("Capacidade  : %d adultos, %d crianças\n",
+        printf("Diaria      : R$ %.2f\n", cat->valorDiaria);
+        printf("Capacidade  : %d adultos, %d criancas\n",
                cat->maxAdultos, cat->maxCriancas);
     } else {
-        printf("Categoria   : (não encontrada, id=%d)\n", a->idCategoria);
+        printf("Categoria   : (nao encontrada, id=%d)\n", a->idCategoria);
     }
 }
 
@@ -80,10 +80,10 @@ int AcomodacaoExcluir(ListaAcomodacao **lista, int id) {
 
 int AcomodacaoAtualizar(ListaAcomodacao **lista, int id, int op) {
     TipoAcomodacao *a = AcomodacaoBuscar(lista, id);
-    if (!a) { printf("Acomodação não encontrada.\n"); return 0; }
+    if (!a) { printf("Acomodacao nao encontrada.\n"); return 0; }
     switch (op) {
     case 1:
-        ler_string(" Nova descrição: ",a->descricao,   sizeof(a->descricao));   
+        ler_string(" Nova descricao: ",a->descricao,   sizeof(a->descricao));   
         break;
     case 2: 
         ler_string("Facilidades: ", a->facilidades, sizeof(a->facilidades)); 
@@ -92,7 +92,7 @@ int AcomodacaoAtualizar(ListaAcomodacao **lista, int id, int op) {
         a->idCategoria = ler_int("ID categoria: ");
         break;
     default: 
-        printf("Opção inválida.\n"); 
+        printf("Opcao invalida.\n"); 
         return 0;
     }
     return 1;

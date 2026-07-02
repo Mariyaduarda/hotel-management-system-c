@@ -13,12 +13,12 @@
 typedef struct {
     int id;
     char data[12];
-    int tipo; // Entrada ou Saída
+    int tipo; // Entrada ou Saida
     double valor;
     char descricao[200];
-    int metodoPagamento; // Dinheiro ou Cartão
-    int idReferencia; // ID da reserva ou acomodação relacionada (opcional)
-    int ativo; // 1 para ativo, 0 para inativo (excluído logicamente)
+    int metodoPagamento; // Dinheiro ou Cartao
+    int idReferencia; // ID da reserva ou acomodacao relacionada (opcional)
+    int ativo; // 1 para ativo, 0 para inativo (excluido logicamente)
 } TipoCaixa;
 
 

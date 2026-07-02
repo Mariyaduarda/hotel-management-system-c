@@ -66,7 +66,7 @@ static void separadorMenuPrincipal(const char *label) {
     linhaTexto(label);
 }
 
-/* ── Cabeçalho / Rodapé ─────────────────────────────────── */
+/* ── Cabecalho / Rodape ─────────────────────────────────── */
 
 static void cabecalho(const char *titulo) {
     limparTela();

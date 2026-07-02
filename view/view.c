@@ -25,9 +25,9 @@ void ViewCaixaDetalhes(TipoCaixa caixa) {
     printf("%2d | %10s | %7s | R$ %8.2f | %16s | %s\n",
         caixa.id,
         caixa.data,
-        (caixa.tipo == CAIXA_ENTRADA) ? "Entrada" : "Saída",
+        (caixa.tipo == CAIXA_ENTRADA) ? "Entrada" : "Saida",
         caixa.valor,
-        (caixa.metodoPagamento == PAGAMENTO_DINHEIRO) ? "Dinheiro" : "Cartão",
+        (caixa.metodoPagamento == PAGAMENTO_DINHEIRO) ? "Dinheiro" : "Cartao",
         caixa.descricao
     );
 }

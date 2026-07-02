@@ -11,7 +11,7 @@ all: $(TARGET)
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ) -lssl -lcrypto -lm
 
-# ── Compilação de cada .c em .o ──────────────────────────
+# ── Compilacao de cada .c em .o ──────────────────────────
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 

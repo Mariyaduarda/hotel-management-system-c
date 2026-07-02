@@ -23,7 +23,7 @@ void ProdutoListaInit(ListaProduto *lista) {
     ProdutoInit(&lista->produto);
 }
 
-/* gerar próximo ID percorrendo a lista */
+/* gerar proximo ID percorrendo a lista */
 static int proximoId(ListaProduto *lista) {
     int maior = 0;
     ListaProduto *atual = lista;
@@ -41,7 +41,7 @@ int ProdutoCriar(ListaProduto **lista, TipoProduto produto) {
 
     ListaProduto *novo = (ListaProduto *)malloc(sizeof(ListaProduto));
     if (!novo) {
-        printf("Erro: falha ao alocar memória para produto.\n");
+        printf("Erro: falha ao alocar memoria para produto.\n");
         return 0;
     }
 
@@ -72,19 +72,19 @@ void ProdutoListar(ListaProduto **lista, int id) {
     }
 
     printf("\n%-5s %-30s %-8s %-10s %-12s %-12s %-6s\n",
-           "ID", "Descrição", "Estoque", "Est.Mín.", "Preço Custo", "Preço Venda", "Ativo");
+           "ID", "Descricao", "Estoque", "Est.Min.", "Preco Custo", "Preco Venda", "Ativo");
     printf("%s\n", "----------------------------------------------------------------------"
                    "-------------------");
 
     ListaProduto *atual = *lista;
     while (atual) {
         TipoProduto *p = &atual->produto;
-        /* Se id == 0 lista todos; caso contrário filtra pelo id */
+        /* Se id == 0 lista todos; caso contrario filtra pelo id */
         if (id == 0 || p->id == id) {
             printf("%-5d %-30s %-8d %-10d %-12.2f %-12.2f %-6s\n",
                    p->id, p->descricao, p->estoque, p->estoqueMinimo,
                    p->precoCusto, p->precoVenda,
-                   p->ativo ? "Sim" : "Não");
+                   p->ativo ? "Sim" : "Nao");
         }
         atual = atual->proximo;
     }
@@ -123,17 +123,17 @@ int ProdutoExcluir(ListaProduto **lista, int id) {
         atual    = atual->proximo;
     }
 
-    printf("Produto ID %d não encontrado.\n", id);
+    printf("Produto ID %d nao encontrado.\n", id);
     return 0;
 }
 
 /*
  * op — campo a atualizar:
- *   1 = descrição
+ *   1 = descricao
  *   2 = estoque
- *   3 = estoque mínimo
- *   4 = preço de custo
- *   5 = preço de venda
+ *   3 = estoque minimo
+ *   4 = preco de custo
+ *   5 = preco de venda
  *   6 = ativo (toggle)
  */
 
@@ -141,32 +141,32 @@ int ProdutoExcluir(ListaProduto **lista, int id) {
 int ProdutoAtualizar(ListaProduto **lista, int id, int op) {
     TipoProduto *p = ProdutoBuscar(lista, id);
     if (!p) {
-        printf("Produto ID %d não encontrado.\n", id);
+        printf("Produto ID %d nao encontrado.\n", id);
         return 0;
     }
 
     switch (op) {
         case 1:
-            ler_string("Nova descrição: ", p->descricao, sizeof(p->descricao));
+            ler_string("Nova descricao: ", p->descricao, sizeof(p->descricao));
             break;
         case 2:
             p->estoque = ler_int("Novo estoque: ");
             break;
         case 3:
-            p->estoqueMinimo = ler_int("Novo estoque mínimo: ");
+            p->estoqueMinimo = ler_int("Novo estoque minimo: ");
             break;
         case 4:
-            p->precoCusto = ler_float("Novo preço de custo: ");
+            p->precoCusto = ler_float("Novo preco de custo: ");
             break;
         case 5:
-            p->precoVenda = ler_float("Novo preço de venda: ");
+            p->precoVenda = ler_float("Novo preco de venda: ");
             break;
         case 6:
             p->ativo = !p->ativo;
-            printf("Produto ID %d agora está %s.\n", id, p->ativo ? "ativo" : "inativo");
+            printf("Produto ID %d agora esta %s.\n", id, p->ativo ? "ativo" : "inativo");
             break;
         default:
-            printf("Opção inválida.\n");
+            printf("Opcao invalida.\n");
             return 0;
     }
 
@@ -207,7 +207,7 @@ int ProdutoSalvarTxt(ListaProduto *lista) {
 
 int ProdutoLerTxt(ListaProduto **lista) {
     FILE *fp = fopen(ARQUIVO_TXT, "r");
-    if (!fp) return 0; /* arquivo ainda não existe */
+    if (!fp) return 0; /* arquivo ainda nao existe */
 
     TipoProduto p;
     char linha[256];
@@ -255,7 +255,7 @@ int ProdutoSalvarBin(ListaProduto *lista) {
 
 int ProdutoLerBin(ListaProduto **lista) {
     FILE *fp = fopen(ARQUIVO_BIN, "rb");
-    if (!fp) return 0; /* arquivo ainda não existe */
+    if (!fp) return 0; /* arquivo ainda nao existe */
 
     TipoProduto p;
     while (fread(&p, sizeof(TipoProduto), 1, fp) == 1) {

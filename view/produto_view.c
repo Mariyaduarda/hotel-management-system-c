@@ -15,6 +15,24 @@ void ProdutoMenuExibir(void) {
     printf("Opcao: ");
 }
 
+void ProdutoMenuExecutar(ListaProduto **lista) {
+    int opcao;
+    do {
+        ProdutoMenuExibir();
+        opcao = ler_int("");
+
+        switch (opcao) {
+            case 1: ProdutoCadastrarView(lista); break;
+            case 2: ProdutoListarView(lista);    break;
+            case 3: ProdutoBuscarView(lista);    break;
+            case 4: ProdutoAtualizarView(lista); break;
+            case 5: ProdutoExcluirView(lista);   break;
+            case 0: break;
+            default: printf("Opcao invalida.\n");
+        }
+    } while (opcao != 0);
+}
+
 void ProdutoCadastrarView(ListaProduto **lista) {
     TipoProduto p;
     ProdutoInit(&p);

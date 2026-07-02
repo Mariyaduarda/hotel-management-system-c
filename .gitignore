@@ -1,7 +1,7 @@
 # Arquivos objeto compilados
 *.o
 
-# Executável
+# Executavel
 hotel-management-system
 hotel_management_system
 a.out
@@ -20,7 +20,7 @@ a.out
 *.so
 *.dylib
 
-# Arquivos temporários
+# Arquivos temporarios
 *~
 *.swp
 *.swo

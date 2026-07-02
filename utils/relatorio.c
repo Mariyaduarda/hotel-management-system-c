@@ -110,7 +110,7 @@ void RelatorioAcomodacoes(ListaAcomodacao **listaAcom,
                            int idCategoria,
                            const char *dataDisponivel)
 {
-    (void)dataDisponivel; /* parâmetro não utilizado */
+    (void)dataDisponivel; /* parâmetro nao utilizado */
     FILE *out = abrirDestino(cfg);
     if (out == NULL) return;
 
@@ -348,9 +348,9 @@ void RelatorioMovimentacaoAcomodacoes(ListaReserva    **listaReserva,
                                        ConfigRelatorio *cfg,
                                        int idAcomodacao)
 {
-    (void)listaReserva; /* parâmetro não utilizado */
-    (void)listaAcom;    /* parâmetro não utilizado */
-    (void)listaCat;     /* parâmetro não utilizado */
+    (void)listaReserva; /* parâmetro nao utilizado */
+    (void)listaAcom;    /* parâmetro nao utilizado */
+    (void)listaCat;     /* parâmetro nao utilizado */
     FILE *out = abrirDestino(cfg);
     if (out == NULL) return;
 

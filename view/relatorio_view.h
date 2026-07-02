@@ -22,6 +22,11 @@ static ConfigRelatorio pedirDestino(void);
 // ──────────────────────────────────────────────
 
 void RelatorioMenuExibir(void);
+void RelatorioMenuExecutar(ListaHospede    **listaHospede,
+                           ListaAcomodacao **listaAcom,
+                           ListaCategoria  **listaCat,
+                           ListaReserva    **listaReserva,
+                           ListaProduto    **listaProduto);
 
 // ──────────────────────────────────────────────
 // Hospedes

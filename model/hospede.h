@@ -24,7 +24,7 @@ typedef struct ListaHospede {
     TipoHospede hospede;
 } ListaHospede;
 
-/* ── Funcoes de inicialização e outras ────────────────────────────── */
+/* ── Funcoes de inicializacao e outras ────────────────────────────── */
 void HospedeInit(TipoHospede *hospede);
 void HospedeListaInit(ListaHospede *hospede);
 
@@ -38,7 +38,7 @@ int HospedeAtualizar(ListaHospede **lista, int id, int op);
 void HospedeListaLiberar(ListaHospede *lista);
 
 // Funcoes de arquivo
-// Leitura de arquivo gera espaço na memoria
+// Leitura de arquivo gera espaco na memoria
 int HospedeSalvarTxt(ListaHospede *lista);
 int HospedeSalvarBin(ListaHospede *lista);
 int HospedeLerTxt(ListaHospede **lista);

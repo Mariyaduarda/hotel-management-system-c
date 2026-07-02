@@ -16,7 +16,7 @@ int CaixaInserir(ListaCaixa **lista, TipoCaixa caixa){
     if (!novo) return 0;
 
     novo->caixa = caixa;
-    novo->caixa.ativo = 1; // garante que nova entrada é ativa
+    novo->caixa.ativo = 1; // garante que nova entrada e ativa
     novo->proximo = NULL;
 
     if(*lista == NULL){
@@ -41,7 +41,7 @@ TipoCaixa CaixaBuscar(ListaCaixa **lista, int id) {
             return atual->caixa; // caixa encontrado
         atual = atual->proximo;
     }
-    return (TipoCaixa){0}; // caixa vazio se não encontrado
+    return (TipoCaixa){0}; // caixa vazio se nao encontrado
 }
 
 int CaixaListar(ListaCaixa **lista, char *dataInicio, char *dataFim) {

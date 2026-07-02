@@ -35,7 +35,7 @@ typedef struct ListaVenda {
     struct ListaVenda *proximo;
 } ListaVenda;
 
-/* ── Funções de inicialização e outras ────────────────────────────── */
+/* ── Funcoes de inicializacao e outras ────────────────────────────── */
 void       VendaInit(TipoVenda *venda);
 int        VendaCriar(ListaVenda **lista, TipoVenda venda);
 TipoVenda *VendaBuscar(ListaVenda **lista, int id);

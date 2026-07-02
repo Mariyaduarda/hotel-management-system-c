@@ -45,13 +45,13 @@ TipoCategoria *CategoriaBuscar(ListaCategoria **lista, int id) {
 
 void CategoriaListar(ListaCategoria **lista, int id) {
     TipoCategoria *c = CategoriaBuscar(lista, id);
-    if (!c) { printf("Categoria não encontrada.\n"); return; }
+    if (!c) { printf("Categoria nao encontrada.\n"); return; }
 
     printf("ID          : %d\n",      c->id);
-    printf("Descrição   : %s\n",      c->descricao);
-    printf("Diária      : R$ %.2f\n", c->valorDiaria);
+    printf("Descricao   : %s\n",      c->descricao);
+    printf("Diaria      : R$ %.2f\n", c->valorDiaria);
     printf("Max adultos : %d\n",      c->maxAdultos);
-    printf("Max crianças: %d\n",      c->maxCriancas);
+    printf("Max criancas: %d\n",      c->maxCriancas);
 }
 
 int CategoriaExcluir(ListaCategoria **lista, int id) {
@@ -63,23 +63,23 @@ int CategoriaExcluir(ListaCategoria **lista, int id) {
 
 int CategoriaAtualizar(ListaCategoria **lista, int id, int op) {
     TipoCategoria *c = CategoriaBuscar(lista, id);
-    if (!c) { printf("Categoria não encontrada.\n"); return 0; }
+    if (!c) { printf("Categoria nao encontrada.\n"); return 0; }
 
     switch (op) {
     case 1:
-        ler_string("Nova descrição: ", c->descricao, sizeof(c->descricao));
+        ler_string("Nova descricao: ", c->descricao, sizeof(c->descricao));
         break;
     case 2:
-        c->valorDiaria = ler_float("Novo valor de diária: R$ ");
+        c->valorDiaria = ler_float("Novo valor de diaria: R$ ");
         break;
     case 3:
         c->maxAdultos = ler_int("Max adultos: ");
         break;
     case 4:
-        c->maxCriancas = ler_int("Max crianças: ");
+        c->maxCriancas = ler_int("Max criancas: ");
         break;
     default:
-        printf("Opção inválida.\n");
+        printf("Opcao invalida.\n");
         return 0;
     }
     return 1;

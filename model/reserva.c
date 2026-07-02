@@ -2,7 +2,7 @@
 #include "../common.h"
 
 /* ════════════════════════════════════════════════════════════════ */
-/* Funções auxiliares de data                                       */
+/* Funcoes auxiliares de data                                       */
 /* ════════════════════════════════════════════════════════════════ */
 
 
@@ -21,7 +21,7 @@ static int datasSeOverpoem(const char *e1, const char *s1,
 }
 
 /* ════════════════════════════════════════════════════════════════ */
-/* Inicialização da Reserva                                         */
+/* Inicializacao da Reserva                                         */
 /* ════════════════════════════════════════════════════════════════ */
 
 void ReservaInit(TipoReserva *reserva) {
@@ -39,11 +39,11 @@ void ReservaInit(TipoReserva *reserva) {
 }
 
 void ReservaListaInit(ListaReserva *lista) {
-    (void)lista; /* parâmetro não utilizado */
+    (void)lista; /* parâmetro nao utilizado */
 }
 
 /* ════════════════════════════════════════════════════════════════ */
-/* Verificação de disponibilidade e cálculo de diárias             */
+/* Verificacao de disponibilidade e calculo de diarias             */
 /* ════════════════════════════════════════════════════════════════ */
 
 int ReservaVerificarDisponibilidade(ListaReserva **lista, int idAcomodacao,
@@ -69,7 +69,7 @@ int ReservaCalcularDiarias(const char *entrada, const char *saida) {
 }
 
 /* ════════════════════════════════════════════════════════════════ */
-/* Geração de ID único                                             */
+/* Geracao de ID unico                                             */
 /* ════════════════════════════════════════════════════════════════ */
 
 static int gerarId(ListaReserva **lista) {
@@ -208,7 +208,7 @@ void ReservaListar(ListaReserva **lista, int id) {
 }
 
 /* ════════════════════════════════════════════════════════════════ */
-/* Liberação de memória                                            */
+/* Liberacao de memoria                                            */
 /* ════════════════════════════════════════════════════════════════ */
 
 void ReservaListaLiberar(ListaReserva *lista) {
@@ -279,7 +279,7 @@ int ReservaLerTxt(ListaReserva **lista) {
 }
 
 /* ════════════════════════════════════════════════════════════════ */
-/* Persistência — Arquivo Binário                                   */
+/* Persistência — Arquivo Binario                                   */
 /* ════════════════════════════════════════════════════════════════ */
 
 int ReservaSalvarBin(ListaReserva *lista) {

@@ -8,6 +8,10 @@
 
 // Menus
 void ReservaMenuExibir();
+void ReservaMenuExecutar(ListaReserva    **listaReserva,
+                         ListaAcomodacao **listaAcomodacao,
+                         ListaCategoria  **listaCategoria,
+                         ListaHospede    **listaHospede);
 void ReservaCadastrarView(ListaReserva **listaReserva,
                           ListaAcomodacao **listaAcomodacao,
                           ListaCategoria  **listaCategoria,
