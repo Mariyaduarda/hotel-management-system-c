@@ -13,6 +13,7 @@
 #include "../controller/checkin_controller.h"
 #include "../controller/contas_pagar_controller.h"
 #include "../controller/contas_receber_controller.h"
+#include "../controller/import_export_controller.h"
 
 #define LARGURA 56
 
@@ -217,7 +218,10 @@ void menuPrincipal(ListaHospede    **listaHospede,
                    ListaVenda      **listaVenda,
                    ListaCheckin    **listaCheckin,
                    ListaContaPagar **listaContaPagar,
-                   ListaContaReceber **listaContaReceber)
+                   ListaContaReceber **listaContaReceber,
+                   ListaOperador   **listaOperador,
+                   ListaCaixa      **listaCaixa,
+                   ListaFornecedor **listaFornecedor)
 {
     int op;
 
@@ -269,8 +273,19 @@ void menuPrincipal(ListaHospede    **listaHospede,
                                         listaProduto);
             break;
         case 5:
-            printf("\nImportacao/exportacao ainda nao.\n");
-            pausar();
+            ImportExportControllerExecutar(listaHospede,
+                                          listaReserva,
+                                          listaAcomodacao,
+                                          listaCategoria,
+                                          listaProduto,
+                                          hotel,
+                                          listaOperador,
+                                          listaNotaFiscal,
+                                          listaVenda,
+                                          listaCaixa,
+                                          listaCheckin,
+                                          listaContaPagar,
+                                          listaContaReceber);
             break;
         case 0:
             break;

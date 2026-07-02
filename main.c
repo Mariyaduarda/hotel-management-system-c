@@ -11,6 +11,8 @@
 #include "model/checkin.h"
 #include "model/contas_pagar.h"
 #include "model/contas_receber.h"
+#include "model/caixa.h"
+#include "model/fornecedor.h"
 #include "view/login_view.h"
 #include "view/menu_principal.h"
 #include "controller/hotel_controller.h"
@@ -81,6 +83,8 @@ int main() {
     ListaCheckin        *listaCheckin      = NULL;
     ListaContaPagar     *listaContaPagar   = NULL;
     ListaContaReceber   *listaContaReceber = NULL;
+    ListaCaixa          *listaCaixa        = NULL;
+    ListaFornecedor     *listaFornecedor   = NULL;
 
     // Le realmente os dados
     if (hotel.TipoSalvamento == 0) {
@@ -94,6 +98,8 @@ int main() {
         CheckinLerTxt(&listaCheckin);
         ContaPagarLerTxt(&listaContaPagar);
         ContaReceberLerTxt(&listaContaReceber);
+        CaixaLerTxt(&listaCaixa);
+        FornecedorLerTxt(&listaFornecedor);
     } else if (hotel.TipoSalvamento == 1) {
         HospedeLerBin(&listaHospede);
         ReservaLerBin(&listaReserva);
@@ -105,6 +111,8 @@ int main() {
         CheckinLerBin(&listaCheckin);
         ContaPagarLerBin(&listaContaPagar);
         ContaReceberLerBin(&listaContaReceber);
+        CaixaLerBin(&listaCaixa);
+        FornecedorLerBin(&listaFornecedor);
     }
 
     // ==================================================
@@ -119,7 +127,10 @@ int main() {
                   &listaVenda,
                   &listaCheckin,
                   &listaContaPagar,
-                  &listaContaReceber);
+                  &listaContaReceber,
+                  &ListaOperador,
+                  &listaCaixa,
+                  &listaFornecedor);
     
     // ==================================================
     // FINALIZACAO
@@ -140,6 +151,8 @@ int main() {
         CheckinSalvarTxt(listaCheckin);
         ContaPagarSalvarTxt(listaContaPagar);
         ContaReceberSalvarTxt(listaContaReceber);
+        CaixaSalvarTxt(listaCaixa);
+        FornecedorSalvarTxt(listaFornecedor);
     } else if (hotel.TipoSalvamento == 1) {
         // caso for bin 
         HotelSalvar(&hotel);
@@ -155,6 +168,8 @@ int main() {
         CheckinSalvarBin(listaCheckin);
         ContaPagarSalvarBin(listaContaPagar);
         ContaReceberSalvarBin(listaContaReceber);
+        CaixaSalvarBin(listaCaixa);
+        FornecedorSalvarBin(listaFornecedor);
     }
 
     // Apagar os arquivos q n estao de acordo
@@ -182,6 +197,8 @@ int main() {
     CheckinListaLiberar(listaCheckin);
     ContaPagarListaLiberar(listaContaPagar);
     ContaReceberListaLiberar(listaContaReceber);
+    CaixaListaLiberar(listaCaixa);
+    FornecedorListaLiberar(listaFornecedor);
 
     return 0;
 }

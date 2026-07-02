@@ -12,6 +12,9 @@
 #include "../model/checkin.h"
 #include "../model/contas_pagar.h"
 #include "../model/contas_receber.h"
+#include "../model/operador.h"
+#include "../model/caixa.h"
+#include "../model/fornecedor.h"
 # include "../common.h"
 
 void menuPrincipal(ListaHospede    **listaHospede,
@@ -24,6 +27,9 @@ void menuPrincipal(ListaHospede    **listaHospede,
                    ListaVenda      **listaVenda,
                    ListaCheckin    **listaCheckin,
                    ListaContaPagar **listaContaPagar,
-                   ListaContaReceber **listaContaReceber);
+                   ListaContaReceber **listaContaReceber,
+                   ListaOperador   **listaOperador,
+                   ListaCaixa      **listaCaixa,
+                   ListaFornecedor **listaFornecedor);
 
 #endif // MENU_PRINCIPAL_H

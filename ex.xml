@@ -1,0 +1,36 @@
+<dados>
+    <tabela nome="hospede">
+        <registro>
+            <codigo>1</codigo>
+            <nome>Fulano de Tal</nome>
+            <endereço>Rua XYZ, 123, Bairro QWER, Formiga, MG</endereço>
+            <cpf>111.111.111-11</cpf>
+            <telefone>3733213321</telefone>
+            <email>fulanodetal@fulanodetal.com.br</email>
+            <sexo>M</sexo>
+            <est_civil>Casado</est_civil>
+            <data_nascimento>11/11/1988</data_nascimento>
+            <!-- Se você tiver campos extra no seu sistema, adicione crie tags correspondentes e adicione no seu arquivo de
+            exportação/importação -->
+        </registro>
+        <registro>
+            <codigo>2</codigo>
+            <nome>Ciclana Beltrano</nome>
+            <endereço>Rua lkjdsfu, 1365423, Bairro qk2u3yi, Cidade, MG</endereço>
+            <cpf>111.111.111-12</cpf>
+            <telefone>3733646821</telefone>
+            <email>ciclanafulano@ ciclanofulano.com.br</email>
+            <sexo>F</sexo>
+            <est_civil>Casada</est_civil>
+            <data_nascimento>11/05/1958</data_nascimento>
+            <!-- Se você tiver campos extra no seu sistema, adicione crie tags correspondentes e adicione no seu arquivo de
+            exportação/importação -->
+        </registro>
+        <registro>
+            (...) <!-- Crie um registro para cada cliente que tiver no seu programa -->
+        </registro>
+    </tabela>
+    <tabela nome="X"> <!-- você deve criar uma tag “tabela” para cada cadastro do seu sistema, com os
+    respectivos campos -->
+    </tabela>
+</dados>
