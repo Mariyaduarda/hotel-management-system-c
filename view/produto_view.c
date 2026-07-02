@@ -21,24 +21,11 @@ void ProdutoCadastrarView(ListaProduto **lista) {
 
     printf("\n-- Cadastro de Produto --\n");
 
-    printf("Descricao: ");
-    scanf(" %99[^\n]", p.descricao);
-
-    printf("Estoque inicial: ");
-    scanf("%d", &p.estoque);
-    limparBuffer();
-
-    printf("Estoque minimo: ");
-    scanf("%d", &p.estoqueMinimo);
-    limparBuffer();
-
-    printf("Preco de custo: ");
-    scanf("%f", &p.precoCusto);
-    limparBuffer();
-
-    printf("Preco de venda: ");
-    scanf("%f", &p.precoVenda);
-    limparBuffer();
+    ler_string("Descricao: ", p.descricao, sizeof(p.descricao));
+    p.estoque = ler_int("Estoque inicial: ");
+    p.estoqueMinimo = ler_int("Estoque minimo: ");
+    p.precoCusto = ler_float("Preco de custo: ");
+    p.precoVenda = ler_float("Preco de venda: ");
 
     ProdutoCriar(lista, p);
 }
@@ -51,9 +38,7 @@ void ProdutoListarView(ListaProduto **lista) {
 void ProdutoBuscarView(ListaProduto **lista) {
     int id;
     printf("\n-- Buscar Produto --\n");
-    printf("ID do produto: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("ID do produto: ");
 
     TipoProduto *p = ProdutoBuscar(lista, id);
     if (!p) {
@@ -72,9 +57,7 @@ void ProdutoBuscarView(ListaProduto **lista) {
 void ProdutoAtualizarView(ListaProduto **lista) {
     int id, op;
     printf("\n-- Atualizar Produto --\n");
-    printf("ID do produto: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("ID do produto: ");
 
     TipoProduto *p = ProdutoBuscar(lista, id);
     if (!p) {
@@ -90,9 +73,7 @@ void ProdutoAtualizarView(ListaProduto **lista) {
     printf("4. Preco de custo\n");
     printf("5. Preco de venda\n");
     printf("6. Ativar/Desativar\n");
-    printf("Opcao: ");
-    scanf("%d", &op);
-    limparBuffer();
+    op = ler_int("Opcao: ");
 
     ProdutoAtualizar(lista, id, op);
 }
@@ -100,9 +81,7 @@ void ProdutoAtualizarView(ListaProduto **lista) {
 void ProdutoExcluirView(ListaProduto **lista) {
     int id;
     printf("\n-- Excluir Produto --\n");
-    printf("ID do produto: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("ID do produto: ");
 
     TipoProduto *p = ProdutoBuscar(lista, id);
     if (!p) {
@@ -112,8 +91,7 @@ void ProdutoExcluirView(ListaProduto **lista) {
 
     printf("Confirma exclusao de \"%s\"? (1=Sim / 0=Nao): ", p->descricao);
     int confirma;
-    scanf("%d", &confirma);
-    limparBuffer();
+    confirma = ler_int("");
 
     if (confirma == 1)
         ProdutoExcluir(lista, id);

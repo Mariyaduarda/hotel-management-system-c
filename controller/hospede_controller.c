@@ -8,6 +8,20 @@
    Retorna 1 em sucesso, 0 em falha
    ────────────────────────────────────────────────────────── */
 int controllerHospedeCadastrar(ListaHospede **lista, TipoHospede h) {
+    ler_string("Nome: ", h.nome, sizeof(h.nome));
+    ler_string("CPF: ", h.cpf, sizeof(h.cpf));
+    ler_string("Email: ", h.email, sizeof(h.email));
+    ler_string("Telefone: ", h.telefone, sizeof(h.telefone));
+    ler_string("Sexo: ", h.sexo, sizeof(h.sexo));
+    ler_string("Data de Nascimento (dd/mm/aaaa): ", h.dataNascimento, sizeof(h.dataNascimento));
+    ler_string("Estado Civil: ", h.estadoCivil, sizeof(h.estadoCivil));
+    ler_string("Endereço: ", h.endereco.rua, sizeof(h.endereco.rua));
+    ler_string("Número: ", h.endereco.numero, sizeof(h.endereco.numero));
+    ler_string("Complemento: ", h.endereco.complemento, sizeof(h.endereco.complemento));
+    ler_string("Bairro: ", h.endereco.bairro, sizeof(h.endereco.bairro));
+    ler_string("Cidade: ", h.endereco.cidade, sizeof(h.endereco.cidade));
+    ler_string("Estado: ", h.endereco.estado, sizeof(h.endereco.estado));
+    ler_string("CEP: ", h.endereco.cep, sizeof(h.endereco.cep));
     return HospedeCriar(lista, h);
 }
 
@@ -83,51 +97,32 @@ void HospedeControllerExecutar(ListaHospede **lista) {
         printf(  "║ 5. Excluir hóspede           ║\n");
         printf(  "║ 0. Voltar                    ║\n");
         printf(  "╚══════════════════════════════╝\n");
-        printf("Opcao: ");
-        scanf("%d", &opcao);
-        limparBuffer();
+        opcao = ler_int("Opcao: ");
 
         switch (opcao) {
-            case 1: {
-                TipoHospede h = {0};
-                printf("Nome: ");
-                scanf(" %99[^\n]", h.nome);
-                printf("CPF: ");
-                scanf(" %14[^\n]", h.cpf);
-                printf("Email: ");
-                scanf(" %99[^\n]", h.email);
-                printf("Telefone: ");
-                scanf(" %19[^\n]", h.telefone);
+            case 1:
+                TipoHospede h;
                 controllerHospedeCadastrar(lista, h);
                 break;
-            }
             case 2:
                 controllerHospedeListar(lista, 0);
                 break;
             case 3: {
                 int id;
-                printf("ID: ");
-                scanf("%d", &id);
-                limparBuffer();
+                id = ler_int("ID: ");
                 controllerHospedeListar(lista, id);
                 break;
             }
             case 4: {
                 int id, op;
-                printf("ID do hóspede: ");
-                scanf("%d", &id);
-                limparBuffer();
-                printf("Campo (1=nome 2=cpf 3=email 4=tel 5=sexo 6=nasc 7=est.civil): ");
-                scanf("%d", &op);
-                limparBuffer();
+                id = ler_int("ID: ");
+                op = ler_int("Campo (1=nome 2=cpf 3=email 4=tel 5=sexo 6=nasc 7=est.civil): ");
                 controllerHospedeAtualizar(lista, id, op);
                 break;
             }
             case 5: {
                 int id;
-                printf("ID do hóspede: ");
-                scanf("%d", &id);
-                limparBuffer();
+                id = ler_int("ID: ");
                 controllerHospedeExcluir(lista, id);
                 break;
             }

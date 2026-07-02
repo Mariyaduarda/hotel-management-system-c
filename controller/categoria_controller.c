@@ -8,8 +8,7 @@ void CategoriaControllerExecutar(ListaCategoria **lista) {
     do {
         CategoriaMenuExibir();
         printf("Opcao: ");
-        scanf("%d", &opcao);
-        limparBuffer();
+        opcao = ler_int("");
 
         switch (opcao) {
             case 1: CategoriaCadastrarView(lista);  break;

@@ -106,12 +106,13 @@ int OperadorAtualizar(ListaOperador **lista, int id, int op) {
     if (!o) return 0;
     char novaSenha[100], confirma[100];
     switch (op) {
-        case 1: printf("Novo nome: ");    lerString(o->nome,    sizeof(o->nome));    break;
-        case 2: printf("Novo usuario: "); lerString(o->usuario, sizeof(o->usuario)); break;
+        case 1: ler_string("Novo nome: ",    o->nome,    sizeof(o->nome));      break;
+        case 2: ler_string("Novo usuario: ", o->usuario, sizeof(o->usuario));   break;
         case 3:
             do {
-                printf("Nova senha: ");    scanf("%99s", novaSenha);  limparBuffer();
-                printf("Confirme: ");      scanf("%99s", confirma);   limparBuffer();
+                // confere se a senha e a confirmacao sao iguais
+                ler_string("Nova senha: ", novaSenha, sizeof(novaSenha));
+                ler_string("Confirme: ",   confirma,  sizeof(confirma));
                 if (strcmp(novaSenha, confirma) != 0)
                     printf("Senhas nao coincidem.\n");
             } while (strcmp(novaSenha, confirma) != 0);
@@ -163,12 +164,12 @@ void criarOperador(void) {
 
     printf(" -- Cadastro de Operador -- \n");
     operadorAtual.id = 1;
-    printf("Usuario: "); scanf("%49s", operadorAtual.usuario); limparBuffer();
-    printf("Nome: ");    scanf("%99s", operadorAtual.nome);    limparBuffer();
+    ler_string("Usuario: ", operadorAtual.usuario, sizeof(operadorAtual.usuario));
+    ler_string("Nome: ", operadorAtual.nome, sizeof(operadorAtual.nome));
 
     do {
-        printf("Senha: ");         scanf("%99s", senha);        limparBuffer();
-        printf("Confirme a senha: "); scanf("%99s", confirmacao); limparBuffer();
+        ler_string("Senha: ", senha, sizeof(senha));
+        ler_string("Confirme a senha: ", confirmacao, sizeof(confirmacao));
         if (strcmp(senha, confirmacao) != 0)
             printf("As senhas nao coincidem. Tente novamente.\n");
     } while (strcmp(senha, confirmacao) != 0);

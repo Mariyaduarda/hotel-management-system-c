@@ -6,8 +6,7 @@ void ProdutoControllerExecutar(ListaProduto **listaProduto) {
     int opcao;
     do {
         ProdutoMenuExibir();
-        scanf("%d", &opcao);
-        limparBuffer();
+        opcao = ler_int("");
 
         switch (opcao) {
             case 1:

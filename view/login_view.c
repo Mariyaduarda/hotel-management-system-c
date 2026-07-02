@@ -43,13 +43,9 @@ int telaLogin(ListaOperador **lista, Operador **logado) {
 
     while (tentativas > 0) {
 
-        printf("\n  Usuario : ");
-        scanf("%49s", usuario);
-        limparBuffer();
+        ler_string("\n  Usuario : ", usuario, sizeof(usuario));
 
-        printf("  Senha   : ");
-        scanf("%99s", senha);
-        limparBuffer();
+        ler_string("  Senha   : ", senha, sizeof(senha));
 
         if (OperadorAutenticar(lista, usuario, senha, logado)) {
 
@@ -101,21 +97,15 @@ int telaPrimeiroCadastro(ListaOperador **lista) {
 
     printf("\n");
 
-    printf("  Nome     : ");
-    lerString(op.nome, sizeof(op.nome));
+    ler_string("  Nome     : ", op.nome, sizeof(op.nome));
 
-    printf("  Usuario  : ");
-    lerString(op.usuario, sizeof(op.usuario));
+    ler_string("  Usuario  : ", op.usuario, sizeof(op.usuario));
 
     do {
 
-        printf("  Senha    : ");
-        scanf("%99s", senha);
-        limparBuffer();
+        ler_string("  Senha    : ", senha, sizeof(senha));
 
-        printf("  Confirme : ");
-        scanf("%99s", confirma);
-        limparBuffer();
+        ler_string("  Confirme : ", confirma, sizeof(confirma));
 
         if (strcmp(senha, confirma) != 0) {
             printf(VERMELHO

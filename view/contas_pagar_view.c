@@ -38,8 +38,7 @@ void ContaPagarMenuView(ListaContaPagar **lista) {
         printf("%s\n", MEIO);
         imprimirOpcao("0", "Voltar");
         rodape();
-        scanf("%d", &opcao);
-        limparBuffer();
+        opcao = ler_int("");
 
         switch (opcao) {
             case 1: ContaPagarCadastrarView(lista); break;
@@ -58,29 +57,19 @@ void ContaPagarCadastrarView(ListaContaPagar **lista) {
     TipoContaPagar conta;
     ContaPagarInit(&conta);
 
+    // cabecalho
     printf("\n");
     cabecalho("CADASTRAR CONTA A PAGAR");
     printf("%s\n", FUNDO);
 
-    printf("Fornecedor ID: ");
-    scanf("%d", &conta.idFornecedor);
-    limparBuffer();
-    printf("Nota fiscal ID: ");
-    scanf("%d", &conta.idNotaFiscal);
-    limparBuffer();
-    printf("Descricao: ");
-    lerString(conta.descricao, sizeof(conta.descricao));
-    printf("Valor: ");
-    scanf("%f", &conta.valor);
-    limparBuffer();
-    printf("Data de vencimento (DD/MM/AAAA): ");
-    lerString(conta.dataVencimento, sizeof(conta.dataVencimento));
-    printf("Numero da parcela: ");
-    scanf("%d", &conta.numeroParcela);
-    limparBuffer();
-    printf("Total de parcelas: ");
-    scanf("%d", &conta.totalParcelas);
-    limparBuffer();
+    // recebe os dados
+    conta.idFornecedor = ler_int("Fornecedor ID: ");
+    conta.idNotaFiscal = ler_int("Nota fiscal ID: ");
+    ler_string("Descricao: ", conta.descricao, sizeof(conta.descricao));
+    conta.valor = ler_float("Valor: ");
+    ler_string("Data de vencimento (DD/MM/AAAA): ", conta.dataVencimento, sizeof(conta.dataVencimento));
+    conta.numeroParcela = ler_int("Numero da parcela: ");
+    conta.totalParcelas = ler_int("Total de parcelas: ");
 
     if (controllerContaPagarCadastrar(lista, conta))
         printf(VERDE "  Conta a pagar cadastrada com sucesso.\n" RESET);
@@ -97,22 +86,14 @@ void ContaPagarListarView(ListaContaPagar **lista) {
     printf("\n");
     cabecalho("LISTAR CONTAS A PAGAR");
     printf("%s\n", FUNDO);
-    printf("Filtrar por fornecedor? (1=Sim / 0=Nao): ");
-    scanf("%d", &filtrar);
-    limparBuffer();
+    filtrar = ler_int("Filtrar por fornecedor? (1=Sim / 0=Nao): ");
     if (filtrar) {
-        printf("Fornecedor ID: ");
-        scanf("%d", &idFornecedor);
-        limparBuffer();
+        idFornecedor = ler_int("Fornecedor ID: ");
     }
-    printf("Filtrar por periodo? (1=Sim / 0=Nao): ");
-    scanf("%d", &filtrar);
-    limparBuffer();
+    filtrar = ler_int("Filtrar por periodo? (1=Sim / 0=Nao): ");
     if (filtrar) {
-        printf("Data inicio (DD/MM/AAAA): ");
-        lerString(dataInicio, sizeof(dataInicio));
-        printf("Data fim (DD/MM/AAAA): ");
-        lerString(dataFim, sizeof(dataFim));
+        ler_string("Data inicio (DD/MM/AAAA): ", dataInicio, sizeof(dataInicio));
+        ler_string("Data fim (DD/MM/AAAA): ", dataFim, sizeof(dataFim));
     }
     controllerContaPagarListar(lista, idFornecedor, dataInicio, dataFim);
 }
@@ -121,9 +102,7 @@ void ContaPagarBuscarView(ListaContaPagar **lista) {
     int id;
     printf("\n");
     cabecalho("BUSCAR CONTA A PAGAR");
-    printf("ID da conta: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("ID da conta: ");
     TipoContaPagar *c = controllerContaPagarBuscar(lista, id);
     if (c) {
         printf("ID: %d\n", c->id);
@@ -145,11 +124,12 @@ void ContaPagarBaixarView(ListaContaPagar **lista) {
     char dataPagamento[12];
     printf("\n");
     cabecalho("DAR BAIXA EM CONTA");
-    printf("ID da conta: ");
-    scanf("%d", &id);
-    limparBuffer();
-    printf("Data de pagamento (DD/MM/AAAA): ");
-    lerString(dataPagamento, sizeof(dataPagamento));
+
+    // recebe os dados
+    id = ler_int("ID da conta: ");
+    ler_string("Data de pagamento (DD/MM/AAAA): ", dataPagamento, sizeof(dataPagamento));
+
+    // confere se deu certo
     if (!controllerContaPagarBaixar(lista, id, dataPagamento))
         printf(VERMELHO "  Falha ao dar baixa na conta.\n" RESET);
     else

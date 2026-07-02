@@ -67,20 +67,16 @@ int CategoriaAtualizar(ListaCategoria **lista, int id, int op) {
 
     switch (op) {
     case 1:
-        printf("Nova descrição: ");
-        lerString(c->descricao, sizeof(c->descricao));
+        ler_string("Nova descrição: ", c->descricao, sizeof(c->descricao));
         break;
     case 2:
-        printf("Novo valor de diária: R$ ");
-        scanf("%f", &c->valorDiaria); limparBuffer();
+        c->valorDiaria = ler_float("Novo valor de diária: R$ ");
         break;
     case 3:
-        printf("Max adultos: ");
-        scanf("%d", &c->maxAdultos); limparBuffer();
+        c->maxAdultos = ler_int("Max adultos: ");
         break;
     case 4:
-        printf("Max crianças: ");
-        scanf("%d", &c->maxCriancas); limparBuffer();
+        c->maxCriancas = ler_int("Max crianças: ");
         break;
     default:
         printf("Opção inválida.\n");

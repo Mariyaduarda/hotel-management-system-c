@@ -53,41 +53,37 @@ void HotelEditarView(Hotel *hotel) {
     printf(  "║  [13] Tipo de Salvamento                             ║\n");
     printf(  "║  [0]  Voltar                                         ║\n");
     printf(  "╚══════════════════════════════════════════════════════╝\n");
-    printf("Opcao: ");
-    scanf("%d", &opcao);
-    limparBuffer();
+    opcao = ler_int("Opcao: ");
 
     switch (opcao) {
-        case 1:  printf("Nome Fantasia: ");       lerString(hotel->NomeFantasia,      sizeof(hotel->NomeFantasia));      break;
-        case 2:  printf("Razao Social: ");        lerString(hotel->RazaoSocial,       sizeof(hotel->RazaoSocial));       break;
-        case 3:  printf("CNPJ: ");                lerString(hotel->CNPJ,              sizeof(hotel->CNPJ));              break;
-        case 4:  printf("Insc. Estadual: ");      lerString(hotel->InscricaoEstadual, sizeof(hotel->InscricaoEstadual)); break;
-        case 5:  printf("Email: ");               lerString(hotel->Email,             sizeof(hotel->Email));             break;
-        case 6:  printf("Telefone: ");            lerString(hotel->Telefone,          sizeof(hotel->Telefone));          break;
-        case 7:  printf("Nome Responsavel: ");    lerString(hotel->NomeResp,          sizeof(hotel->NomeResp));          break;
-        case 8:  printf("Telefone Resp.: ");      lerString(hotel->TelefoneResp,      sizeof(hotel->TelefoneResp));      break;
-        case 9:  printf("Check-in (HH:MM): ");    lerString(hotel->CheckIn,           sizeof(hotel->CheckIn));           break;
-        case 10: printf("Check-out (HH:MM): ");   lerString(hotel->CheckOut,          sizeof(hotel->CheckOut));          break;
-        case 11: printf("Margem de Lucro (%%): "); scanf("%lf", &hotel->MargemLucro);  limparBuffer();                    break;
+        case 1:  ler_string("Nome Fantasia: ",     hotel->NomeFantasia,      sizeof(hotel->NomeFantasia));      break;
+        case 2:  ler_string("Razao Social: ",      hotel->RazaoSocial,       sizeof(hotel->RazaoSocial));       break;
+        case 3:  ler_string("CNPJ: ",              hotel->CNPJ,              sizeof(hotel->CNPJ));              break;
+        case 4:  ler_string("Insc. Estadual: ",    hotel->InscricaoEstadual, sizeof(hotel->InscricaoEstadual)); break;
+        case 5:  ler_string("Email: ",             hotel->Email,             sizeof(hotel->Email));             break;
+        case 6:  ler_string("Telefone: ",          hotel->Telefone,          sizeof(hotel->Telefone));          break;
+        case 7:  ler_string("Nome Responsavel: ",  hotel->NomeResp,          sizeof(hotel->NomeResp));          break;
+        case 8:  ler_string("Telefone Resp.: ",    hotel->TelefoneResp,      sizeof(hotel->TelefoneResp));      break;
+        case 9:  ler_string("Check-in (HH:MM): ",  hotel->CheckIn,           sizeof(hotel->CheckIn));           break;
+        case 10: ler_string("Check-out (HH:MM): ", hotel->CheckOut,          sizeof(hotel->CheckOut));          break;
+        case 11: hotel->MargemLucro = ler_long("Margem de Lucro (%%): "); break;
         case 12:
-            printf("Rua: ");          lerString(hotel->endereco.rua,         sizeof(hotel->endereco.rua));
-            printf("Numero: ");       lerString(hotel->endereco.numero,      sizeof(hotel->endereco.numero));
-            printf("Complemento: ");  lerString(hotel->endereco.complemento, sizeof(hotel->endereco.complemento));
-            printf("Bairro: ");       lerString(hotel->endereco.bairro,      sizeof(hotel->endereco.bairro));
-            printf("Cidade: ");       lerString(hotel->endereco.cidade,      sizeof(hotel->endereco.cidade));
-            printf("Estado: ");       lerString(hotel->endereco.estado,      sizeof(hotel->endereco.estado));
-            printf("CEP: ");          lerString(hotel->endereco.cep,         sizeof(hotel->endereco.cep));
+            ler_string("Rua: ",         hotel->endereco.rua,         sizeof(hotel->endereco.rua));
+            ler_string("Numero: ",      hotel->endereco.numero,      sizeof(hotel->endereco.numero));
+            ler_string("Complemento: ", hotel->endereco.complemento, sizeof(hotel->endereco.complemento));
+            ler_string("Bairro: ",      hotel->endereco.bairro,      sizeof(hotel->endereco.bairro));
+            ler_string("Cidade: ",      hotel->endereco.cidade,      sizeof(hotel->endereco.cidade));
+            ler_string("Estado: ",      hotel->endereco.estado,      sizeof(hotel->endereco.estado));
+            ler_string("CEP: ",         hotel->endereco.cep,         sizeof(hotel->endereco.cep));
             break;
         case 13:
-            printf(" 0. Salvar em TXT              \n");
-            printf(" 1. Salvar em BIN              \n");
-            printf(" 2. Nao salvar (apenas memoria)\n");
-            printf("Tipo de Salvamento: ");
-            scanf("%d", &hotel->TipoSalvamento);
-            limparBuffer();
+            hotel->TipoSalvamento = ler_int("Tipo de Salvamento (0-TXT, 1-BIN, 2-Nao salvar): ");
             break;
-        case 0: return;
-        default: printf("Opcao invalida.\n"); return;
+        case 0:
+            return;
+        default:
+            printf("Opcao invalida.\n"); 
+            break;
     }
     printf("Hotel atualizado com sucesso!\n");
 }

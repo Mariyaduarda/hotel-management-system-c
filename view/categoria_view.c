@@ -24,20 +24,10 @@ void CategoriaCadastrarView(ListaCategoria **lista) {
 
     printf("\n--- Cadastrar Categoria ---\n");
 
-    printf("Descricao: ");
-    lerString(cat.descricao, sizeof(cat.descricao));
-
-    printf("Valor da diaria: R$ ");
-    scanf("%f", &cat.valorDiaria);
-    limparBuffer();
-
-    printf("Max adultos: ");
-    scanf("%d", &cat.maxAdultos);
-    limparBuffer();
-
-    printf("Max criancas: ");
-    scanf("%d", &cat.maxCriancas);
-    limparBuffer();
+    ler_string(" Descricao: ", cat.descricao, sizeof(cat.descricao));
+    cat.valorDiaria = ler_float(" Valor da diaria: R$ ");
+    cat.maxAdultos  = ler_int(" Max adultos:  ");
+    cat.maxCriancas = ler_int(" Max criancas: ");
 
     if (CategoriaCriar(lista, cat))
         printf(VERDE "Categoria cadastrada com sucesso!\n" RESET);
@@ -82,9 +72,7 @@ void CategoriaListarTodosView(ListaCategoria **lista) {
    ══════════════════════════════════════ */
 void CategoriaBuscarView(ListaCategoria **lista) {
     int id;
-    printf("\nID da categoria: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("\nID da categoria: ");
 
     CategoriaListar(lista, id);
 }
@@ -94,9 +82,7 @@ void CategoriaBuscarView(ListaCategoria **lista) {
    ══════════════════════════════════════ */
 void CategoriaAtualizarView(ListaCategoria **lista) {
     int id;
-    printf("\nID da categoria a atualizar: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("\nID da categoria a atualizar: ");
 
     // Mostra estado atual antes de editar
     TipoCategoria *c = CategoriaBuscar(lista, id);
@@ -113,11 +99,9 @@ void CategoriaAtualizarView(ListaCategoria **lista) {
     printf("2. Valor da diaria\n");
     printf("3. Max adultos\n");
     printf("4. Max criancas\n");
-    printf("Opcao: ");
 
     int op;
-    scanf("%d", &op);
-    limparBuffer();
+    op = ler_int("Opcao: ");
 
     if (CategoriaAtualizar(lista, id, op))
         printf(VERDE "Categoria atualizada com sucesso!\n" RESET);
@@ -130,9 +114,7 @@ void CategoriaAtualizarView(ListaCategoria **lista) {
    ══════════════════════════════════════ */
 void CategoriaExcluirView(ListaCategoria **lista) {
     int id;
-    printf("\nID da categoria a excluir: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("\nID da categoria a excluir: ");
 
     // Confirma antes de excluir
     TipoCategoria *c = CategoriaBuscar(lista, id);
@@ -143,8 +125,7 @@ void CategoriaExcluirView(ListaCategoria **lista) {
 
     printf("Confirma exclusao de \"%s\"? (S/N): ", c->descricao);
     char conf;
-    scanf(" %c", &conf);
-    limparBuffer();
+    conf = ler_char("");
 
     if (toupper(conf) != 'S') {
         printf(AMARELO "Operacao cancelada.\n" RESET);

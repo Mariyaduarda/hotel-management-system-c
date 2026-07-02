@@ -10,8 +10,7 @@ void ReservaControllerExecutar(ListaReserva    **listaReserva,
     int opcao;
     do {
         ReservaMenuExibir();
-        scanf("%d", &opcao);
-        limparBuffer();
+        opcao = ler_int("");
 
         switch (opcao) {
             case 1:

@@ -15,7 +15,7 @@ O sistema permite gerenciar todas as operações de um hotel, desde o cadastro d
 ```
 hotel-management-system-c/
 ├── main.c
-├── common.h / common.c          # Utilitários globais (lerString, limparBuffer)
+├── common.h / common.c          # Utilitários globais
 ├── model/                       # Estruturas de dados e persistência
 │   ├── hotel.c / hotel.h
 │   ├── hospede.c / hospede.h

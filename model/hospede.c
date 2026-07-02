@@ -109,36 +109,36 @@ int HospedeAtualizar(ListaHospede **lista, int id, int op) {
 
     switch (op) {
     case 1: /* todos */
-        printf("Nome: ");            lerString(h->nome,                  sizeof(h->nome));
-        printf("CPF: ");             lerString(h->cpf,                   sizeof(h->cpf));
-        printf("Email: ");           lerString(h->email,                 sizeof(h->email));
-        printf("Telefone: ");        lerString(h->telefone,              sizeof(h->telefone));
-        printf("Sexo: ");            lerString(h->sexo,                  sizeof(h->sexo));
-        printf("Nascimento: ");      lerString(h->dataNascimento,        sizeof(h->dataNascimento));
-        printf("Estado Civil: ");    lerString(h->estadoCivil,           sizeof(h->estadoCivil));
-        printf("Rua: ");             lerString(h->endereco.rua,          sizeof(h->endereco.rua));
-        printf("Numero: ");          lerString(h->endereco.numero,       sizeof(h->endereco.numero));
-        printf("Complemento: ");     lerString(h->endereco.complemento,  sizeof(h->endereco.complemento));
-        printf("Bairro: ");          lerString(h->endereco.bairro,       sizeof(h->endereco.bairro));
-        printf("Cidade: ");          lerString(h->endereco.cidade,       sizeof(h->endereco.cidade));
-        printf("Estado (UF): ");     lerString(h->endereco.estado,       sizeof(h->endereco.estado));
-        printf("CEP: ");             lerString(h->endereco.cep,          sizeof(h->endereco.cep));
+        ler_string("Nome: ",         h->nome,                 sizeof(h->nome)                 );
+        ler_string("CPF: ",          h->cpf,                  sizeof(h->cpf)                  );
+        ler_string("Email: ",        h->email,                sizeof(h->email)                );
+        ler_string("Telefone: ",     h->telefone,             sizeof(h->telefone)             );
+        ler_string("Sexo: ",         h->sexo,                 sizeof(h->sexo)                 );
+        ler_string("Nascimento: ",   h->dataNascimento,       sizeof(h->dataNascimento)       );
+        ler_string("Estado Civil: ", h->estadoCivil,          sizeof(h->estadoCivil)          );
+        ler_string("Rua: ",          h->endereco.rua,         sizeof(h->endereco.rua)         );
+        ler_string("Numero: ",       h->endereco.numero,      sizeof(h->endereco.numero)      );
+        ler_string("Complemento: ",  h->endereco.complemento, sizeof(h->endereco.complemento) );
+        ler_string("Bairro: ",       h->endereco.bairro,      sizeof(h->endereco.bairro)      );
+        ler_string("Cidade: ",       h->endereco.cidade,      sizeof(h->endereco.cidade)      );
+        ler_string("Estado (UF): ",  h->endereco.estado,      sizeof(h->endereco.estado)      );
+        ler_string("CEP: ",          h->endereco.cep,         sizeof(h->endereco.cep)         );
         break;
     /* um de cada vez */
-    case 2:  printf("Nome: ");           lerString(h->nome,                 sizeof(h->nome));           break;
-    case 3:  printf("CPF: ");            lerString(h->cpf,                  sizeof(h->cpf));            break;
-    case 4:  printf("Email: ");          lerString(h->email,                sizeof(h->email));          break;
-    case 5:  printf("Telefone: ");       lerString(h->telefone,             sizeof(h->telefone));       break;
-    case 6:  printf("Sexo: ");           lerString(h->sexo,                 sizeof(h->sexo));           break;
-    case 7:  printf("Nascimento: ");     lerString(h->dataNascimento,       sizeof(h->dataNascimento)); break;
-    case 8:  printf("Estado Civil: ");   lerString(h->estadoCivil,          sizeof(h->estadoCivil));    break;
-    case 9:  printf("Rua: ");            lerString(h->endereco.rua,         sizeof(h->endereco.rua));   break;
-    case 10: printf("Numero: ");         lerString(h->endereco.numero,      sizeof(h->endereco.numero));break;
-    case 11: printf("Complemento: ");    lerString(h->endereco.complemento, sizeof(h->endereco.complemento)); break;
-    case 12: printf("Bairro: ");         lerString(h->endereco.bairro,      sizeof(h->endereco.bairro));break;
-    case 13: printf("Cidade: ");         lerString(h->endereco.cidade,      sizeof(h->endereco.cidade));break;
-    case 14: printf("Estado (UF): ");    lerString(h->endereco.estado,      sizeof(h->endereco.estado));break;
-    case 15: printf("CEP: ");            lerString(h->endereco.cep,         sizeof(h->endereco.cep));   break;
+    case 2:  ler_string("Nome: ",         h->nome,                 sizeof(h->nome)                 ); break;
+    case 3:  ler_string("CPF: ",          h->cpf,                  sizeof(h->cpf)                  ); break;
+    case 4:  ler_string("Email: ",        h->email,                sizeof(h->email)                ); break;
+    case 5:  ler_string("Telefone: ",     h->telefone,             sizeof(h->telefone)             ); break;
+    case 6:  ler_string("Sexo: ",         h->sexo,                 sizeof(h->sexo)                 ); break;
+    case 7:  ler_string("Nascimento: ",   h->dataNascimento,       sizeof(h->dataNascimento)       ); break;
+    case 8:  ler_string("Estado Civil: ", h->estadoCivil,          sizeof(h->estadoCivil)          ); break;
+    case 9:  ler_string("Rua: ",          h->endereco.rua,         sizeof(h->endereco.rua)         ); break;
+    case 10: ler_string("Numero: ",       h->endereco.numero,      sizeof(h->endereco.numero)      ); break;
+    case 11: ler_string("Complemento: ",  h->endereco.complemento, sizeof(h->endereco.complemento) ); break;
+    case 12: ler_string("Bairro: ",       h->endereco.bairro,      sizeof(h->endereco.bairro)      ); break;
+    case 13: ler_string("Cidade: ",       h->endereco.cidade,      sizeof(h->endereco.cidade)      ); break;
+    case 14: ler_string("Estado (UF): ",  h->endereco.estado,      sizeof(h->endereco.estado)      ); break;
+    case 15: ler_string("CEP: ",          h->endereco.cep,         sizeof(h->endereco.cep)         ); break;
     default: printf("Opcao invalida.\n"); return 0;
     }
     return 1;

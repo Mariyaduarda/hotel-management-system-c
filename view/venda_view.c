@@ -37,8 +37,7 @@ void VendaMenuView(ListaVenda **lista) {
         printf("%s\n", MEIO);
         imprimirOpcao("0", "Voltar");
         rodape();
-        scanf("%d", &opcao);
-        limparBuffer();
+        opcao = ler_int("");
 
         switch (opcao) {
             case 1: VendaCadastrarView(lista); break;
@@ -61,17 +60,10 @@ void VendaCadastrarView(ListaVenda **lista) {
     cabecalho("CADASTRAR VENDA");
     printf("%s\n", FUNDO);
 
-    printf("Hospede ID: ");
-    scanf("%d", &venda.idHospede);
-    limparBuffer();
-    printf("Data (DD/MM/AAAA): ");
-    lerString(venda.data, sizeof(venda.data));
-    printf("Forma de pagamento (1=Avista / 2=Anotar): ");
-    scanf("%d", &venda.formaPagamento);
-    limparBuffer();
-    printf("Numero de itens: ");
-    scanf("%d", &numItens);
-    limparBuffer();
+    ler_string("Data (DD/MM/AAAA): ", venda.data, sizeof(venda.data));
+    venda.idHospede =      ler_int("Hospede ID: ");
+    numItens =             ler_int("Numero de itens: ");
+    venda.formaPagamento = ler_int("Forma de pagamento (1=Avista / 2=Anotar): ");
 
     if (numItens > MAX_ITENS_VENDA) numItens = MAX_ITENS_VENDA;
     venda.numItens = 0;
@@ -81,15 +73,9 @@ void VendaCadastrarView(ListaVenda **lista) {
     for (int i = 0; i < numItens; i++) {
         ItemVenda item = {0};
         printf("\nItem %d\n", i + 1);
-        printf("ID do produto: ");
-        scanf("%d", &item.idProduto);
-        limparBuffer();
-        printf("Quantidade: ");
-        scanf("%d", &item.quantidade);
-        limparBuffer();
-        printf("Preco unitario: ");
-        scanf("%f", &item.precoUnitario);
-        limparBuffer();
+        item.idProduto = ler_int("ID do produto: ");
+        item.quantidade = ler_int("Quantidade: ");
+        item.precoUnitario = ler_float("Preco unitario: ");
         item.subtotal = item.precoUnitario * item.quantidade;
         venda.total += item.subtotal;
         venda.itens[venda.numItens++] = item;
@@ -111,9 +97,7 @@ void VendaBuscarView(ListaVenda **lista) {
     int id;
     printf("\n");
     cabecalho("BUSCAR VENDA");
-    printf("ID da venda: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("ID da venda: ");
     controllerVendaListar(lista, id);
 }
 

@@ -84,13 +84,27 @@ int FornecedorAtualizar(ListaFornecedor **lista, int id, int op) {
     if (f == NULL) { printf("Fornecedor nao encontrado.\n"); return 0; }
 
     switch (op) {
-    case 1: printf("Nome Fantasia     : "); lerString(f->nomeFantasia,      sizeof(f->nomeFantasia));      break;
-    case 2: printf("Razao Social      : "); lerString(f->razaoSocial,       sizeof(f->razaoSocial));       break;
-    case 3: printf("Inscricao Estadual: "); lerString(f->inscricaoEstadual, sizeof(f->inscricaoEstadual)); break;
-    case 4: printf("CNPJ              : "); lerString(f->cnpj,              sizeof(f->cnpj));              break;
-    case 5: printf("Endereco          : "); lerString(f->endereco,          sizeof(f->endereco));          break;
-    case 6: printf("Telefone          : "); lerString(f->telefone,          sizeof(f->telefone));          break;
-    case 7: printf("E-mail            : "); lerString(f->email,             sizeof(f->email));             break;
+    case 1: 
+        ler_string("Nome Fantasia     : ", f->nomeFantasia, sizeof(f->nomeFantasia));      
+        break;
+    case 2: 
+        ler_string("Razao Social      : ", f->razaoSocial, sizeof(f->razaoSocial));       
+        break;
+    case 3: 
+        ler_string("Inscricao Estadual: ", f->inscricaoEstadual, sizeof(f->inscricaoEstadual)); 
+        break;
+    case 4: 
+        ler_string("CNPJ              : ", f->cnpj, sizeof(f->cnpj));              
+        break;
+    case 5: 
+        ler_string("Endereco          : ", f->endereco, sizeof(f->endereco));          
+        break;
+    case 6: 
+        ler_string("Telefone          : ", f->telefone, sizeof(f->telefone));          
+        break;
+    case 7: 
+        ler_string("E-mail            : ", f->email, sizeof(f->email));             
+        break;
     default: printf("Opcao invalida.\n"); return 0;
     }
     return 1;

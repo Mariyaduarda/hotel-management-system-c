@@ -33,13 +33,15 @@ static void viewFornecedorCadastrar(ListaFornecedor **lista) {
     FornecedorInit(&f);
 
     printf("\n--- Novo Fornecedor ---\n");
-    printf("  Nome Fantasia      : "); lerString(f.nomeFantasia,      sizeof(f.nomeFantasia));
-    printf("  Razao Social       : "); lerString(f.razaoSocial,       sizeof(f.razaoSocial));
-    printf("  Inscricao Estadual : "); lerString(f.inscricaoEstadual, sizeof(f.inscricaoEstadual));
-    printf("  CNPJ               : "); lerString(f.cnpj,              sizeof(f.cnpj));
-    printf("  Endereco completo  : "); lerString(f.endereco,          sizeof(f.endereco));
-    printf("  Telefone           : "); lerString(f.telefone,          sizeof(f.telefone));
-    printf("  E-mail             : "); lerString(f.email,             sizeof(f.email));
+    ler_string("  Nome Fantasia      : ", f.nomeFantasia,      sizeof(f.nomeFantasia));
+    ler_string("  Razao Social       : ", f.razaoSocial,       sizeof(f.razaoSocial));
+    ler_string("  Inscricao Estadual : ", f.inscricaoEstadual, sizeof(f.inscricaoEstadual));
+    ler_string("  CNPJ               : ", f.cnpj,              sizeof(f.cnpj));
+    ler_string("  Endereco completo  : ", f.endereco,          sizeof(f.endereco));
+    ler_string("  Telefone           : ", f.telefone,          sizeof(f.telefone));
+    ler_string("  E-mail             : ", f.email,             sizeof(f.email));
+
+
 
     if (controllerFornecedorCadastrar(lista, f))
         printf("\nFornecedor cadastrado com sucesso!\n");
@@ -49,19 +51,15 @@ static void viewFornecedorCadastrar(ListaFornecedor **lista) {
 
 /* ── Listar ─────────────────────────────────────────────── */
 static void viewFornecedorListar(ListaFornecedor **lista) {
-    printf("\n  ID do fornecedor: ");
     int id;
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("\n  ID do fornecedor: ");
     controllerFornecedorListar(lista, id);
 }
 
 /* ── Atualizar ───────────────────────────────────────────── */
 static void viewFornecedorAtualizar(ListaFornecedor **lista) {
-    printf("\n  ID do fornecedor: ");
     int id;
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("\n  ID do fornecedor: ");
 
     printf("  [1] Nome Fantasia\n");
     printf("  [2] Razao Social\n");
@@ -70,10 +68,8 @@ static void viewFornecedorAtualizar(ListaFornecedor **lista) {
     printf("  [5] Endereco\n");
     printf("  [6] Telefone\n");
     printf("  [7] E-mail\n");
-    printf("  Campo: ");
     int op;
-    scanf("%d", &op);
-    limparBuffer();
+    op = ler_int("  Campo: ");
 
     if (controllerFornecedorAtualizar(lista, id, op))
         printf("\n  Dados atualizados!\n");
@@ -83,10 +79,8 @@ static void viewFornecedorAtualizar(ListaFornecedor **lista) {
 
 /* ── Excluir ─────────────────────────────────────────────── */
 static void viewFornecedorExcluir(ListaFornecedor **lista) {
-    printf("\n  ID do fornecedor: ");
     int id;
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("\n  ID do fornecedor: ");
 
     if (controllerFornecedorExcluir(lista, id))
         printf("\n  Fornecedor desativado.\n");
@@ -107,7 +101,7 @@ void menuFornecedor(ListaFornecedor **lista) {
         separador();
         opcao("V", "Voltar");
         rodape();
-        scanf(" %c", &op);
+        op = ler_char("");
         op = toupper(op);
 
         switch (op) {

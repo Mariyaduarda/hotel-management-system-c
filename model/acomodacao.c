@@ -82,10 +82,18 @@ int AcomodacaoAtualizar(ListaAcomodacao **lista, int id, int op) {
     TipoAcomodacao *a = AcomodacaoBuscar(lista, id);
     if (!a) { printf("Acomodação não encontrada.\n"); return 0; }
     switch (op) {
-    case 1: printf("Nova descrição: ");   lerString(a->descricao,   sizeof(a->descricao));   break;
-    case 2: printf("Facilidades: ");      lerString(a->facilidades, sizeof(a->facilidades)); break;
-    case 3: printf("ID categoria: ");     scanf("%d", &a->idCategoria); limparBuffer();       break;
-    default: printf("Opção inválida.\n"); return 0;
+    case 1:
+        ler_string(" Nova descrição: ",a->descricao,   sizeof(a->descricao));   
+        break;
+    case 2: 
+        ler_string("Facilidades: ", a->facilidades, sizeof(a->facilidades)); 
+        break;
+    case 3: 
+        a->idCategoria = ler_int("ID categoria: ");
+        break;
+    default: 
+        printf("Opção inválida.\n"); 
+        return 0;
     }
     return 1;
 }

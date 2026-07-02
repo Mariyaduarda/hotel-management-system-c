@@ -25,15 +25,9 @@ void AcomodacaoCadastrarView(ListaAcomodacao **lista,
 
     printf("\n-- Cadastro de Acomodacao --\n");
 
-    printf("Descricao: ");
-    scanf(" %99[^\n]", a.descricao);
-
-    printf("Facilidades: ");
-    scanf(" %199[^\n]", a.facilidades);
-
-    printf("ID da categoria: ");
-    scanf("%d", &a.idCategoria);
-    limparBuffer();
+    ler_string("Descricao: ", a.descricao, sizeof(a.descricao));
+    ler_string("Facilidades: ", a.facilidades, sizeof(a.facilidades));
+    a.idCategoria = ler_int("ID da categoria: ");
 
     if (AcomodacaoCriar(lista, a))
         printf("Acomodacao cadastrada com sucesso!\n");
@@ -46,9 +40,7 @@ void AcomodacaoListarView(ListaAcomodacao **lista,
 {
     int id;
     printf("\n-- Listar Acomodacao --\n");
-    printf("ID da acomodacao (0 para listar todas): ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("ID da acomodacao (0 para listar todas): ");
 
     AcomodacaoListar(lista, id, listaCat);
 }
@@ -59,9 +51,7 @@ void AcomodacaoAtualizarView(ListaAcomodacao **lista,
     (void)listaCat; /* parâmetro não utilizado */
     int id, op;
     printf("\n-- Atualizar Acomodacao --\n");
-    printf("ID da acomodacao: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("ID da acomodacao: ");
 
     TipoAcomodacao *a = AcomodacaoBuscar(lista, id);
     if (!a) {
@@ -74,9 +64,7 @@ void AcomodacaoAtualizarView(ListaAcomodacao **lista,
     printf("1. Descricao\n");
     printf("2. Facilidades\n");
     printf("3. ID categoria\n");
-    printf("Opcao: ");
-    scanf("%d", &op);
-    limparBuffer();
+    op = ler_int("Opcao: ");
 
     if (AcomodacaoAtualizar(lista, id, op))
         printf("Acomodacao atualizada com sucesso!\n");
@@ -87,9 +75,7 @@ void AcomodacaoAtualizarView(ListaAcomodacao **lista,
 void AcomodacaoExcluirView(ListaAcomodacao **lista) {
     int id;
     printf("\n-- Excluir Acomodacao --\n");
-    printf("ID da acomodacao: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("ID da acomodacao: ");
 
     TipoAcomodacao *a = AcomodacaoBuscar(lista, id);
     if (!a) {
@@ -99,8 +85,7 @@ void AcomodacaoExcluirView(ListaAcomodacao **lista) {
 
     printf("Confirma exclusao de \"%s\"? (1=Sim / 0=Nao): ", a->descricao);
     int confirma;
-    scanf("%d", &confirma);
-    limparBuffer();
+    confirma = ler_int("");
 
     if (confirma) {
         if (AcomodacaoExcluir(lista, id))
@@ -117,9 +102,7 @@ void AcomodacaoBuscarView(ListaAcomodacao **lista,
 {
     int id;
     printf("\n-- Buscar Acomodacao por ID --\n");
-    printf("ID da acomodacao: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("ID da acomodacao: ");
 
     TipoAcomodacao *a = AcomodacaoBuscar(lista, id);
     if (!a) {

@@ -38,8 +38,7 @@ void ContaReceberMenuView(ListaContaReceber **lista) {
         printf("%s\n", MEIO);
         imprimirOpcao("0", "Voltar");
         rodape();
-        scanf("%d", &opcao);
-        limparBuffer();
+        opcao = ler_int("");
 
         switch (opcao) {
             case 1: ContaReceberCadastrarView(lista); break;
@@ -58,20 +57,16 @@ void ContaReceberCadastrarView(ListaContaReceber **lista) {
     TipoContaReceber conta;
     ContaReceberInit(&conta);
 
+    // cabecalho
     printf("\n");
     cabecalho("CADASTRAR CONTA A RECEBER");
     printf("%s\n", FUNDO);
 
-    printf("Hospede ID: ");
-    scanf("%d", &conta.idHospede);
-    limparBuffer();
-    printf("Descricao: ");
-    lerString(conta.descricao, sizeof(conta.descricao));
-    printf("Valor: ");
-    scanf("%f", &conta.valor);
-    limparBuffer();
-    printf("Data de vencimento (DD/MM/AAAA): ");
-    lerString(conta.dataVencimento, sizeof(conta.dataVencimento));
+    // ler dados
+    conta.idHospede = ler_int("Hospede ID: ");
+    ler_string("Descricao: ", conta.descricao, sizeof(conta.descricao));
+    conta.valor = ler_float("Valor: ");
+    ler_string("Data de vencimento (DD/MM/AAAA): ",conta.dataVencimento, sizeof(conta.dataVencimento));
 
     if (controllerContaReceberCadastrar(lista, conta))
         printf(VERDE "  Conta a receber cadastrada com sucesso.\n" RESET);
@@ -88,22 +83,17 @@ void ContaReceberListarView(ListaContaReceber **lista) {
     printf("\n");
     cabecalho("LISTAR CONTAS A RECEBER");
     printf("%s\n", FUNDO);
-    printf("Filtrar por hospede? (1=Sim / 0=Nao): ");
-    scanf("%d", &filtrar);
-    limparBuffer();
+
+    filtrar = ler_int("Filtrar por hospede? (1=Sim / 0=Nao): ");
+
     if (filtrar) {
-        printf("Hospede ID: ");
-        scanf("%d", &idHospede);
-        limparBuffer();
+        idHospede = ler_int("Hospede ID: ");        
     }
-    printf("Filtrar por periodo? (1=Sim / 0=Nao): ");
-    scanf("%d", &filtrar);
-    limparBuffer();
+
+    filtrar = ler_int("Filtrar por periodo? (1=Sim / 0=Nao): ");
     if (filtrar) {
-        printf("Data inicio (DD/MM/AAAA): ");
-        lerString(dataInicio, sizeof(dataInicio));
-        printf("Data fim (DD/MM/AAAA): ");
-        lerString(dataFim, sizeof(dataFim));
+        ler_string("Data inicio (DD/MM/AAAA): ", dataInicio, sizeof(dataInicio));
+        ler_string("Data fim (DD/MM/AAAA): ", dataFim, sizeof(dataFim));
     }
     controllerContaReceberListar(lista, idHospede, dataInicio, dataFim);
 }
@@ -112,9 +102,7 @@ void ContaReceberBuscarView(ListaContaReceber **lista) {
     int id;
     printf("\n");
     cabecalho("BUSCAR CONTA A RECEBER");
-    printf("ID da conta: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("ID da conta: ");
     TipoContaReceber *c = controllerContaReceberBuscar(lista, id);
     if (c) {
         printf("ID: %d\n", c->id);
@@ -134,11 +122,10 @@ void ContaReceberBaixarView(ListaContaReceber **lista) {
     char dataRecebimento[12];
     printf("\n");
     cabecalho("DAR BAIXA EM CONTA");
-    printf("ID da conta: ");
-    scanf("%d", &id);
-    limparBuffer();
-    printf("Data de recebimento (DD/MM/AAAA): ");
-    lerString(dataRecebimento, sizeof(dataRecebimento));
+    
+    id = ler_int("ID da conta: ");
+    ler_string("Data de recebimento (DD/MM/AAAA): ", dataRecebimento, sizeof(dataRecebimento));
+    
     if (!controllerContaReceberBaixar(lista, id, dataRecebimento))
         printf(VERMELHO "  Falha ao dar baixa na conta.\n" RESET);
     else

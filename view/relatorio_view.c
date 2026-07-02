@@ -39,16 +39,12 @@ static ConfigRelatorio pedirDestino(void) {
     cfg.destino = RELATORIO_TELA;
     strcpy(cfg.caminho, "");
 
-    printf(CIANO "\n  Saída: " RESET);
-    printf("[1] Tela  [2] Arquivo CSV: ");
     int op;
-    scanf("%d", &op);
-    limparBuffer();
-
+    printf(CIANO "\n  Saída: " RESET);
+    op = ler_int("[1] Tela  [2] Arquivo CSV: ");
     if (op == 2) {
         cfg.destino = RELATORIO_ARQUIVO;
-        printf("  Caminho (ex: relatorio.csv): ");
-        lerString(cfg.caminho, sizeof(cfg.caminho));
+        ler_string("  Caminho (ex: relatorio.csv): ", cfg.caminho, sizeof(cfg.caminho));
     }
     return cfg;
 }
@@ -81,13 +77,11 @@ void RelatorioHospedesView(ListaHospede **lista) {
     printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n" RESET);
 
     int idMin = 0, idMax = 0;
-    printf("Faixa de IDs (0 0 = todos): ");
-    scanf("%d %d", &idMin, &idMax);
-    limparBuffer();
+    idMin = ler_int("ID minimo (0 = todos): ");
+    idMax = ler_int("ID maximo (0 = todos): ");
 
     char sexo[10] = "";
-    printf("Sexo (M/F ou vazio = todos): ");
-    lerString(sexo, sizeof(sexo));
+    ler_string("Sexo (M/F ou vazio = todos): ", sexo, sizeof(sexo));
 
     ConfigRelatorio cfg = pedirDestino();
     RelatorioHospedes(lista, &cfg, idMin, idMax, sexo);
@@ -105,18 +99,14 @@ void RelatorioAcomodacoesView(ListaAcomodacao **listaAcom,
     printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n" RESET);
 
     int idMin = 0, idMax = 0;
-    printf("Faixa de IDs (0 0 = todos): ");
-    scanf("%d %d", &idMin, &idMax);
-    limparBuffer();
+    idMin = ler_int("Faixa de IDs (0 0 = todos): ");
+    idMax = ler_int("Faixa de IDs (0 0 = todos): ");
 
     int idCat = 0;
-    printf("ID da categoria (0 = todas): ");
-    scanf("%d", &idCat);
-    limparBuffer();
+    idCat = ler_int("ID da categoria (0 = todas): ");
 
     char dataDisp[11] = "";
-    printf("Data disponivel DD/MM/AAAA (vazio = sem filtro): ");
-    lerString(dataDisp, sizeof(dataDisp));
+    ler_string("Data disponivel DD/MM/AAAA (vazio = sem filtro): ", dataDisp, sizeof(dataDisp));
 
     ConfigRelatorio cfg = pedirDestino();
     RelatorioAcomodacoes(listaAcom, listaCat, &cfg, idMin, idMax, idCat, dataDisp);
@@ -132,19 +122,13 @@ void RelatorioReservasView(ListaReserva **lista) {
     printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n" RESET);
 
     int idHosp = 0, idAcom = 0;
-    printf("ID do hospede (0 = todos): ");
-    scanf("%d", &idHosp);
-    limparBuffer();
-
-    printf("ID da acomodacao (0 = todas): ");
-    scanf("%d", &idAcom);
+    idHosp = ler_int("ID do hospede (0 = todos): ");
+    idAcom = ler_int("ID da acomodacao (0 = todas): ");
     limparBuffer();
 
     char ini[11] = "", fim[11] = "";
-    printf("Periodo inicio DD/MM/AAAA (vazio = sem filtro): ");
-    lerString(ini, sizeof(ini));
-    printf("Periodo fim    DD/MM/AAAA (vazio = sem filtro): ");
-    lerString(fim, sizeof(fim));
+    ler_string("Periodo inicio DD/MM/AAAA (vazio = sem filtro): ", ini, sizeof(ini));
+    ler_string("Periodo fim    DD/MM/AAAA (vazio = sem filtro): ", fim, sizeof(fim));
 
     ConfigRelatorio cfg = pedirDestino();
     RelatorioReservas(lista, &cfg, idHosp, idAcom, ini, fim);
@@ -163,9 +147,7 @@ void RelatorioMovimentacaoView(ListaReserva    **listaReserva,
     printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n" RESET);
 
     int idAcom = 0;
-    printf("ID da acomodacao (0 = todas): ");
-    scanf("%d", &idAcom);
-    limparBuffer();
+    idAcom = ler_int("ID da acomodacao (0 = todas): ");
 
     ConfigRelatorio cfg = pedirDestino();
     RelatorioMovimentacaoAcomodacoes(listaReserva, listaAcom, listaCat, &cfg, idAcom);
@@ -182,8 +164,8 @@ void RelatorioProdutosView(ListaProduto **lista) {
 
     int idMin = 0, idMax = 0;
     printf("Faixa de IDs (0 0 = todos): ");
-    scanf("%d %d", &idMin, &idMax);
-    limparBuffer();
+    idMin = ler_int("");
+    idMax = ler_int("");
 
     ConfigRelatorio cfg = pedirDestino();
     RelatorioProdutos(lista, &cfg, idMin, idMax);
@@ -196,8 +178,8 @@ void RelatorioProdutosEstoqueView(ListaProduto **lista) {
 
     int idMin = 0, idMax = 0;
     printf("Faixa de IDs (0 0 = todos): ");
-    scanf("%d %d", &idMin, &idMax);
-    limparBuffer();
+    idMin = ler_int("");
+    idMax = ler_int("");
 
     ConfigRelatorio cfg = pedirDestino();
     RelatorioProdutosEstoqueMinimo(lista, &cfg, idMin, idMax);

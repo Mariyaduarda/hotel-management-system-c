@@ -11,8 +11,7 @@ void RelatorioControllerExecutar(ListaHospede    **listaHospede,
     int opcao;
     do {
         RelatorioMenuExibir();
-        scanf("%d", &opcao);
-        limparBuffer();
+        opcao = ler_int("");
 
         switch (opcao) {
             case 1: RelatorioHospedesView(listaHospede);                              break;

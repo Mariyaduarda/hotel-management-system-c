@@ -10,8 +10,7 @@ void AcomodacaoControllerExecutar(ListaAcomodacao **lista,
     do {
         printf("\n");
         AcomodacaoMenuExibir();
-        scanf("%d", &opcao);
-        limparBuffer();
+        opcao = ler_int("");
 
         switch (opcao) {
             case 1: AcomodacaoCadastrarView(lista, listaCat); break;

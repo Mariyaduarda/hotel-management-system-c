@@ -147,24 +147,19 @@ int ProdutoAtualizar(ListaProduto **lista, int id, int op) {
 
     switch (op) {
         case 1:
-            printf("Nova descrição: ");
-            scanf(" %99[^\n]", p->descricao);
+            ler_string("Nova descrição: ", p->descricao, sizeof(p->descricao));
             break;
         case 2:
-            printf("Novo estoque: ");
-            scanf("%d", &p->estoque);
+            p->estoque = ler_int("Novo estoque: ");
             break;
         case 3:
-            printf("Novo estoque mínimo: ");
-            scanf("%d", &p->estoqueMinimo);
+            p->estoqueMinimo = ler_int("Novo estoque mínimo: ");
             break;
         case 4:
-            printf("Novo preço de custo: ");
-            scanf("%f", &p->precoCusto);
+            p->precoCusto = ler_float("Novo preço de custo: ");
             break;
         case 5:
-            printf("Novo preço de venda: ");
-            scanf("%f", &p->precoVenda);
+            p->precoVenda = ler_float("Novo preço de venda: ");
             break;
         case 6:
             p->ativo = !p->ativo;

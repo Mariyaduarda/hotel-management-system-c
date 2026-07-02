@@ -43,8 +43,7 @@ void menuHospede(ListaHospede **lista) {
         separador();
         opcao("0", "Voltar");
         rodape();
-        scanf("%d", &opcao_num);
-        limparBuffer();
+        opcao_num = ler_int("");
 
         switch (opcao_num) {
             case 1: HospedeCadastrarView(lista);    break;
@@ -68,22 +67,22 @@ void HospedeCadastrarView(ListaHospede **lista) {
     printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n\n" RESET);
 
     printf(CINZA "  -- Dados pessoais --\n" RESET);
-    printf("  Nome            : "); lerString(h.nome,           sizeof(h.nome));
-    printf("  CPF             : "); lerString(h.cpf,            sizeof(h.cpf));
-    printf("  Email           : "); lerString(h.email,          sizeof(h.email));
-    printf("  Telefone        : "); lerString(h.telefone,       sizeof(h.telefone));
-    printf("  Sexo            : "); lerString(h.sexo,           sizeof(h.sexo));
-    printf("  Nascimento      : "); lerString(h.dataNascimento, sizeof(h.dataNascimento));
-    printf("  Estado Civil    : "); lerString(h.estadoCivil,    sizeof(h.estadoCivil));
+    ler_string("  Nome            : ", h.nome,           sizeof(h.nome));
+    ler_string("  CPF             : ", h.cpf,            sizeof(h.cpf));
+    ler_string("  Email           : ", h.email,          sizeof(h.email));
+    ler_string("  Telefone        : ", h.telefone,       sizeof(h.telefone));
+    ler_string("  Sexo            : ", h.sexo,           sizeof(h.sexo));
+    ler_string("  Nascimento      : ", h.dataNascimento, sizeof(h.dataNascimento));
+    ler_string("  Estado Civil    : ", h.estadoCivil,    sizeof(h.estadoCivil));
 
     printf(CINZA "\n  -- Endereco --\n" RESET);
-    printf("  Rua             : "); lerString(h.endereco.rua,         sizeof(h.endereco.rua));
-    printf("  Numero          : "); lerString(h.endereco.numero,      sizeof(h.endereco.numero));
-    printf("  Complemento     : "); lerString(h.endereco.complemento, sizeof(h.endereco.complemento));
-    printf("  Bairro          : "); lerString(h.endereco.bairro,      sizeof(h.endereco.bairro));
-    printf("  Cidade          : "); lerString(h.endereco.cidade,      sizeof(h.endereco.cidade));
-    printf("  Estado (UF)     : "); lerString(h.endereco.estado,      sizeof(h.endereco.estado));
-    printf("  CEP             : "); lerString(h.endereco.cep,         sizeof(h.endereco.cep));
+    ler_string("  Rua             : ", h.endereco.rua,         sizeof(h.endereco.rua));
+    ler_string("  Numero          : ", h.endereco.numero,      sizeof(h.endereco.numero));
+    ler_string("  Complemento     : ", h.endereco.complemento, sizeof(h.endereco.complemento));
+    ler_string("  Bairro          : ", h.endereco.bairro,      sizeof(h.endereco.bairro));
+    ler_string("  Cidade          : ", h.endereco.cidade,      sizeof(h.endereco.cidade));
+    ler_string("  Estado (UF)     : ", h.endereco.estado,      sizeof(h.endereco.estado));
+    ler_string("  CEP             : ", h.endereco.cep,         sizeof(h.endereco.cep));
 
     if (controllerHospedeCadastrar(lista, h))
         printf(VERDE "\n  Hospede cadastrado com sucesso!\n" RESET);
@@ -128,9 +127,7 @@ void HospedeBuscarView(ListaHospede **lista) {
     printf("\n");
     cabecalho("BUSCAR HOSPEDE");
     printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n\n" RESET);
-    printf("  ID: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("  ID: ");
     controllerHospedeListar(lista, id);
 }
 
@@ -141,9 +138,7 @@ void HospedeAtualizarView(ListaHospede **lista) {
     cabecalho("ATUALIZAR HOSPEDE");
     printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n\n" RESET);
 
-    printf("  ID do hospede: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("  ID do hospede: ");
 
     TipoHospede *h = controllerHospedeBuscar(lista, id);
     if (!h) { printf(VERMELHO "  Hospede ID %d nao encontrado.\n" RESET, id); return; }
@@ -158,9 +153,7 @@ void HospedeAtualizarView(ListaHospede **lista) {
     printf("   6. Sexo         13.  Cidade\n");
     printf("   7. Nascimento   14.  Estado\n");
     printf("   8. Est. Civil   15.  CEP\n");
-    printf("  Opcao: ");
-    scanf("%d", &op);
-    limparBuffer();
+    op = ler_int("  Opcao: ");
 
     if (controllerHospedeAtualizar(lista, id, op))
         printf(VERDE "  Hospede atualizado com sucesso!\n" RESET);
@@ -175,17 +168,14 @@ void HospedeExcluirView(ListaHospede **lista) {
     cabecalho("EXCLUIR HOSPEDE");
     printf(CIANO BORDA RESET "\n" CIANO FUNDO "\n\n" RESET);
 
-    printf("  ID do hospede: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("  ID do hospede: ");
 
     TipoHospede *h = controllerHospedeBuscar(lista, id);
     if (!h) { printf(VERMELHO "  Hospede ID %d nao encontrado.\n" RESET, id); return; }
 
     printf("  Confirma exclusao de \"%s\"? (1=Sim / 0=Nao): ", h->nome);
     int confirma;
-    scanf("%d", &confirma);
-    limparBuffer();
+    confirma = ler_int("");
 
     if (confirma == 1) {
         if (controllerHospedeExcluir(lista, id))

@@ -37,8 +37,7 @@ void NotaFiscalMenuView(ListaNotaFiscal **lista) {
         printf("%s\n", MEIO);
         imprimirOpcao("0", "Voltar");
         rodape();
-        scanf("%d", &opcao);
-        limparBuffer();
+        opcao = ler_int("");
 
         switch (opcao) {
             case 1: NotaFiscalCadastrarView(lista); break;
@@ -58,59 +57,38 @@ void NotaFiscalCadastrarView(ListaNotaFiscal **lista) {
     int numItens = 0;
     float margemLucro = 10.0f;
 
+    // cabecalho
     printf("\n");
     cabecalho("CADASTRAR NOTA FISCAL");
     printf("%s\n", FUNDO);
 
-    printf("Fornecedor ID: ");
-    scanf("%d", &nota.idFornecedor);
-    limparBuffer();
-    printf("Data (DD/MM/AAAA): ");
-    lerString(nota.data, sizeof(nota.data));
-    printf("Frete: ");
-    scanf("%f", &nota.frete);
-    limparBuffer();
-    printf("Imposto: ");
-    scanf("%f", &nota.imposto);
-    limparBuffer();
-    printf("Forma de pagamento (1=Avista / 2=Aprazo): ");
-    scanf("%d", &nota.formaPagamento);
-    limparBuffer();
-
+    // ler dados
+    nota.idFornecedor = ler_int("Fornecedor ID: ");
+    ler_string("Data (DD/MM/AAAA): ", nota.data, sizeof(nota.data));
+    nota.frete = ler_float("Frete: ");
+    nota.imposto = ler_float("Imposto: ");
+    nota.formaPagamento = ler_int("Forma de pagamento (1=Avista / 2=Aprazo): ");
     if (nota.formaPagamento == NF_APRAZO) {
-        printf("Valor de entrada: ");
-        scanf("%f", &nota.valorEntrada);
-        limparBuffer();
-        printf("Numero de parcelas: ");
-        scanf("%d", &nota.numParcelas);
-        limparBuffer();
+        nota.valorEntrada = ler_float("Valor de entrada: ");
+        nota.numParcelas = ler_int("Numero de parcelas: ");
     }
-
-    printf("Margem de lucro (percentual): ");
-    scanf("%f", &margemLucro);
-    limparBuffer();
-    printf("Numero de itens: ");
-    scanf("%d", &numItens);
-    limparBuffer();
+    margemLucro = ler_float("Margem de lucro (percentual): ");
+    numItens = ler_int("Numero de itens: ");
 
     if (numItens > MAX_ITENS_NOTA) numItens = MAX_ITENS_NOTA;
     nota.numItens = 0;
     nota.totalNota = 0.0f;
 
     for (int i = 0; i < numItens; i++) {
+
         ItemNotaFiscal item = {0};
         printf("\nItem %d\n", i + 1);
-        printf("ID do produto: ");
-        scanf("%d", &item.idProduto);
-        limparBuffer();
-        printf("Descricao: ");
-        lerString(item.descricao, sizeof(item.descricao));
-        printf("Preco de custo: ");
-        scanf("%f", &item.precoCusto);
-        limparBuffer();
-        printf("Quantidade: ");
-        scanf("%d", &item.quantidade);
-        limparBuffer();
+
+        item.idProduto = ler_int("ID do produto: ");
+        ler_string("Descricao: ", item.descricao, sizeof(item.descricao));    
+        item.precoCusto = ler_float("Preco de custo: ");
+        item.quantidade = ler_int("Quantidade: ");
+        
         item.subtotal = item.precoCusto * item.quantidade;
         nota.itens[nota.numItens++] = item;
     }
@@ -132,9 +110,7 @@ void NotaFiscalBuscarView(ListaNotaFiscal **lista) {
     int id;
     printf("\n");
     cabecalho("BUSCAR NOTA FISCAL");
-    printf("ID da nota fiscal: ");
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("ID da nota fiscal: ");
     controllerNotaFiscalListar(lista, id);
 }
 

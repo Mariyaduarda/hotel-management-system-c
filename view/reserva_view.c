@@ -141,9 +141,7 @@ void ReservaCadastrarView(ListaReserva    **listaReserva,
     cabecalho("NOVA RESERVA");
     printf("%s\n", FUNDO);
 
-    printf("ID do hospede: ");
-    scanf("%d", &r.idHospede);
-    limparBuffer();
+    r.idHospede = ler_int("ID do hospede: ");
 
     TipoHospede *h = HospedeBuscar(listaHospede, r.idHospede);
     if (h == NULL || !h->ativo) {
@@ -155,22 +153,15 @@ void ReservaCadastrarView(ListaReserva    **listaReserva,
     lerData(r.dataEntrada, sizeof(r.dataEntrada), "Data de entrada (DD/MM/AAAA): ");
     lerData(r.dataSaida,   sizeof(r.dataSaida),   "Data de saida  (DD/MM/AAAA): ");
 
-    printf("Numero de adultos : ");
-    scanf("%d", &r.numAdultos);
-    limparBuffer();
-    printf("Numero de criancas: ");
-    scanf("%d", &r.numCriancas);
-    limparBuffer();
+    r.numAdultos = ler_int("Numero de adultos : ");
+    r.numCriancas = ler_int("Numero de criancas: ");
 
     printf("\n-- Filtros (0 ou vazio = ignorar) --\n");
     int idCategoria = 0;
-    printf("ID da categoria desejada: ");
-    scanf("%d", &idCategoria);
-    limparBuffer();
+    idCategoria = ler_int("ID da categoria desejada: ");
 
     char facilidade[100] = "";
-    printf("Facilidade desejada (ex: TV): ");
-    lerString(facilidade, sizeof(facilidade));
+    ler_string("Facilidade desejada (ex: TV): ", facilidade, sizeof(facilidade));
 
     printf("\n-- Acomodacoes Disponiveis --\n");
     exibirDisponiveisPeriodo(listaReserva, listaAcomodacao, listaCategoria,
@@ -178,9 +169,7 @@ void ReservaCadastrarView(ListaReserva    **listaReserva,
                               idCategoria, r.numAdultos, r.numCriancas,
                               facilidade);
 
-    printf("\nID da acomodacao (0 = cancelar): ");
-    scanf("%d", &r.idAcomodacao);
-    limparBuffer();
+    r.idAcomodacao = ler_int("\nID da acomodacao (0 = cancelar): ");
     if (r.idAcomodacao == 0) return;
 
     TipoAcomodacao *ac = AcomodacaoBuscar(listaAcomodacao, r.idAcomodacao);
@@ -203,14 +192,11 @@ void ReservaCadastrarView(ListaReserva    **listaReserva,
                dias, cat->valorDiaria, r.totalDiarias);
     }
 
-    printf("Pagar no check-in? (1=Sim / 0=Nao): ");
-    scanf("%d", &r.pagarNaEntrada);
-    limparBuffer();
+    r.pagarNaEntrada = ler_int("Pagar no check-in? (1=Sim / 0=Nao): ");
 
     printf("\nConfirmar reserva? (1=Sim / 0=Nao): ");
     int confirm;
-    scanf("%d", &confirm);
-    limparBuffer();
+    confirm = ler_int("");
     if (!confirm) return;
 
     if (ReservaCriar(listaReserva, r))
@@ -225,10 +211,8 @@ void ReservaCancelarView(ListaReserva **lista) {
     cabecalho("CANCELAR RESERVA");
     printf("%s\n", FUNDO);
 
-    printf("ID da reserva: ");
     int id;
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("ID da reserva: ");
 
     ReservaListar(lista, id);
 
@@ -237,8 +221,7 @@ void ReservaCancelarView(ListaReserva **lista) {
 
     printf("\nConfirmar cancelamento? (1=Sim / 0=Nao): ");
     int confirm;
-    scanf("%d", &confirm);
-    limparBuffer();
+    confirm = ler_int("");
     if (!confirm) return;
 
     if (ReservaCancelar(lista, id))
@@ -251,10 +234,8 @@ void ReservaConsultarView(ListaReserva **lista) {
     cabecalho("CONSULTAR RESERVA");
     printf("%s\n", FUNDO);
 
-    printf("ID da reserva: ");
     int id;
-    scanf("%d", &id);
-    limparBuffer();
+    id = ler_int("ID da reserva: ");
     ReservaListar(lista, id);
 }
 
@@ -272,13 +253,12 @@ void ReservaBuscarDisponiveisView(ListaReserva    **listaReserva,
     lerData(saida,   sizeof(saida),   "Data de saida  (DD/MM/AAAA): ");
 
     int adultos = 0, criancas = 0, idCat = 0;
-    printf("Adultos  (0 = qualquer): ");     scanf("%d", &adultos);  limparBuffer();
-    printf("Criancas (0 = qualquer): ");     scanf("%d", &criancas); limparBuffer();
-    printf("ID Categoria (0 = qualquer): "); scanf("%d", &idCat);    limparBuffer();
+    adultos = ler_int("Adultos  (0 = qualquer): ");
+    criancas = ler_int("Criancas (0 = qualquer): ");
+    idCat = ler_int("ID Categoria (0 = qualquer): ");
 
     char facilidade[100] = "";
-    printf("Facilidade (vazio = qualquer): ");
-    lerString(facilidade, sizeof(facilidade));
+    ler_string("Facilidade (vazio = qualquer): ", facilidade, sizeof(facilidade));
 
     exibirDisponiveisPeriodo(listaReserva, listaAcomodacao, listaCategoria,
                               entrada, saida, idCat, adultos, criancas, facilidade);
